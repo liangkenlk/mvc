@@ -1,0 +1,289 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="jquery-easyui-1.4.4/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="jquery-easyui-1.4.4/themes/icon.css" />
+    <script type="text/javascript" src="jquery-easyui-1.4.4/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery-easyui-1.4.4/jquery.easyui.min.js"></script>
+    <script src="jquery-easyui-1.4.4/locale/easyui-lang-zh_CN.js"></script>
+    <script src="js/Common.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <!--<link rel="stylesheet" href="css/style.css" type="text/css" />-->
+    <link rel="stylesheet" type="text/css" href="css/userguide.css" />
+</head>
+<body>
+    <table class="easyui-datagrid"  style="width:100%;height:50%;"
+           data-options="singleSelect:true,rownumbers:true,pagination:true,queryParams:queryParams,url:'Case/Getlist',toolbar:'#tb',footer:'#ft',idField: 'id',onSortColumn:'onSort',onLoadSuccess:setNowTitle,onCheck:onCaseCheck,onUncheck:HightLight,onCheckAll:HightLight,onUncheckAll:HightLight">
+        <thead>
+            <tr>
+                <th data-options="field:'id',width:80,checkbox:true"></th>
+                <th data-options="field:'Zone',width:80,sortable:false,editor:'text'">区域</th>
+                <th data-options="field:'CaseType',width:80,sortable:false,editor:'text'">大类</th>
+                <th data-options="field:'CaseSubType',width:100,sortable:false,editor:'text'">小类</th>
+                <th data-options="field:'Address',width:100,sortable:false,editor:'text'">地点</th>
+                <th data-options="field:'Remark',width:200,sortable:false,editor:Typeeditor">描述</th>
+                <th data-options="field:'BeginTime',width:100,sortable:false,editor:Typeeditor">上报时间</th>
+                <th data-options="field:'Uploader',width:100,sortable:false,editor:Typeeditor">上报人</th>
+                <!--  <th data-options="field:'DataPower',width:100,sortable:false,editor:editor,formatter:format">数据权限</th>-->
+            </tr>
+        </thead>
+    </table>
+    <div id="tb" style="padding:2px 5px;">
+
+        地点： <input id="Address" style="width:110px" />
+        <a href="#" class="easyui-linkbutton" onclick="dosearch();" iconcls="icon-search">查询</a>
+        <a href="#" class="easyui-linkbutton" onclick="add();" iconcls="icon-add">添加</a>
+        <a href="#" class="easyui-linkbutton" onclick="edit();" iconcls="icon-edit">修改</a>
+        <a href="#" class="easyui-linkbutton" onclick="setStatus('已解决');" iconcls="icon-ok">设为解决</a>
+        <a href="#" class="easyui-linkbutton" onclick="setStatus('已撤销');" iconcls="icon-no">设为撤销</a>
+        <a href="#" class="easyui-linkbutton" onclick="del();" iconcls="icon-remove">删除</a>
+    </div>
+    <div id="tt" class="easyui-tabs" data-options="onSelect:tabSelected" style="width:100%;height:49%;">
+        <div title="问题详情" style="">
+            <iframe width="100%" id="CaseDetail"  height="99.5%" frameborder="0" src="CaseDetail.html"></iframe>
+        </div>
+        <div title="处理经过">
+            <iframe width="100%" id="CheckList" height="99.5%" frameborder="0" src="CheckList.html"></iframe>
+        </div>
+        <div title="任务派遣">
+            <iframe width="100%" id="TaskList" height="99.5%" frameborder="0" src="TaskList.html"></iframe>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<script type="text/javascript">
+
+    var queryParams = { status: this.getQueryStringByName("status") };
+    var sort;
+    var order;
+    var dropdata = [{ "id": "1=1", "text": "所有" }, { "id": "userid='@userid'", "text": "仅本人" }];
+    var editor = { type: 'combobox', options: { valueField: 'id', textField: 'text', data: dropdata } };
+
+    var Typedata = [{ "id": "管理员" }, { "id": "普通用户" }];
+    var Typeeditor = { type: 'combobox', options: { valueField: 'id', textField: 'id', data: Typedata } };
+    function dosearch() {
+
+        var Address = $('#Address').val();
+        $('.easyui-datagrid').datagrid("load", { Address: Address });
+    }
+
+    function format(row, data, index)
+    {
+        if (data.DataPower == "userid='@userid'") {
+            return "仅本人";
+
+        }
+        else if (data.DataPower == "1=1")
+            return "所有";
+        else
+            return "";
+    }
+
+    function select1Row()
+    {
+        
+        $('.easyui-datagrid').datagrid("checkRow", 0);
+    }
+
+   
+
+    function del() {
+        if (!confirm("确定要删除吗？")) {
+            return;
+        }
+        var a = $('.easyui-datagrid').datagrid("getChecked");
+        var selected = "";
+        for (var i = 0; i < a.length; i++) {
+            var id = "'" + a[i].id + "'";
+            if (selected != "")
+                selected += "," + id;
+            else
+                selected += id;
+        }
+
+        var url = "case/Delete";
+        var data = { selected: selected };
+        j(data, url, delCallBack);
+
+    }
+    function delCallBack(result) {
+        if (result.Success == true)
+            $('.easyui-datagrid').datagrid("reload");
+        else
+            $.messager.show({ title: "提示", msg: "请勾选需要删除的选项" });
+
+    }
+    function Cancel()
+    {
+
+        $('.easyui-datagrid').datagrid("cancelEdit", editRow);
+        if (isAdding) {
+            $('.easyui-datagrid').datagrid("deleteRow", 0);
+            editRow = undefined;
+            isAdding = false;
+        }
+
+
+    }
+
+    function add()
+    {
+
+        window.parent.showSelectPoint();
+    }
+
+    var isAdding;
+    var editRow;
+    function edit() {
+        //修改时要获取选择到的行
+        var rows = $('.easyui-datagrid').datagrid("getChecked");
+        if (rows.length == 0)
+            return;
+        parent.editCaseWinOpen(rows[0].id);
+
+    }
+    function onSort(sort, order) {
+        sort = sort;
+        order = order;
+    }
+    function exportSHP() {
+        var begin = $('#begin').datebox('getValue');
+        var end = $('#end').datebox('getValue');
+        var flowstate = $('#flowstate').combobox('getValue');
+        var LoginID = $('#LoginID').val();
+        var user1name = $('#user1name').val();
+        var user2name = $('#user2name').val();
+        var data = { begin: begin, end: end, flowstate: flowstate, user2name: user2name, LoginID: LoginID, user1name: user1name, sort: sort, order: order };
+
+        var url = "../server/ConsoleHandler.ashx?method=ExportSHP";
+        $.messager.progress({ text: '生成中，请稍后...' });
+        GetObjectByMethod(result, data, url, exportExcelCallBack);
+    }
+    function exportSHPCallBack(re) {
+        $.messager.progress('close');
+        if (re.Success)
+            window.open("../temp/" + re.Message);
+        else
+            $.messager.show({ title: "提示", msg: re.Message });
+    }
+    function save() {
+        $('.easyui-datagrid').datagrid("endEdit", editRow);
+        var data = $('.easyui-datagrid').datagrid("getData").rows[editRow];
+        var url = "../server/userHandler.ashx?method=Save";
+
+        GetObjectByMethod(result, data, url, saveCallBack);
+    }
+    function saveCallBack(re) {
+        if (re.Success == true) {
+
+            $('.easyui-datagrid').datagrid("updateRow",{index:editRow,row:{UserId:re.Message}});
+            $('.easyui-datagrid').datagrid("acceptChanges", editRow);
+            editRow = undefined;
+            isAdding = false;
+            $.messager.show({ title: "提示", msg: "保存成功。" });
+        }
+        else {
+            if (isAdding)
+                $('.easyui-datagrid').datagrid("deleteRow", editRow);
+            else
+                $('.easyui-datagrid').datagrid("rejectChanges", editRow);
+            isAdding = false;
+            editRow = undefined;
+            $('.easyui-datagrid').datagrid("clearSelections");
+
+            $.messager.show({ title: "提示", msg: re.Message });
+
+        }
+    }
+
+
+    function exportExcel() {
+        var begin = $('#begin').datebox('getValue');
+        var end = $('#end').datebox('getValue');
+        var flowstate = $('#flowstate').combobox('getValue');
+        var LoginID = $('#LoginID').val();
+        var user1name = $('#user1name').val();
+        var user2name = $('#user2name').val();
+        var data = { begin: begin, end: end, flowstate: flowstate, user2name: user2name, LoginID: LoginID, user1name: user1name, sort: sort, order: order };
+
+        var url = "../server/ConsoleHandler.ashx?method=ExportExcel";
+        $.messager.progress({ text: '生成中，请稍后...' });
+        GetObjectByMethod(result, data, url, exportExcelCallBack);
+    }
+
+    function exportExcelCallBack(re) {
+        $.messager.progress('close');
+        if (re.Success)
+            window.open("../temp/" + re.Message);
+        else
+            $.messager.show({ title: "提示", msg: re.Message });
+
+    }
+
+    //取消操作
+    function Cancel() {
+
+
+
+        $('.easyui-datagrid').datagrid("uncheckAll", editRow);
+          if (isAdding) {
+            $('.easyui-datagrid').datagrid("uncheckAll", 0);
+            editRow = undefined;
+             isAdding = false;
+         }
+
+
+    }
+   
+    function setNowTitle(data)
+    {
+        //this.window.
+        //select1Row();
+        window.parent.setNowTitle(data.total);
+        window.parent.showPoints(data.rows);
+        window.parent.showPointsData = data.rows;
+        select1Row();
+        
+    }
+    
+    function HightLight()
+    {
+        window.parent.HightLight( $('.easyui-datagrid').datagrid("getChecked"));
+    }
+    function reload(re)
+    {
+        if (re!=null && re.Message != null)
+            $.messager.show({title:"提示",msg: re.Message});
+        $('.easyui-datagrid').datagrid("reload");
+    }
+    function onCaseCheck(rowIndex, rowData)
+    {
+        HightLight();
+        $("#CaseDetail").attr("src", "CaseDetail.html?id=" + rowData.id);
+        $("#TaskList").attr("src", "TaskList.html?id=" + rowData.id);
+        $("#CheckList").attr("src", "CheckList.html?id=" + rowData.id);
+    }
+    function setStatus(s)
+    {
+        var rows = $('.easyui-datagrid').datagrid("getChecked");
+        if (rows.length == 0)
+            return;
+        rows[0].Status = s;
+        j(rows[0], "Case/Update", reload);
+    }
+    var arrLoadedTab = new Array();
+    function tabSelected(title, index) {
+        var tab = $('#tt').tabs('getSelected');
+        if ($.inArray(index, arrLoadedTab) == -1) {
+            var str = tab[0].innerHTML;
+            tab[0].innerHTML = str;
+            arrLoadedTab.push(index);
+        }
+    }
+
+</script>

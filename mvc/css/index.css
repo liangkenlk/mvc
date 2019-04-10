@@ -1,0 +1,108 @@
+.table_user,.table_user td{
+			border:1px solid #A6C9E2;
+			border-collapse:collapse;/*单元格边框合并*/
+			font-size:12px;
+			padding:4px
+		}
+
+/**标题样式**/
+#header{
+	
+	background: url("../images/head_center.png") repeat;
+}
+.zn-head-right {
+	right: 0px;width: 171px;height: 70px;margin-top: -5px;background: url("../images/head_right.png") repeat;position: absolute;
+}
+.zn-head-left {
+	float: left;width: 372px;height: 70px;margin-top: -5px;background: url("../images/head_left.png") no-repeat;position: absolute;
+}
+.head .zn-logo2 {
+	width: 371px;height: 70px;
+	
+}
+.ywcx_hd {
+    height: 40px;
+    margin-top: 1px;
+    margin-right: 1px;
+    color: rgb(255, 255, 255);
+    padding-left: 16px;
+    font: bold 16px/40px 微软雅黑;
+}
+
+
+		
+     .btn {
+            align-items: flex-start;
+            background-clip: padding-box;
+            background-color: rgb(0, 122, 255);
+            border-bottom-color: rgb(0, 122, 255);
+            border-bottom-left-radius: 3px;
+            border-bottom-right-radius: 3px;
+            border-bottom-style: solid;
+            border-bottom-width: 1px;
+            border-image-outset: 0px;
+            border-image-repeat: stretch;
+            border-image-slice: 100%;
+            border-image-source: none;
+            border-image-width: 1;
+            border-left-color: rgb(0, 122, 255);
+            border-left-style: solid;
+            border-left-width: 1px;
+            border-right-color: rgb(0, 122, 255);
+            border-right-style: solid;
+            border-right-width: 1px;
+            border-top-color: rgb(0, 122, 255);
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+            border-top-style: solid;
+            border-top-width: 1px;
+            box-sizing: border-box;
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+            display: inline-block;
+            font-family: "Helvetica Neue", Helvetica, sans-serif;
+            font-size: 14px;
+            font-stretch: 100%;
+            font-style: normal;
+            font-variant-caps: normal;
+            font-variant-east-asian: normal;
+            font-variant-ligatures: normal;
+            font-variant-numeric: normal;
+            font-weight: 400;
+            height: 33px;
+            letter-spacing: normal;
+            line-height: 19.88px;
+            margin-bottom: 0px;
+            margin-left: 0px;
+            margin-right: 0px;
+            margin-top: 0px;
+            outline-color: rgb(255, 255, 255);
+            outline-style: none;
+            outline-width: 0px;
+            overflow-x: visible;
+            overflow-y: visible;
+            padding-bottom: 6px;
+            padding-left: 12px;
+            padding-right: 12px;
+            padding-top: 6px;
+            position: relative;
+            text-align: center;
+            text-indent: 0px;
+            text-rendering: auto;
+            text-shadow: none;
+            text-size-adjust: 100%;
+            text-transform: none;
+            transition-delay: 0s;
+            transition-duration: 0.2s;
+            transition-property: all;
+            transition-timing-function: linear;
+            user-select: none;
+            vertical-align: top;
+            white-space: nowrap;
+            width: 54px;
+            word-spacing: 0px;
+            writing-mode: horizontal-tb;
+            -webkit-appearance: none;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            -webkit-border-image: none;
+        }

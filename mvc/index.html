@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>上林县城市管理综合指挥平台</title>
+	<meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="jquery-easyui-1.4.4/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="jquery-easyui-1.4.4/themes/icon.css" />
+    <script type="text/javascript" src="jquery-easyui-1.4.4/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery-easyui-1.4.4/jquery.easyui.min.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <!--<link rel="stylesheet" href="css/style.css" type="text/css" />-->
+    <link rel="stylesheet" type="text/css" href="css/userguide.css" />
+
+    <!--<link rel="stylesheet" href="http://219.159.239.222:8089/api/library/3.20/3.20/esri/css/esri.css" />
+    <script src="http://219.159.239.222:8089/api/library/3.20/3.20/init.js"></script>
+    <link rel="stylesheet" href="http://219.159.239.222:8089/api/library/3.20/3.20/dijit/themes/claro/claro.css">-->
+    <script src="http://js.arcgis.com/3.20/"></script>
+    <link rel="stylesheet" href="http://js.arcgis.com/3.20/esri/css/esri.css" />
+
+ 
+
+    <script src="js/mapConfig.js"></script>
+    <script src="js/MapTool.js"></script>
+    <script src="js/BaseMap.js"></script>
+    <script src="js/sysConfig.js"></script>
+    <script src="js/CaseMap.js"></script>
+    <script src="js/Common.js"></script>
+    <script>
+        $(showUserName());
+        function setNowTitle()
+        {
+            j(null, "Case/GetCount", setNowTitleCallBack)
+        }
+        function setNowTitleCallBack(re) {
+            var tab = $('#tt').tabs('getTab', 0);  // 取得第一个tab
+            $('#tt').tabs('update', {
+                tab: tab,
+                options: {
+                    title: '需处理<span style="color:red">(' + re["需处理"] + ')</span>'
+                }
+            });
+            tab = $('#tt').tabs('getTab', 1);
+            $('#tt').tabs('update', {
+                tab: tab,
+                options: {
+                    title: '已处理<span style="color:red">(' + re["已处理"] + ')</span>'
+                }
+            });
+        }
+
+        function showPhotoWin(id) {
+            
+            $("#winImg").window('open');
+            $("#winImg iframe").attr("src", "sjgzPic.aspx?id=" + id);
+        }
+
+        var arrLoadedTab = new Array();
+        function tabSelected(title, index) {
+            var tab = $('#tt').tabs('getSelected');
+            if ($.inArray(index, arrLoadedTab) == -1) {
+                var str = tab[0].innerHTML;
+                tab[0].innerHTML = str;
+                arrLoadedTab.push(index);
+            }
+        }
+
+        function Logout() {
+            var url = "user/Logout";
+            j( {}, url, LogoutCallBack)
+        }
+        function LogoutCallBack(e) {
+            location.href = "login.html";
+        }
+
+        function showUserName() {
+            //var url = "";
+            var url = "user/getCurrentUserInfo";
+
+            j({}, url, showUserNameCallBack);
+        }
+        function showUserNameCallBack(re) {
+            if (re.Success == false)
+                this.location.href = "login.html";
+            $('#UserName').text("您好："+re.UserName);
+
+        }
+    </script>
+</head>
+<body class="easyui-layout claro">
+    <div data-options="region:'north',border:false,onResize:setCenter" style="font-family: fantasy;font-size: 40px;background-color:cornflowerblue;width: 1366px;height: 60px;color: white; overflow:hidden">
+    <div style="float:left"><img src="images/hlogo.png" style="height:60px" /></div><div style="vertical-align:top;float:left;">上林县城市管理综合指挥平台</div><div style="float:right;margin-top:10px;    margin-right: 20px;"><img  src="images/user.png" style="height:20px;vertical-align:bottom"/><label href="#" id="UserName" style="font-size:20px;vertical-align:bottom"></label><a href="javascript:Logout()"><img style="height:30px;vertical-align:bottom" alt="注销" src="images/logout.png" /></a></div></div>
+    <div data-options="region:'west',split:true,title:'地图',noheader:false,collapsible:true,collapse:false" style="width:550px;" id="map" >
+        <img id="divPostion" src="images/dw.gif" style="display:none;width:20px;position:absolute;z-index:999"/>
+        <div id="lblSelectPoint" style="color:white; display:none;position:absolute;top:30px;right:5px;z-index:999;background-color:blue">请拖动地图选择问题地点<a href="#" class="easyui-linkbutton" onclick="pointSelected();" iconcls="icon-search">选定</a></div>
+        <img id="imagebtn" onclick="changeMapHandler()" src="images/ic_image.png" style="cursor:pointer; width:40px;position:absolute; right:5px;bottom:5px; z-index:999" />
+        <img id="vectorbtn" onclick="changeMapHandler()" src="images/ic_vector.png" style="cursor:pointer;display:none;width:40px;position:absolute;right:5px;bottom:5px;z-index:999" />
+    </div>
+    <div data-options="region:'south',border:false" style="height:40px;background-color:cornflowerblue;padding:10px;text-align:center">版权所有©2019 南宁市国土测绘信息中心 版本：v1.0</div>
+    <div data-options="region:'center',title:'Center',noheader:true">
+        <div id="tt" class="easyui-tabs" data-options="onSelect:tabSelected" style="width:100%;height:100%;">
+            <div title="需处理" style="">
+                <iframe width="100%" height="99.5%" frameborder="0" id="caseframe" src="Case.html?status=需处理"></iframe>
+            </div>
+            <div title="已处理" style="">
+                <iframe width="100%" height="99.5%" frameborder="0" id="caseframe" src="Case.html?status=已处理"></iframe>
+            </div>
+            <div title="已解决" >
+                <iframe width="100%" height="99.5%" frameborder="0" id="caseframe" src="Case.html?status=已解决"></iframe>
+            </div>
+            <div title="已撤销">
+                <iframe width="100%" height="99.5%" frameborder="0" id="caseframe" src="Case.html?status=已撤销"></iframe>
+            </div>
+            <div title="统计与报表" >
+                <iframe width="100%" height="99.5%" frameborder="0" id="caseframe" src="count.html"></iframe>
+            </div>
+            <div title="用户管理">
+                <iframe width="100%" height="99.5%" frameborder="0" src="userlist.html"></iframe>
+            </div>
+        </div>
+    </div>
+    <div id="win" class="easyui-window" title="问题编辑" style="width:800px;height:600px;"
+         data-options="iconCls:'icon-save',modal:true,closed:true,onOpen:winReload">
+        <iframe  src="CaseEdit.html" frameborder="0" height="99%" width="100%"></iframe>
+    </div>
+    <div id="winImg" class="easyui-window" title="相关图片" style="width:800px;height:600px;"
+         data-options="iconCls:'icon-save',modal:true,closed:true,onOpen:winReload">
+        <iframe src="sjgzPic.aspx" frameborder="0" height="99%" width="100%"></iframe>
+    </div>
+</body>
+</html>

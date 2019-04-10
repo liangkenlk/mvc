@@ -1,0 +1,382 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="jquery-easyui-1.4.4/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="jquery-easyui-1.4.4/themes/icon.css" />
+    <script type="text/javascript" src="jquery-easyui-1.4.4/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery-easyui-1.4.4/jquery.easyui.min.js"></script>
+    <script src="jquery-easyui-1.4.4/locale/easyui-lang-zh_CN.js"></script>
+    <script src="js/sysConfig.js"></script>
+    <script src="js/Common.js"></script>
+    <script src="jquery-easyui-1.4.4/imageView/js/index.js"></script>
+    <link href="jquery-easyui-1.4.4/imageView/css/index.css" rel="stylesheet" />
+    <script src="jquery-easyui-1.4.4/imageView/js/jquery.rotate.min.js"></script>
+    <script type="text/javascript" src="js/touch.min.js"></script>
+    <script type="text/javascript" src="js/cat.touchjs.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <!--<link rel="stylesheet" href="css/style.css" type="text/css" />-->
+    <link rel="stylesheet" type="text/css" href="css/userguide.css" />
+    <style type="text/css">
+        .clearfix {
+            *zoom: 1;
+        }
+
+            .clearfix:before, .clearfix:after {
+                display: table;
+                line-height: 0;
+                content: "";
+            }
+
+            .clearfix:after {
+                clear: both;
+            }
+
+        .dynamic_images {
+            width: 100%;
+        }
+
+            .dynamic_images ul {
+                margin: 0;
+                padding: 0;
+            }
+
+                .dynamic_images ul li {
+                    float: left;
+                    list-style: none;
+                    width: 100px;
+                    height: 100px;
+                    overflow: hidden;
+                    cursor: pointer;
+                }
+
+                    .dynamic_images ul li img {
+                        width: 98%;
+                        height: 80px;
+                    }
+
+        .btn {
+            align-items: flex-start;
+            background-clip: padding-box;
+            background-color: rgb(0, 122, 255);
+            border-bottom-color: rgb(0, 122, 255);
+            border-bottom-left-radius: 3px;
+            border-bottom-right-radius: 3px;
+            border-bottom-style: solid;
+            border-bottom-width: 1px;
+            border-image-outset: 0px;
+            border-image-repeat: stretch;
+            border-image-slice: 100%;
+            border-image-source: none;
+            border-image-width: 1;
+            border-left-color: rgb(0, 122, 255);
+            border-left-style: solid;
+            border-left-width: 1px;
+            border-right-color: rgb(0, 122, 255);
+            border-right-style: solid;
+            border-right-width: 1px;
+            border-top-color: rgb(0, 122, 255);
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+            border-top-style: solid;
+            border-top-width: 1px;
+            box-sizing: border-box;
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+            display: inline-block;
+            font-family: "Helvetica Neue", Helvetica, sans-serif;
+            font-size: 14px;
+            font-stretch: 100%;
+            font-style: normal;
+            font-variant-caps: normal;
+            font-variant-east-asian: normal;
+            font-variant-ligatures: normal;
+            font-variant-numeric: normal;
+            font-weight: 400;
+            height: 33px;
+            letter-spacing: normal;
+            line-height: 19.88px;
+            margin-bottom: 0px;
+            margin-left: 0px;
+            margin-right: 0px;
+            margin-top: 0px;
+            outline-color: rgb(255, 255, 255);
+            outline-style: none;
+            outline-width: 0px;
+            overflow-x: visible;
+            overflow-y: visible;
+            padding-bottom: 6px;
+            padding-left: 12px;
+            padding-right: 12px;
+            padding-top: 6px;
+            position: relative;
+            text-align: center;
+            text-indent: 0px;
+            text-rendering: auto;
+            text-shadow: none;
+            text-size-adjust: 100%;
+            text-transform: none;
+            transition-delay: 0s;
+            transition-duration: 0.2s;
+            transition-property: all;
+            transition-timing-function: linear;
+            user-select: none;
+            vertical-align: top;
+            white-space: nowrap;
+            width: 54px;
+            word-spacing: 0px;
+            writing-mode: horizontal-tb;
+            -webkit-appearance: none;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            -webkit-border-image: none;
+        }
+    </style>
+</head>
+<body>
+    <div style="margin:20px 0;"></div>
+    <fieldset>
+        <legend>基本信息</legend>
+        <div style="padding:10px 60px 20px 60px">
+            <form id="ff" method="post">
+                <table cellpadding="5">
+                    <tr>
+                        <td>地址:</td>
+                        <td><input class="easyui-textbox" type="text" name="Address" id="Address" data-options="required:true"></input></td>
+                    </tr>
+                    <tr>
+                        <td>大类:</td>
+                        <td>
+                            <select class="easyui-combobox" id="CaseType" data-options="width:160,valueField: 'id',textField: 'id',data:GetCaseTypeList(),onSelect:onselect" name="CaseType"></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>小类:</td>
+                        <td><select class="easyui-combobox" id="CaseSubType" data-options="width:160,valueField: 'id',textField: 'id'" name="CaseSubType"></select></td>
+                    </tr>
+                    <tr>
+                        <td>所属区域:</td>
+                        <td><input class="easyui-textbox" id="Zone" name="Zone"></input></td>
+                    </tr>
+                    <tr>
+                        <td>描述:</td>
+                        <td><input class="easyui-textbox" name="Remark" id="Remark" data-options="multiline:true" style="height:60px"></input></td>
+                    </tr>
+
+                </table>
+            </form>
+            <div style="text-align:center;padding:5px">
+                <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-save" onclick="submitForm()">提交</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-remove" onclick="clearForm()">清空</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="cancel()">取消</a>
+            </div>
+            </fieldset>
+            <fieldset>
+                <legend>现场照片</legend>
+                <input class="easyui-filebox" id="file" name="images" data-options="width:300,multiple:true,buttonText:'选择图片（可多选）'" />
+                <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-save" onclick="uploadimages()">上传</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="delimages()">删除</a>
+          
+                <div style="width:100%">
+                    <ul id='viewer' class="picView-magnify-list"><div style="clear:both;"></div></ul>
+                 
+                </div>
+            </fieldset>
+        </div>
+
+</body>
+<script>
+    var id;
+    function submitForm() {
+        var url = "case/Update";
+        var data = $("#ff").serializeObject();
+        if (window.parent.x != null) {
+            data.X = window.parent.x;
+            data.Y = window.parent.y;
+        }
+        id = getQueryStringByName("id");
+        if (id != null)
+            data.id = id;
+        j(data, url, submitFormCallBack);
+    }
+    function submitFormCallBack(re)
+    {
+        if (re.Success)
+        {
+            id = re.data;
+            $.messager.show({ title: "提示", msg: "保存成功" });
+            var s = window.parent.frames["caseframe"]
+            for (var i = 0; i < s.length; i++)
+            {
+                try {
+                    s.contentWindow.reload();
+                }
+                catch (e) { }
+            }
+           // window.parent.closeEditWin();
+            
+        }
+        else
+            $.messager.show("提示", "保存失败："+re.Message);
+    }
+		function clearForm(){
+			$('#ff').form('clear');
+		}
+		function cancel()
+		{
+		    window.parent.closeEditWin();
+		    window.parent.frames["caseframe"].reload();
+		}
+		$(init());
+		function init()
+		{
+		    $.parser.onComplete = function () {
+		        $("#filebox_file_id_1").attr("multiple", "multiple");
+		        $("#filebox_file_id_1").attr("accept", "image/jpeg, image/png");
+                
+		    }
+		     id = getQueryStringByName("id");
+		    if (id != null)
+		    {
+		        var url = "case/GetByKey";
+               
+		        j({ key: id }, url, initCallBack);
+		    }
+		    getPhotoList();
+		}
+		function initCallBack(re)
+		{
+		    //$("#Address").textbox("setText", re.Address);
+		    //$("#Address").val(re.Address);
+		    //$("#Zone").textbox("setText", re.Zone);
+		    //$("#Zone").val(re.Zone);
+		    //$("#Remark").textbox("setText", re.Remark);
+		    //$("#Remark").val(re.Remark);
+		    //$('#CaseType').combobox('setValue', re.CaseType);
+		    //$('#CaseSubType').combobox('setValue', re.CaseSubType);
+		    $('#ff').form('load', re);
+		}
+		function onselect(record)
+		{
+		    $("#CaseSubType").combobox({ data: GetCaseSubTypeList(record.id) });
+		}
+
+		function getPhotoList() {
+
+		    $('[data-magnify]').Magnify({
+		        Toolbar: [
+                    'prev',
+                    'next',
+                    'rotateLeft',
+                    'rotateRight',
+                    'zoomIn',
+                    'actualSize',
+                    'zoomOut'
+		        ],
+		        keyboard: true,
+		        draggable: true,
+		        movable: true,
+		        modalSize: [800, 400],
+		        beforeOpen: function (obj, data) {
+		            console.log('beforeOpen')
+		        },
+		        opened: function (obj, data) {
+		            console.log('opened')
+		        },
+		        beforeClose: function (obj, data) {
+		            console.log('beforeClose')
+		        },
+		        closed: function (obj, data) {
+		            console.log('closed')
+		        },
+		        beforeChange: function (obj, data) {
+		            console.log('beforeChange')
+		        },
+		        changed: function (obj, data) {
+		            console.log('changed')
+		        }
+		    });
+		    var url = "Images/GetListByOutId";
+		    var data = { outid: id};
+		    j(data, url, getPhotoListCallBack);
+		}
+    
+		function getPhotoListCallBack(e) {
+		    $('#viewer').html("");
+		    //<li><a href="javascript:void(0)" data-magnify="gallery" data-group="g1" data-src="./images/a1.jpg" data-caption="测试图片一"><img src="./images/a1.jpg"></a></li>
+		    for (var i = 0; i < e.length; i++) {
+		        var src = rootUrl + "upload/case/" + e[i].Outid+"/"+e[i].FileName;
+		        var str = '<li><input type="checkbox" value="' + e[i].id + '" /><div href="javascript:void(0)" data-magnify="gallery" data-group="g1" data-src="' + src + '" data-caption="' + "aaaa" + '"><img src="' + src + '"></div></li>';
+		        $('#viewer').append(str);
+		    }
+		    $('#viewer').append('<div style="clear:both;"></div>');
+		    $('[data-magnify]').Magnify({
+		        Toolbar: [
+                    'prev',
+                    'next',
+                    'rotateLeft',
+                    'rotateRight',
+                    'zoomIn',
+                    'actualSize',
+                    'zoomOut'
+		        ],
+		        keyboard: true,
+		        draggable: true,
+
+		        movable: true,
+		        modalSize: [800, 400],
+		        beforeOpen: function (obj, data) {
+		            console.log('beforeOpen')
+		        },
+		        opened: function (obj, data) {
+		            console.log('opened');
+		            setTouch();
+		        },
+		        beforeClose: function (obj, data) {
+		            console.log('beforeClose')
+		        },
+		        closed: function (obj, data) {
+		            console.log('closed')
+		        },
+		        beforeChange: function (obj, data) {
+		            console.log('beforeChange')
+		        },
+		        changed: function (obj, data) {
+		            console.log('changed')
+		        }
+		    });
+		}
+
+		function uploadimages() {
+		    var url = "Images/UploadFile";
+		    var formData = new FormData();
+		    for (var i = 0; i < this.document.getElementById("filebox_file_id_1").files.length; i++) {
+		        formData.append("file" + i, this.document.getElementById("filebox_file_id_1").files[i]);
+		    }
+		    //formData.append("file", this.document.getElementById("filebox_file_id_1").files);
+		    formData.append("outid", id);
+		    $.messager.progress({ title: "上传中", interval: 0 });
+		    jUp(formData, url, onprogress, uploadCallBack);
+		}
+		function onprogress(evt) {
+		    var loaded = evt.loaded;     //已经上传大小情况 
+		    var tot = evt.total;      //附件总大小 
+		    var per = Math.floor(100 * loaded / tot);  //已经上传的百分比 
+		    var bar = $.messager.progress("bar");
+		    bar.progressbar('setValue', per);
+
+		}
+		function uploadCallBack(r) {
+		    $.messager.progress("close");
+		    
+		    //r = JSON.parse(r);
+		    if(r.Success==false)
+		        $.messager.alert({ title: "错误", msg: r.Message });
+		    
+		    getPhotoList();
+	
+		}
+
+</script>
+</html>

@@ -1,0 +1,318 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../jquery-easyui-1.4.4/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../jquery-easyui-1.4.4/themes/icon.css">
+    
+    <script type="text/javascript" src="../jquery-easyui-1.4.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../jquery-easyui-1.4.4/jquery.easyui.min.js"></script>
+    <script src="../jquery-easyui-1.4.4/locale/easyui-lang-zh_CN.js"></script>
+    <script src="../js/Common.js"></script>
+</head>
+<body style="overflow-y:hidden;">
+    <table class="easyui-datagrid" title="数据查询" style="width:100%;height:450px;overflow-y:hidden;"
+           data-options="rownumbers:false,pagination:true,url:'../server/citypartHandler.ashx?method=GetList',toolbar:'#tb',footer:'#ft',idField: 'id',onSortColumn:'onSort'" rownumbers="true" pagination="true">
+        <thead>
+            <tr>
+                <th data-options="field:'id',width:80,checkbox:true"></th>
+                <th data-options="field:'name',width:80,sortable:false,editor:'text'">名称</th>
+                <th data-options="field:'latlng',width:80,sortable:false,editor:'text'">位置</th>
+                <th data-options="field:'type',width:80,sortable:false,editor:'text'">类型</th>
+                <th data-options="field:'geotype',width:100,sortable:false">图形类型</th>
+                <th data-options="field:'json',width:100,sortable:false,formatter:showShowFields">属性</th>
+                <!--  <th data-options="field:'DataPower',width:100,sortable:false,editor:editor,formatter:format">数据权限</th>-->
+            </tr>
+        </thead>
+    </table>
+    <div id="tb" style="padding:2px 5px;">
+
+        名称： <input id="name" style="width:110px" />
+       
+        类型：<select id="CityPartType" panelHeight="auto" style="width:100px">
+    <option value="">=所有=</option>
+</select><a href="#" class="easyui-linkbutton" onclick="dosearch();" iconcls="icon-search">查询</a>
+        <!--<a href="#" class="easyui-linkbutton" onclick="add();" iconcls="icon-add">添加</a>-->
+        <a href="#" class="easyui-linkbutton" onclick="edit();" iconcls="icon-edit">编辑</a>
+        <a href="#" class="easyui-linkbutton" onclick="Cancel();" iconcls="icon-cancel">取消</a>
+        <a href="#" class="easyui-linkbutton" onclick="save();" iconcls="icon-save">保存</a>
+        <a href="#" class="easyui-linkbutton" onclick="del();" iconcls="icon-remove">删除</a>
+        <a href="#" class="easyui-linkbutton" onclick="exportExcel();" iconCls="icon-redo">导出excel</a>
+    </div>
+    <div class="easyui-window" id="showFieldsWin" closed="true" title="部件属性" style="width:200px;height:250px;">
+
+        <textarea id="showFiledsTxt" style="width:100%;height:80%;"></textarea>
+        <input type="button" id="saveShowFields" value="保存" onclick="saveJson()" style="margin-right:100px;" />
+    </div>
+</body>
+</html>
+
+<script type="text/javascript">
+
+
+    var sort;
+    var order;
+    var dropdata = [{ "id": "1=1", "text": "所有" }, { "id": "userid='@userid'", "text": "仅本人" }];
+    var editor = { type: 'combobox', options: { valueField: 'id', textField: 'text', data: dropdata } };
+
+    var Typedata = [{ "id": "管理员" }, { "id": "普通用户" }];
+    var Typeeditor = { type: 'combobox', options: { valueField: 'id', textField: 'id', data: Typedata } };
+    $(initCityPartTypeSelect());
+    function dosearch() {
+
+        var keyword = $('#name').val();
+        var type = $('#CityPartType option:selected').text();
+        //var type = $('#CityPartType').combobox('getValue');
+        $('.easyui-datagrid').datagrid("load", { keyword: keyword ,type:type});
+    }
+
+    function format(row, data, index)
+    {
+        if (data.DataPower == "userid='@userid'") {
+            return "仅本人";
+
+        }
+        else if (data.DataPower == "1=1")
+            return "所有";
+        else
+            return "";
+    }
+
+
+
+    var result = new ajaxObject();
+
+    function del() {
+        if (!confirm("确定要删除吗？")) {
+            return;
+        }
+        var a = $('.easyui-datagrid').datagrid("getChecked");
+        var selected = "";
+        for (var i = 0; i < a.length; i++) {
+            var id = "'" + a[i].id + "'";
+            if (selected != "")
+                selected += "," + id;
+            else
+                selected += id;
+        }
+
+        var url = "../server/citypartHandler.ashx?method=DeleteSelect";
+        var data = { selected: selected };
+        j( data, url, delCallBack);
+
+    }
+    function delCallBack(result) {
+        if (result.Success == true)
+            $('.easyui-datagrid').datagrid("reload");
+        else
+            $.messager.show({ title: "提示", msg: "请勾选需要删除的选项" });
+
+    }
+    function Cancel()
+    {
+
+        $('.easyui-datagrid').datagrid("cancelEdit", editRow);
+        if (isAdding) {
+            $('.easyui-datagrid').datagrid("deleteRow", 0);
+            editRow = undefined;
+            isAdding = false;
+        }
+
+
+    }
+    function add()
+    {
+        $('.easyui-datagrid').datagrid("insertRow", {
+            index: 0, row: {
+                UserName: '新用户',
+                PassWord: '123456',
+                LoginID:"newUser"
+            }
+        });
+        if (editRow != undefined) {
+            $('.easyui-datagrid').datagrid("endEdit", editRow);
+            editRow = undefined;
+        }
+        $('.easyui-datagrid').datagrid("beginEdit", 0);
+        isAdding = true;
+        editRow = 0;
+    }
+
+    var isAdding;
+    var editRow;
+    function edit() {
+        //修改时要获取选择到的行
+        var rows = $('.easyui-datagrid').datagrid("getSelections");
+        //如果只选择了一行则可以进行修改，否则不操作
+        if (rows.length == 1) {
+            //修改之前先关闭已经开启的编辑行，当调用endEdit该方法时会触发onAfterEdit事件
+            if (editRow != undefined) {
+                $('.easyui-datagrid').datagrid("endEdit", editRow);
+                editRow = undefined;
+            }
+            //当无编辑行时
+            if (editRow == undefined) {
+                //获取到当前选择行的下标
+                var index = $('.easyui-datagrid').datagrid("getRowIndex", rows[0]);
+                //开启编辑
+                $('.easyui-datagrid').datagrid("beginEdit", index);
+                //把当前开启编辑的行赋值给全局变量editRow
+                editRow = index;
+                //当开启了当前选择行的编辑状态之后，
+                //应该取消当前列表的所有选择行，要不然双击之后无法再选择其他行进行编辑
+                $('.easyui-datagrid').datagrid("unselectAll");
+            }
+        }
+    }
+    function onSort(sort, order) {
+        sort = sort;
+        order = order;
+    }
+    function exportSHP() {
+        var begin = $('#begin').datebox('getValue');
+        var end = $('#end').datebox('getValue');
+        var flowstate = $('#flowstate').combobox('getValue');
+        var LoginID = $('#LoginID').val();
+        var user1name = $('#user1name').val();
+        var user2name = $('#user2name').val();
+        var data = { begin: begin, end: end, flowstate: flowstate, user2name: user2name, LoginID: LoginID, user1name: user1name, sort: sort, order: order };
+
+        var url = "../server/ConsoleHandler.ashx?method=ExportSHP";
+        $.messager.progress({ text: '生成中，请稍后...' });
+        GetObjectByMethod(result, data, url, exportExcelCallBack);
+    }
+    function exportSHPCallBack(re) {
+        $.messager.progress('close');
+        if (re.Success)
+            window.open("../temp/" + re.Message);
+        else
+            $.messager.show({ title: "提示", msg: re.Message });
+    }
+    function save() {
+        $('.easyui-datagrid').datagrid("endEdit", editRow);
+        var data = $('.easyui-datagrid').datagrid("getData").rows[editRow];
+        var url = "../server/CityPartHandler.ashx?method=Update";
+
+        j( data, url, saveCallBack);
+    }
+    function saveCallBack(re) {
+        if (re.Success == true) {
+
+            $('.easyui-datagrid').datagrid("updateRow",{index:editRow,row:{UserId:re.Message}});
+            $('.easyui-datagrid').datagrid("acceptChanges", editRow);
+            editRow = undefined;
+            isAdding = false;
+            $.messager.show({ title: "提示", msg: "保存成功。" });
+        }
+        else {
+            if (isAdding)
+                $('.easyui-datagrid').datagrid("deleteRow", editRow);
+            else
+                $('.easyui-datagrid').datagrid("rejectChanges", editRow);
+            isAdding = false;
+            editRow = undefined;
+            $('.easyui-datagrid').datagrid("clearSelections");
+
+            $.messager.show({ title: "提示", msg: re.Message });
+
+        }
+    }
+
+
+    function exportExcel() {
+
+
+        var keyword = $('#name').val();
+        var data = { keyword: keyword };
+        var url = "../server/CityPartHandler.ashx?method=ExportPointExcel";
+        $.messager.progress({ text: '生成中，请稍后...', msg: '请勿阻止新窗口打开' });
+        j(data, url, exportExcelCallBack);
+    }
+    function exportExcelCallBack(re) {
+        $.messager.progress('close');
+        if (re.Success)
+            window.open("../temp/" + re.Message);
+        else
+            $.messager.show({ title: "提示", msg: re.Message });
+
+    }
+
+    //取消操作
+    function Cancel() {
+
+
+
+        $('.easyui-datagrid').datagrid("uncheckAll", editRow);
+          if (isAdding) {
+            $('.easyui-datagrid').datagrid("uncheckAll", 0);
+            editRow = undefined;
+             isAdding = false;
+         }
+
+
+    }
+    function showShowFields(val, row, index) {
+
+        return '<a href="#" onclick="editShowFields(' + index + ')">查看</a>';
+
+    }
+    function editShowFields(index) {
+
+        var rows = $('.easyui-datagrid').datagrid('getRows');
+        var row = rows[index];
+        var json = JSON.parse(row.json)
+        var tempTxt ="";
+        for (var i in json)
+        {
+            if (tempTxt != "")
+                tempTxt += "\n";
+            tempTxt += i +":"+ json[i]
+        }
+        citypartid = row.id;
+        //alert(classTxt);
+        document.getElementById("showFiledsTxt").value = tempTxt;
+        $("#showFieldsWin").window('open');
+        function showShowFields(val, row, index) {
+
+            return '<a href="#" onclick="editShowFields(' + index + ')">查看</a>';
+
+        }
+    }
+ 
+    var citypartid;
+    function saveJson()
+    {
+        var tempTxt = $("#showFiledsTxt").val().replaceAll("\n",";");
+        var data = {};
+        var arr = tempTxt.split(";");
+        for (var i = 0; i < arr.length;i++)
+        {
+            data[arr[i].split(":")[0]] = arr[i].split(":")[1];
+        }
+
+        data = { "json": JSON.stringify(data), "id": citypartid };
+        var url = "../server/citypartHandler.ashx?method=Update"
+        j(data, url, function (re) {
+            $.messager.show({ title: "提示", msg: re.Message });
+            $('.easyui-datagrid').datagrid("reload");
+        });
+    }
+
+    function initCityPartTypeSelect() {
+        var url = '../server/CityPartHandler.ashx?method=GetTypeList';
+        j(null, url, initCityPartTypeSelectCallBack);
+    }
+    function initCityPartTypeSelectCallBack(re) {
+
+        //专题下拉框
+        var select = $("#CityPartType");
+        select.html("");
+        for (var i = 0; i < re.length; i++) {
+
+            select.append("<option value='" + re[i].type + "'>" + re[i].type + "</option>");
+        }
+        //$.parser.parse("#CityPartType");
+    }
+</script>

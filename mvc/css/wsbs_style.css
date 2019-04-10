@@ -1,0 +1,210 @@
+.new_header {
+	margin: 0px auto; padding: 0px; border: 0px currentColor; width: 980px; height: 100%; line-height: 25px; font-family: "Microsoft YaHei", "å¾®è½¯é›…é»‘", "Segoe UI", Arial; font-size: 15px; white-space: normal; max-height: 100%;
+}
+#Portal_Footer {
+	margin: 0px auto; padding: 0px; border: 0px currentColor; width: 980px; height: 100%; line-height: 25px; font-family: "Microsoft YaHei", "å¾®è½¯é›…é»‘", "Segoe UI", Arial; font-size: 15px; white-space: normal; max-height: 100%;
+}
+.reginfo {
+	color: rgb(102, 102, 102); font-size: 12px;
+}
+.reginfo a {
+	color: rgb(102, 102, 102); font-size: 12px;
+}
+.reginfo a:visited {
+	color: rgb(102, 102, 102); font-size: 12px;
+}
+.wblist-btn {
+	width: 198px; height: 39px; margin-bottom: 8px;
+}
+.wsbs-content {
+	margin: 0px; padding: 0px; border: 1px solid rgb(204, 204, 204); line-height: 35px; font-size: 16px;
+}
+.wsbs-content-title {
+	background: url("../images/wsbs_title_bg.gif") repeat-x top; height: 35px; text-align: center; color: rgb(20, 117, 160); line-height: 35px; font-size: 16px; font-weight: bold;
+}
+.new_header input {
+	border: 1px solid rgb(128, 128, 128); font-family: "Microsoft YaHei", "å¾®è½¯é›…é»‘", "Segoe UI", Arial;
+}
+.new_header textarea {
+	font-family: "Microsoft YaHei", "å¾®è½¯é›…é»‘", "Segoe UI", Arial;
+}
+.new_header table {
+	font-family: "Microsoft YaHei", "å¾®è½¯é›…é»‘", "Segoe UI", Arial;
+}
+.new_header a {
+	color: rgb(102, 136, 204); text-decoration: none; cursor: pointer;
+}
+.new_header a:hover {
+	color: red; text-decoration: none;
+}
+.index-title {
+	padding-left: 250px;
+}
+.index-back {
+	text-align: right; padding-top: 15px;
+}
+.header-title {
+	top: -10px; padding-right: 340px; position: relative;
+}
+.dr-table {
+	border-top-color: rgb(192, 192, 192); border-left-color: rgb(192, 192, 192); border-top-width: 1px; border-left-width: 1px; border-top-style: solid; border-left-style: solid; border-collapse: collapse; empty-cells: show;
+}
+.dr-table-cell {
+	padding: 4px; border-right-color: rgb(192, 192, 192); border-bottom-color: rgb(192, 192, 192); border-right-width: 1px; border-bottom-width: 1px; border-right-style: solid; border-bottom-style: solid;
+}
+.dr-subtable-cell {
+	padding: 4px; border-right-color: rgb(192, 192, 192); border-bottom-color: rgb(192, 192, 192); border-right-width: 1px; border-bottom-width: 1px; border-right-style: solid; border-bottom-style: solid;
+}
+.dr-table-header {
+	
+}
+.dr-table-header-continue {
+	
+}
+.dr-table-headercell {
+	padding: 4px 6px; text-align: left; color: black; font-family: "Microsoft YaHei", "å¾®è½¯é›…é»‘", "Segoe UI", Arial; font-size: 14px; font-weight: bold; border-right-color: rgb(192, 192, 192); border-bottom-color: rgb(192, 192, 192); border-right-width: 1px; border-bottom-width: 1px; border-right-style: solid; border-bottom-style: solid;
+}
+.dr-table-subheadercell {
+	padding: 4px 6px; border-right-color: rgb(192, 192, 192); border-right-width: 1px; border-right-style: solid; white-space: nowrap;
+}
+.dr-subtable-headercell {
+	padding: 4px 6px; border-right-color: rgb(192, 192, 192); border-bottom-color: rgb(192, 192, 192); border-right-width: 1px; border-bottom-width: 1px; border-right-style: solid; border-bottom-style: solid;
+}
+.message {
+	margin: 0px; padding: 0px 0px 0px 5px; font-size: 14px; border-top-color: rgb(204, 204, 204); border-bottom-color: rgb(204, 204, 204); border-top-width: 1px; border-bottom-width: 1px; border-top-style: solid; border-bottom-style: solid; cursor: pointer; background-color: rgb(255, 255, 225);
+}
+.message li {
+	background: no-repeat left; list-style: none; padding-top: 4px; padding-bottom: 4px; padding-left: 20px;
+}
+.message li.infomsg {
+	color: black; background-image: url("/channel/WebWork/inc/images/framework/ico_flag_info.png");
+}
+.message li.errormsg {
+	color: red; background-image: url("/channel/WebWork/inc/images/framework/ico_flag_warning.png");
+}
+.message li.warnmsg {
+	background-image: url("/channel/WebWork/inc/images/framework/ico_flag_warning.png");
+}
+.name {
+	padding: 0px; width: 115px; text-align: right; clear: left; vertical-align: top; float: left; white-space: nowrap;
+}
+.dataHeadSearchTd {
+	color: rgb(145, 145, 145);
+}
+.value {
+	padding: 0px;
+}
+.error {
+	padding-left: 6px; float: left;
+}
+.errors {
+	color: red; vertical-align: middle;
+}
+img.errors {
+	padding-right: 2px;
+}
+.errors input {
+	border: 1px solid red !important;
+}
+.errors textarea {
+	border: 1px solid red !important;
+}
+.required {
+	color: red; padding-left: 2px;
+}
+.infoDetail {
+	padding: 4px; border: 1px solid rgb(204, 204, 204); font-size: 14px; white-space: normal; cursor: pointer; background-color: rgb(255, 255, 225);
+}
+.infoDetailNoTop {
+	border-width: 0px 1px 1px; border-style: solid; border-color: rgb(204, 204, 204); padding: 4px; font-size: 14px; white-space: normal; cursor: pointer; background-color: rgb(255, 255, 225);
+}
+.GridToolbar {
+	background-position: top; padding: 6px 8px 4px; color: rgb(0, 0, 0); vertical-align: middle; border-right-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-right-width: 1px; border-left-width: 1px; border-right-style: solid; border-left-style: solid; background-image: url("/channel/WebWork/inc/img/Common/toolgrad6.gif"); background-color: rgb(234, 243, 251);
+}
+.GridToolbar td {
+	font-size: 14px;
+}
+.frontBannerBg {
+	height: 155px; background-image: url("/channel/WebWork/inc/images/portal/portal_banner_bg.gif"); background-repeat: no-repeat;
+}
+.serviceSubjectRightBg {
+	height: 114px; background-image: url("/channel/WebWork/inc/images/portal/service_subject_right_bg.gif"); background-repeat: no-repeat;
+}
+.simpleBannerBg {
+	height: 50px; color: rgb(255, 255, 255); font-size: 20px; background-image: url("/channel/WebWork/inc/images/portal/simpleBannerBg.png"); background-repeat: no-repeat;
+}
+.titlelink {
+	
+}
+.titlelink a {
+	margin: 4px; color: rgb(51, 51, 51); font-size: 14px; text-decoration: none;
+}
+.titlelink a:hover {
+	color: rgb(255, 51, 0); font-size: 14px; text-decoration: underline;
+}
+.finishTitleColumn {
+	border: 1px solid rgb(191, 191, 191); width: 100%; height: 31px; color: rgb(144, 144, 144); padding-left: 20px; background-color: rgb(242, 242, 242);
+}
+.processTitleColumn {
+	border: 1px solid rgb(191, 191, 191); width: 100%; height: 31px; padding-left: 20px; background-color: rgb(209, 228, 242);
+}
+.tipTable {
+	border: 1px solid rgb(191, 191, 191); border-collapse: collapse;
+}
+.tipTable .leftHeadTd {
+	border: 1px solid rgb(204, 204, 204); line-height: 35px; padding-left: 20px; background-color: rgb(242, 242, 242);
+}
+.tipTable .rightHeadTd {
+	border: 1px solid rgb(204, 204, 204); width: 100px; text-align: center; line-height: 35px; background-color: rgb(242, 242, 242);
+}
+.tipTable .leftTd {
+	line-height: 30px; padding-left: 20px; border-right-color: rgb(204, 204, 204); border-bottom-color: rgb(204, 204, 204); border-right-width: 1px; border-bottom-width: 1px; border-right-style: solid; border-bottom-style: solid; white-space: normal;
+}
+.tipTable .rightTd {
+	width: 100px; text-align: center; line-height: 30px; border-bottom-color: rgb(204, 204, 204); border-bottom-width: 1px; border-bottom-style: solid;
+}
+.formTitle {
+	line-height: 29px; padding-left: 20px; border-right-color: rgb(192, 192, 192); border-left-color: rgb(192, 192, 192); border-right-width: 1px; border-left-width: 1px; border-right-style: solid; border-left-style: solid; background-image: url("/channel/WebWork/inc/images/station/form_head_bg.jpg");
+}
+.resultDeliveryHome {
+	border: 1px solid rgb(204, 204, 204); width: 100%; height: 46px; background-color: rgb(255, 255, 255);
+}
+.baseViewHeader {
+	width: 100%; height: 31px; background-color: rgb(209, 228, 242);
+}
+.baseViewHeaderImgTd {
+	padding-right: 8px; padding-left: 8px; vertical-align: middle; cursor: pointer;
+}
+.baseViewHeaderTitleTd {
+	width: 100%; padding-left: 20px; white-space: nowrap;
+}
+.portalTwoColumnTable {
+	width: 960px;
+}
+.portalTwoColumnFirstTd {
+	width: 50%; vertical-align: top;
+}
+.portalTwoColumnSecondTd {
+	width: 50%; vertical-align: top;
+}
+.portalInputTwoColumn {
+	width: 300px;
+}
+.portalInputOneColumn {
+	border: 1px solid rgb(0, 0, 0); width: 778px; -ms-word-wrap: break-word; background-color: rgb(255, 255, 255);
+}
+.topmenuword {
+	color: rgb(255, 255, 255); font-family: "å¾®è½¯é›…é»‘"; font-size: 12pt; font-weight: bold; text-decoration: none;
+}
+.sysMenuTab {
+	width: 100px; height: 37px; text-align: center; color: white; overflow: hidden; font-size: 12pt; font-weight: bold; text-decoration: none; vertical-align: middle;
+}
+.sysMenuTab:hover {
+	
+}
+.sysMenuTabSelected {
+	width: 100px; height: 37px; text-align: center; color: black; overflow: hidden; font-size: 12pt; font-weight: bold; text-decoration: none; vertical-align: middle; cursor: pointer; background-image: url("/channel/WebWork/inc/images/menubg1.jpg");
+}
+.bottomword {
+	color: white; font-family: "å¾®è½¯é›…é»‘"; font-size: 10pt; text-decoration: none;
+}

@@ -1,0 +1,854 @@
+﻿
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>...</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+
+    <!--<link rel="stylesheet" type="text/css" href="http://192.168.2.80/GisBaseForH5/arcgis_js_api/library/3.14/3.14/dijit/themes/tundra/tundra.css" />
+    <link rel="stylesheet" type="text/css" href="http://192.168.2.80/GisBaseForH5/arcgis_js_api/library/3.14/3.14/esri/css/esri.css" />
+    <link rel="stylesheet" type="text/css" href="http://192.168.2.80/GisBaseForH5/arcgis_js_api/library/3.14/3.14/dijit/themes/claro/claro.css" />-->
+    <!--<link rel="stylesheet" href="http://localhost/GisBaseForH5/arcgis_js_api/library/3.14/3.14/dijit/themes/soria/soria.css" type="text/css" />
+    <script type="text/javascript" src="http://localhost/GisBaseForH5/arcgis_js_api/library/3.14/3.14/init.js"></script>-->
+    <!--<script src="http://js.arcgis.com/3.20/"></script>
+    <link rel="stylesheet" href="http://js.arcgis.com/3.20/esri/css/esri.css" />-->
+
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="jquery-easyui-1.4.4/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="jquery-easyui-1.4.4/themes/icon.css" />
+    <link rel="stylesheet" type="text/css" href="css/userguide.css" />
+
+    <link rel="stylesheet" href="http://219.159.239.222:8089/api/library/3.20/3.20/esri/css/esri.css" />
+    <script src="http://219.159.239.222:8089/api/library/3.20/3.20/init.js"></script>
+    <link rel="stylesheet" href="http://219.159.239.222:8089/api/library/3.20/3.20/dijit/themes/claro/claro.css">
+
+
+    <!--<link rel="stylesheet" href="http://localhost/arcgis_js_api/library/3.26/3.26/esri/css/esri.css" />
+    <script src="http://localhost/arcgis_js_api/library/3.26/3.26/init.js"></script>
+    <link rel="stylesheet" href="http://localhost/arcgis_js_api/library/3.26/3.26/dijit/themes/claro/claro.css">-->
+    <script type="text/javascript" src="jquery-easyui-1.4.4/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery-easyui-1.4.4/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="jquery-easyui-1.4.4/locale/easyui-lang-zh_CN.js"></script>
+
+
+
+    <script src="js/mapConfig.js"></script>
+    <script type="text/javascript" src="js/maps_tianditu.js"></script>
+
+    <script type="text/javascript" src="js/default.js"></script>
+    <script type="text/javascript" src="js/BaseMap.js"></script>
+    <script type="text/javascript" src="js/Theme.js"></script>
+    <script type="text/javascript" src="js/MapTool.js"></script>
+    <script type="text/javascript" src="js/Common.js"></script>
+    <script type="text/javascript" src="js/address.js"></script>
+    <script type="text/javascript" src="js/wallmap.js"></script>
+    <script type="text/javascript" src="js/Analyse.js"></script>
+    <script type="text/javascript" src="js/label.js"></script>
+    <script type="text/javascript" src="js/example.js"></script>
+    <script type="text/javascript" src="js/CityPart.js"></script>
+    <script src="js/sysConfig.js"></script>
+    <script src="js/appUpdate.js"></script>
+    <script src="jquery-easyui-1.4.4/mui.min.js"></script>
+    <style type="text/css">
+        #divJeepDiv {
+            left: 0px;
+            top: 0px;
+            opacity: 0.1;
+            background: #000;
+            filter: alpha(opacity=100);
+            filter: alpha(opacity=50);
+            -moz-opacity: 0;
+            -khtml-opacity: 0;
+            opacity: 0;
+            overflow: hidden;
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            z-index: 10000;
+            display: none;
+        }
+
+        .defaultbar {
+            margin-top: 10px;
+            height: 5px;
+            background-color: #FFFFE0;
+            border: 1px solid #A9C9E2;
+            position: relative;
+        }
+
+            .defaultbar .jquery-completed {
+                height: 3px;
+                top: 0px;
+                left: 1px;
+                position: absolute;
+            }
+
+            .defaultbar .jquery-jslider {
+                height: 15px;
+                background-color: #E6E6FA;
+                border: 1px solid #A5B6C8;
+                top: -6px;
+                display: block;
+                cursor: pointer;
+                position: absolute;
+            }
+
+            .defaultbar .jquery-jslider-hover {
+                background-color: #000080;
+            }
+
+        fieldset {
+            border: solid 1px #dedede;
+            padding: 0 10px;
+        }
+
+            fieldset legend {
+                background-color: #FFF5FA;
+                border: 1px solid #F8B3D0;
+                padding: 5px 10px;
+            }
+
+        toolbar-small .x-btn-inner {
+            font-size: 20px;
+            font-weight: normal;
+            font-family: tahoma,arial,verdana,sans-serif;
+            color: #333;
+            padding: 0 4px;
+        }
+
+        #Title {
+            font-size: 36px;
+            font-family: '宋体';
+            font-weight: bold;
+            color: #FFFFFF;
+            padding-left: 30px;
+        }
+
+        a:link {
+            color: #000000;
+            text-decoration: none;
+        }
+
+        a:visited {
+            text-decoration: none;
+            color: #000000;
+        }
+
+        #mapServiceDiv {
+            font-size: 16px;
+        }
+
+        #rightTopId a:link {
+            color: #000000;
+            text-decoration: none;
+            padding: 2px;
+        }
+
+        #rightTopId a:visited {
+            text-decoration: none;
+            color: #000000;
+        }
+
+        #rightTopId a:hover {
+            text-decoration: none;
+            border: 1px solid #ccc;
+            padding: 1px;
+        }
+
+        #rightTopId a:active {
+            border: 1px solid #666666;
+        }
+
+        .g-left-content ul li, .g-left-content ul li a {
+            text-decoration: none;
+            color: #061a31;
+            font-size: 15px;
+        }
+
+            .g-left-content ul li a:hover {
+                padding-left: 10px;
+                height: 30px;
+                line-height: 30px;
+                background: none;
+                font-size: 15px;
+                font-family: "新宋体";
+                color: #ff8040;
+            }
+
+        #arrow {
+            position: fixed;
+            right: -25px;
+            display: none;
+            width: 50px;
+            height: 50px;
+            background: url(images/arrow.png);
+        }
+
+        /**专题点查询结果TABLE**/
+        .msgTable {
+            text-align: left;
+            border: 2px;
+            width: 100%;
+            font-size: 12px;
+        }
+    </style>
+
+    <script type="text/jscript">
+        //var sysConfig = <%=sysConfig%>;
+        var center = { x: sysConfig.中心经度, y: sysConfig.中心纬度 };
+        var startLevel = 0;
+    </script>
+
+
+
+
+</head>
+<body class="easyui-layout claro">
+
+
+    <div data-options="region:'north',border:false" class="header" style='border-bottom:1PX solid #386e1a;overflow-y: hidden;'>
+        <div class="head_logo" style="display: inline-block;vertical-align: middle;"><div id="sysname" style="float: left;width:800px"></div></div>
+        <div class="head_rig"></div>
+    </div>
+    <div data-options="region:'west',split:false,border:false" id='west' style="width:396px;overflow:hidden;">
+        <div style="width:430">
+            <!--left start-->
+            <div class="left">
+                <div class="nav">
+                    <ul>
+                        <!--<%--
+                        <li class="nav_hover">
+                            <a href="#">
+                                <div class="nav_icon5"></div>
+                                <div class="nav_text">城市部件</div>
+                            </a>
+                        </li>--%>-->
+                        <li class="nav_hover">
+                            <a href="#">
+                                <div class="nav_icon1"></div>
+                                <div class="nav_text">底图图层</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="nav_icon2"></div>
+                                <div class="nav_text">地名地址</div>
+                            </a>
+                        </li>
+
+                        <!--<li>
+                            <a href="#">
+                                <div class="nav_icon3"></div>
+                                <div class="nav_text">区域定位</div>
+                            </a>
+                        </li>-->
+
+                        <li>
+                            <a href="#">
+                                <div class="nav_icon3"></div>
+                                <div class="nav_text">专题</div>
+                            </a>
+                        </li>
+                        <li onclick="onLabelListShow()">
+                            <a href="#">
+                                <div class="nav_icon4"></div>
+                                <div class="nav_text">标记管理</div>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <!--left end-->
+            <!--左菜单切换的内容 start-->
+            <div class="leftcent">
+                <!--城市部件 start-->
+                <!--<%--  <div class="cent_zt">
+                    <div class="cent_search" style="background-color: #3b98c3">
+                        <span style="color: #FFF;">城市部件</span>
+                    </div>
+                    <div class="cent_search">
+                        <div class="search_sel">
+                            <select id="CityPartType">
+                                <option value="">搜索字段</option>
+                            </select>
+                        </div>
+
+                        <div class="search_inp"><input id="CityPartkeyword" type="text" onkeypress="getKey();" /></div>
+                        <div class="search_but"><a Enter=true onclick="javascript:CityPart_dosearch();"></a></div>
+                    </div>
+                    <div>
+                        <div id="CityPart"></div>
+                    </div>
+
+
+                </div>--%>-->
+                <!--城市部件 end-->
+                <!--图层 start-->
+                <div class="cent_tc">
+                    <div class="cent_search" style="background-color: #3b98c3">
+                        <span style="color: #FFF;">底图图层</span>
+                    </div>
+                    <div class="centtc_list">
+                        <ul></ul>
+                    </div>
+                </div>
+                <!--图层 end-->
+                <!--地名地址 start-->
+                <div class="cent_zt  none">
+                    <div class="cent_search" style="background-color: #3b98c3">
+                        <span style="color: #FFF;">地名地址</span>
+                    </div>
+                    <div class="cent_search">
+                        <div class="search_sel">
+                            关键字：
+                        </div>
+
+                        <div class="search_inp"><input id="inputkeyword" type="text" onkeypress="getKey();" /></div>
+                        <div class="search_but"><a Enter=true onclick="javascript:addsearch();"></a></div>
+                    </div>
+                    <div id="treelist">
+                        <div id="typetree"></div>
+                    </div>
+                    <div id="addlist" style='display:none'>
+                        <a href='javascript:addunsearch()'>&lt&lt清除结果</a><br />
+                        <div id="addInfo" style="width:300px"></div>
+                    </div>
+
+                </div>
+                <!--地名地址 end-->
+                <!--挂图 start-->
+                <!--<div class="cent_user  none">
+                    <div class="cent_search" style="background-color: #3b98c3">
+                        <span style="color: #FFF;">区域定位</span>
+                    </div>
+                    <div id="wallmap" style="width:95%;height:200px;display:none"></div>
+                    <div id="wallmaptree"></div>
+
+                </div>-->
+                <!--挂图 end-->
+                <!--专题 start-->
+                <div class="cent_zt none">
+                    <div class="cent_search">
+                        <div class="search_zt">
+                            <select id="fields" style="height: 28px;width: 130px;">
+                                <option value="">搜索字段</option>
+                            </select>
+                        </div>
+                        <div class="search_inp"><input id="Themekeyword" type="text"></div>
+                        <div class="search_but"><a href="javascript:themesSearch();"></a></div>
+                    </div>
+                    <div id="centzt_list" class="centzt_list">
+
+                    </div>
+                    <div class="centzt_list" id="SeachList" style='display:none'>
+                        <p style='height:20px;padding-top:20px;padding-left:20px;'><a href='javascript:unsearch()'>&lt&lt返回专题列表</a></p>
+
+
+                        <ul id='ul' style='padding-left:20px;'></ul>
+                        <div id='paging' style='height:20px;padding-left:15px;'></div>
+                    </div>
+
+                </div>
+                <!--专题 end-->
+                <!--<div class="cent_fx none">
+                                <div class="centfx_lists">
+                                    <div class="cent_search" style="background-color: #17698f">
+                                        <span style="color: #FFF;">标记管理</span>
+                                    </div>
+                                    <div class="lists" style="max-height: 292px;">
+                                        <ul>
+                                            <li class=".x-menu-item" onclick="javascript:addLabel();"> <img alt="" src="./images/zt_icon.jpg" align="left">&nbsp;<a class="x-menu-item" href="#"> 添加标记 </a> </li>
+                                            <li class=".x-menu-item" onclick="javascript:LabelList()"> <img alt="" src="./images/zt_icon.jpg" align="left">&nbsp;<a class="x-menu-item" href="#"> 标记列表 </a> </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div id="addLabel" class="easyui-window" title="添加标记" data-options="iconCls:'icon-save',closable:true,
+                collapsible:true,minimizable:true,maximizable:true,left:100" closed="true" closed="true" style="width:250px;height:300px;padding:5px;">
+
+                                    <input class="labelType" name="labelAdd" type="radio" value="point"/>点
+                                    <input class="labelType" name="labelAdd" type="radio" value="line" />线
+                                    <input class="labelType" name="labelAdd" type="radio" value="polygon" />面<br />
+                                    <input class="labelType" name="labelAdd" type="radio" value="circle" />圆
+                                    <input class="labelType" name="labelAdd" type="radio" value="rectangle" />矩形<br />
+                                    <input class="labelType" id="labelAddBtn" type="button" value="取消" onclick="javascript:cancelAllLabel()"/>
+
+                                </div>
+                                <div id="addLabelPanel" class="easyui-window" title="添加标记" data-options="iconCls:'icon-save',closable:true,
+                collapsible:true,minimizable:true,maximizable:true,left:100" closed="true" style="width:250px;height:300px;padding:5px;"></div>
+
+
+                                <div class="easyui-window" id="labelList" closed="true" title="标记列表" style="width:500px;height:450px;padding:5px;" data-options="iconCls:'icon-save',closable:true,
+                collapsible:true,minimizable:true,maximizable:true,left:100,top:170">
+                                    <table class="easyui-datagrid" id="labelGrid" style="width:98%;height:400px"
+                                           data-options="rownumbers:false,pagination:false,url:rootUrl+'server/MapHandler.ashx?method=getLabelList&token='+token,toolbar:'#tb',footer:'#ft',idField: 'id',onCheck:labelCellclick,onUncheck:labelCellclick,onCheckAll:labelCellclick,onUncheckAll:labelCellclick">
+                                        <thead>
+                                            <tr>
+                                                <th data-options="field:'id',width:80,checkbox:true"></th>
+                                                <th data-options="field:'name',width:200,sortable:false,editor:'text'">标记名称</th>
+                                                <th data-options="field:'labelDescribe',width:150,sortable:false,editor:'text'">描述</th>
+                                                <th data-options="field:'createTime',width:250,sortable:false,editor:'text'">创建时间</th>
+                                                <th data-options="field:'type',width:200,sortable:false,editor:'text'">类型</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                    <div id="tb" style="padding:2px 5px;">
+
+                                        <a href="#" class="easyui-linkbutton" onclick="edit();" iconcls="icon-edit">修改</a>
+                                        <a href="#" class="easyui-linkbutton" onclick="saveEdit();" iconcls="icon-save">保存</a>
+                                        <a href="#" class="easyui-linkbutton" onclick="labelCellclick();" iconcls="icon-search">显示</a>
+                                        <a href="#" class="easyui-linkbutton" onclick="del();" iconcls="icon-remove">删除</a>
+                                        <a href="#" class="easyui-linkbutton" onclick="clearDisplayLabelLayer();" iconcls="icon-remove">清除</a>
+                                    </div>
+                                </div>
+                            </div>-->
+                <!--个性标记 start-->
+                <div class="cent_zt none">
+                    <div class="cent_search" style="background-color: #3b98c3">
+                        <span style="color: #FFF;">自定义标记管理</span>
+                    </div>
+                    <div class="cent_search">
+
+
+
+
+                        <div class="search_sel">
+                            <select id="shareType" style="height: 28px;width: 108px;" onchange="loadLabelList()">
+                                <option value="">所有</option>
+                                <option value="0">私有</option>
+                                <option value="1">共享</option>
+                            </select>
+                            名称：
+                        </div>
+                        <div class="search_inp"><input id="labelkeyword" type="text" onkeypress="getKey();" /></div>
+                        <div class="search_but"><a Enter=true onclick="javascript: loadLabelList();"></a></div>
+                    </div>
+
+                    <div id="labellist">
+                        <div id="tb" style="padding:2px 5px;">
+                            <a href="#" class="easyui-linkbutton" onclick="addLabel();" iconcls="icon-add">添加</a>
+                            <a href="#" class="easyui-linkbutton" onclick="editLabel();" iconcls="icon-edit">修改</a>
+                            <!--<a href="#" class="easyui-linkbutton" onclick="saveEdit();" iconcls="icon-save">保存</a>-->
+                            <!--<a href="#" class="easyui-linkbutton" onclick="labelCellclick();" iconcls="icon-search">显示</a>-->
+                            <a href="#" class="easyui-linkbutton" onclick="delLabel();" iconcls="icon-remove">删除</a>
+                            <a href="#" class="easyui-linkbutton" onclick="loadLabelList();" iconcls="icon-reload">刷新</a>
+                            <!--<a href="#" class="easyui-linkbutton" onclick="clearDisplayLabelLayer();" iconcls="icon-remove">清除</a>-->
+                        </div>
+                        <!--<a href='javascript:labelunsearch()'>&lt&lt清除结果</a><br />-->
+                        <div id="labelGrid" style="width:300px; height:250px"></div>
+
+                    </div>
+
+                </div>
+                <div id="addLabel" class="easyui-window" title="添加标记" data-options="iconCls:'icon-save',closable:true,
+    collapsible:true,minimizable:true,maximizable:true,left:400" closed="true" closed="true" style="width:250px;height:250px;padding:5px;">
+
+                    <input class="labelType" name="labelAdd" type="radio" value="point" />点
+                    <input class="labelType" name="labelAdd" type="radio" value="line" />线
+                    <input class="labelType" name="labelAdd" type="radio" value="polygon" />面<br />
+                    <input class="labelType" name="labelAdd" type="radio" value="circle" />圆
+                    <input class="labelType" name="labelAdd" type="radio" value="rectangle" />矩形<br />
+                    <input class="labelType" id="labelAddBtn" type="button" value="取消" onclick="javascript:cancelAllLabel()" />
+
+                </div>
+                <div id="addLabelPanel" class="easyui-window" title="添加标记" data-options="iconCls:'icon-save',closable:true,
+    collapsible:true,minimizable:true,maximizable:true,left:400" closed="true" style="width:400px;height:250px;padding:5px;"></div>
+                <!--个性标记 end-->
+                <!--分析 start-->
+                <div class="cent_fx none">
+                    <div class="cent_search" style="background-color: #3b98c3">
+                        <span style="color: #FFF;">叠加分析</span>
+                    </div>
+                    <div class="centfx_list">
+                        <ul>
+                            <li>
+                                <input name="radio" type="radio" id="radio" value="radio" checked="checked" />
+                                <label for="radio">城市总体规划</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="radio" id="radio" value="radio" />
+                                <label for="radio" id="rads">城市总体规划</label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="cent_but">
+                        <a style='float:left' href="javascript:handPainted();">手绘</a>
+                        <a style='float:right' href="javascript:importTxt();">导入</a>
+                    </div>
+                </div>
+                <!--分析 end-->
+
+            </div>
+            <!--左菜单切换的内容 end-->
+        </div>
+    </div>
+    <div id="centerDiv" data-options="region:'center',border:false">
+        <div id="rightTopId" style="overflow:hidden;position:absolute; height:30px;width:100%;background-color:#3892D3;border-left: 4px solid #3892D3">
+            <div style="border: 1px solid #AAAAAA;height: 26px;line-height:26px; padding-left: 10px;">
+                <div style="float: left;height: 26px;">
+
+                    <!--<%--<a href="#" onclick="javascript:LocationNavigation();">
+                        <img src="images/bullet_arrow_down.png" style="vertical-align: middle;" />
+                        龙川县
+                    </a>
+                    <label style="color: #AAAAAA;">|</label>--%>-->
+                    <a href="#" onclick="javascript:fullext();">
+                        <img src="images/fullScreen.png" style="vertical-align: middle;" />
+                        全图
+                    </a>
+                    <!--<label style="color: #AAAAAA;">|</label>
+                    <a href="#" onclick="javascript:printdiv('mapDiv');">
+                        <img src="images/print.png" style="vertical-align: middle;" />
+                        打印
+                    </a>-->
+                    <!-- <label style="color: #AAAAAA;">|</label>
+                    <a href="#" onclick="javascript:pan();">
+                        <img src="images/mov.gif" style="vertical-align: middle;"/>
+                        移动
+                    </a>
+                    <label style="color: #AAAAAA;">|</label>
+                    <a href="#" onclick="javascript:zoomIn();">
+                        <img src="images/zoom_in.png" style="vertical-align: middle;"/>
+                        放大
+                    </a>
+                    <label style="color: #AAAAAA;">|</label>
+                    <a href="#" onclick="javascript:zoomOut();">
+                        <img src="images/zoom_out.png" style="vertical-align: middle;"/>
+                        缩小
+                    </a> -->
+                    <label style="color: #AAAAAA;">|</label>
+                    <a href="#" id="ceju" onclick="javascript:measureLength();">
+                        <img src="images/Measure_Btn.png" style="vertical-align: middle;" />
+                        测距
+                    </a>
+                    <label style="color: #AAAAAA;">|</label>
+                    <a href="#" id="cemian" onclick="javascript:measureArea();">
+                        <img src="images/server_connect.png" style="vertical-align: middle;" />
+                        测面
+                    </a>
+                    <label style="color: #AAAAAA;">|</label>
+                    <a id="clear" href="#" onclick="javascript:clearmeasure();clearAllThemeLayer();">
+                        <img src="images/ClearLine.png" style="vertical-align: middle;" />
+                        清除
+                    </a>
+                    <!-- <label style="color: #AAAAAA;">|</label>
+                    <a href="#" onclick="javascript:changeMapHandler('vector');">
+                        <img src="images/tc_sltc.png" style="vertical-align: middle;"/>
+                        矢量
+                    </a>
+                    <label style="color: #AAAAAA;">|</label>
+                    <a href="#" onclick="javascript:changeMapHandler('image');">
+                        <img src="images/tc_yxtc.png" style="vertical-align: middle;"/>
+                        影像
+                    </a> -->
+                    <label id="clears" style="color:#AAAAAA;">|</label>
+                    <a id="splitBtn" href="#" onclick="javascript:maptoSplit();">
+                        <img src="images/tc_sltc_yxtc.png" style="vertical-align:middle;" />
+                        分屏
+                    </a>
+                    <label style="color: #AAAAAA;">|</label>
+                    <a href="#" onclick="javascript:curtain();">
+                        <img src="images/tc_arrow.png" style="vertical-align: middle;" />
+                        卷帘
+                    </a>
+                    <!-- <label style="color: #AAAAAA;">|</label>
+                    <a href="#" onclick="javascript:show360Point();">
+                        <img src="images/tc_vr.png" style="vertical-align: middle;"/>
+                        360vr
+                    </a> -->
+                    <label style="color: #AAAAAA;">|</label>
+                    <a href="javascript://" target="_blank" onclick="toggleLatlngWin()">
+                        <img src="images/earth.png" style="vertical-align: middle;" />
+                        坐标定位
+                    </a>
+
+                </div>
+
+
+                <div style="float: right;height: 26px;margin-right:10px">
+                    欢迎您,<label id="UserName">
+
+                    </label>
+                    <label style="color: #AAAAAA;">|</label>
+                    <a name="backstage" href="backstage/default.htm" style="">
+                        <img src="images/shapeedit.png" style="vertical-align: middle;" />
+                        后台
+                    </a>
+                    <label name="backstage" style="color: #AAAAAA;">|</label>
+                    <a href="login.html" style="" onclick="Logout(); ">
+                        <img src="images/door_out.png" style="vertical-align: middle;" />
+                        退出
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="mapDiv" style="position:absolute;top:30px; width:100%;height:95%;">
+
+
+            <!--伸缩 start-->
+            <div class="map_ss"><a href='javascript:toggleWest();'></a></div>
+            <!--伸缩 end-->
+
+            <div id="map_values" style="width:100%;height:0px;margin-left:50px;position:absolute; top:5px; z-index:998; font-size:16px;color:red;font-weight:bold;">
+
+
+
+                <div style="width:160px; height:200xp; float:right;" onselectstart="return false">
+                    <img src="images/vectorLast.jpg" width="50px;" height="50px;" onclick="changeMapHandler('vector')" title='矢量地图'
+                         onmouseover="this.src='images/vectorLastSelect.jpg'" onmouseout="this.src='images/vectorLast.jpg'" /><!-- 平移 -->
+                    <img src="images/imageLast.jpg" width="50px;" height="50px;" onclick="changeMapHandler('image')" title='影像地图'
+                         onmouseover="this.src='images/imageLastSelect.jpg'" onmouseout="this.src='images/imageLast.jpg'" /><!-- 平移 -->
+                </div>
+            </div>
+            <div id="divPostion" style="width:40px;height:50px;position:absolute; top:50%;left:50%;z-index:998;display:none;"><a href="javascript:endSelect()" style="width:40px;background-image:url(images/but_4.png);color:white;font-size:large">结束</a><br /><a href="javascript:selectPoint()" style="width:40px;background-image:url(images/but_1.png);color:white;font-size:large">选择</a><br /><img width="40" src="images/posi.png" /></div>
+            <div>
+                <img id="imgGPS" style="width:50px;margin-right:50px; position:absolute; right:5px; bottom:50px; z-index:998; font-size:16px;color:red;font-weight:bold;display:none" src="images/gps.png" width="50" onclick="gpslocation()" />
+            </div>
+
+            <div id="lblSelectPoint" style="width:150px;margin-right:500px; position:absolute; right:-88px; top:100px; z-index:998; font-size:16px;color:red;font-weight:bold;background-color:white;text-align:center;display:none">请选择点</div>
+            <a id="btnEndDraw" class="easyui-linkbutton" onclick="EndDraw()" style="width:150px;margin-right:500px; position:absolute; right:-88px; top:50px; z-index:998; font-size:16px;text-align:center;display:none">开始分析</a>
+            <div id="divhid" style="position:absolute;height:100%;right:0px;display:none">
+                <div id="map2" style="position:absolute;"></div>
+            </div>
+            <div id="map" style="position:absolute;left:0px;width:100%;height:100%;"></div>
+            <!-- 卷帘对比的箭头 -->
+            <div id="arrow"></div>
+            <div id="map_tianditu" style="display:none">	</div>
+        </div>
+    </div>
+    <div id="win" class="easyui-window" title="My Window" style="width:850px;height:600px" data-options="title:'详情',modal:true,closed:true,width:700,height:600">
+        <iframe id="iframe" width="100%" height="98%" frameborder="0"></iframe>
+    </div>
+    <div id="anlyseWin" class="easyui-window" title="My Window" style="width:700px;height:650px" data-options="title:'详情',modal:true,closed:true,width:700,height:650">
+        <table id="table" width="100%" style="display:none; font-size:13px">
+            <tr>
+                <td width="30%"></td>
+                <div id="layername"></div>
+                <td></td>
+
+
+            </tr>
+            <tr>
+                <td>透明度：</td>
+                <td><input id="slider" class='easyui-slider' value=100 id='range~" + id + "' style='width:180px' data-options='step:1,showTip:false,max:100,onChange:themeOnchange'></td>
+            </tr>
+            <tr>
+                <td>属性查询：</td>
+                <td><input id="check" type="checkbox" onchange="searchChange()" />（其他专题属性查询将取消）</td>
+            </tr>
+            <tr id="analyse" style="display:none">
+                <td style="vertical-align:top">叠加分析：</td>
+                <td>
+                    <a href="javascript:movePainted();" style="width: 100px;" class="easyui-linkbutton">拖动手绘</a><br>
+                    <a href="javascript:handPainted();" style="width: 100px;" class="easyui-linkbutton">点击手绘</a>
+                    <!--<a  style="color:blue" href="javascript:importTxt();">导入</a>-->
+
+                </td>
+            </tr>
+            <tr id="Example" style="display:none">
+                <td style="vertical-align:top">
+                    图例：
+                </td>
+                <td>
+                    <a href="javascript:showExample(tempId);" style="width: 100px;" class="easyui-linkbutton">显示图例</a><br><br>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="latlngWin" data-options="title:'详情',modal:true,closed:true,width:700,height:600">
+        <input id="txtlatlng" style="height:27px;width:228px" /><a href="javascript:latlngpost()" class="btn">定位</a>
+        <br />如：108.59965417,23.43361122
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+
+    function plusReady() {
+        if (!window.plus)
+            return;
+
+
+        token = plus.storage.getItem("token");
+        document.getElementById('imgGPS').style.display = "";
+        appUpdate();
+        showUserName();
+        if (token == null)
+            this.location.href = "login.html";
+    }
+
+
+
+    document.addEventListener("plusready", plusReady, false);
+    // Get storage item length
+    function islogin() {
+        var token = plus.storage.getItem("token");
+        if (token == null)
+            this.location.href = "login.html";
+    }
+
+		var loginName = 'admin';
+		var userLevel = '1';
+		var wallmapMag = '';
+     //if (myMap) myMap.resize();
+       		//初始化布局
+  		function initUI(){
+  		    var leftHeight = $(document.body).height()- $("#rightTopId").height() - 70;
+			$("#leftId").css('height',leftHeight+'px');
+
+			if(loginName == "admin"){
+				$("#theVrFree").css('display','block');
+			}else{
+				$("#theVrFree").css('display','none');
+			}
+
+			if( $("#leftId").css('display') == "none"){
+			   var rightTopWidth = $(window).width();
+			   $("#open_arrow").css("display", "block");
+			} else{
+			   var rightTopWidth = $(document.body).outerWidth(true)-$("#leftId").width();
+			   $("#open_arrow").css('display','none');
+			}
+			//$("#rightTopId").css('width',rightTopWidth+'px');
+			$("#centerDiv").css('left',$("#leftId").width()+'px');
+			$("#centerDiv").css('width',($("#topId").width() - $("#leftId").width()-4)+'px');
+			//console.info("body: " + $(document).scrollLeft() );
+			$("#centerDiv").css('height',leftHeight+'px');
+			$("#open_arrow").css("top",$("#centerDiv").height()/2+'px');
+			$("#close_arrow").css("top",$("#centerDiv").height()/2+'px');
+			$("#mapServiceDiv").css("height",leftHeight+'px');
+			if (myMap) myMap.resize();
+			if (myMap2) myMap.resize();
+  		}
+     function toggleWest()
+     {
+
+       if($('.layout-expand-west').length==0  || $('.layout-expand-west')[0].style.display == 'none')
+       {
+         $('body').layout('collapse','west');
+       }
+       else
+       {
+          $('body').layout('expand','west');
+       }
+
+
+     }
+
+
+
+
+    
+
+
+
+     function showUserName()
+     {
+         //var url = "";
+         var url = "server/userHandler.ashx?method=getCurrentUserInfo";
+
+         j({}, url, showUserNameCallBack);
+     }
+     function showUserNameCallBack(re)
+     {
+         $('#UserName').text(re.UserName);
+
+    }
+
+     $(document).ready(function () {
+         if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
+             //TODO
+             $("[name='backstage']").hide();
+         }
+            //初始化高度
+
+            //当文档窗口发生改变时 触发
+         //showUserName();
+         //getSysconfig();
+         $("#sysname").text(sysConfig["系统名称"]);
+             $(document).attr('title', sysConfig["系统名称"]);
+             $('#UserName').text(sysConfig["username"]);
+
+			$(".nav>ul>li").click(function(){
+				var index = $(this).index();
+				$(".leftcent> div").hide();
+				$(".leftcent> div").eq(index).show();
+
+				$(".nav>ul>li").removeClass("nav_hover");
+				$(this).addClass("nav_hover");
+			});
+
+
+
+     })
+
+     function Logout()
+     {
+         var token = plus.storage.setItem("token",null);
+         var url = "server/userHandler.ashx?method=Logout";
+         j({}, url, LogoutCallBack)
+     }
+
+     function LogoutCallBack(e)
+     {
+         location.href = "login.html";
+     }
+
+
+         function getKey() {
+             if (event.keyCode == 13) {
+                 dosearch();
+             }
+         }
+
+
+
+
+
+         //function getSysconfig()
+         //{
+         //    //var url = "server/confighandler.ashx?method=GetSysConfig";
+         //    //j(null, url, getSysconfigCallBack);
+         //    $("#sysname").text(sysConfig["系统名称"]);
+         //    $(document).attr('title', sysConfig["系统名称"]);
+         //    $('#UserName').text(sysConfig["username"]);
+
+         //}
+         //function getSysconfigCallBack(r)
+         //{
+         //    $("#sysname").text(r["系统名称"]);
+         //    $(document).attr('title', r["系统名称"]);
+         //    center.x = parseFloat(r["中心经度"]);
+         //    center.y = parseFloat(r["中心纬度"]);
+         //}
+         //打印地图
+         function printMap() {
+
+             var head_str = "<html><head><title></title></head><body>"; //先生成头部
+             var foot_str = "</body></html>"; //生成尾部
+             var older = document.body.innerHTML;
+
+             //隐藏不需要的元素
+             $(".map_ss").hide();
+             $(".icon_cz").hide();
+             $(".dijitReset").hide();
+             $(".icon_cz").next().hide();
+
+             var new_str = document.getElementById('mapDiv').innerHTML; //获取指定打印区域
+             var old_str = document.body.innerHTML; //获得原本页面的代码
+             document.body.innerHTML = head_str + new_str + foot_str; //构建新网页
+             window.print(); //打印刚才新建的网页
+             document.body.innerHTML = older; //将网页还原
+             return false;
+         }
+</script>
+
+
+<script src="html5plus://ready" /> 

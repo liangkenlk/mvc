@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <link rel="stylesheet" type="text/css" href="arcgis_js_api/library/3.14/3.14/dijit/themes/tundra/tundra.css" />
+    <link rel="stylesheet" type="text/css" href="arcgis_js_api/library/3.14/3.14/esri/css/esri.css" />
+    <link rel="stylesheet" type="text/css" href="arcgis_js_api/library/3.14/3.14/dijit/themes/claro/claro.css" />
+    <link rel="stylesheet" href="arcgis_js_api/library/3.14/3.14/dijit/themes/soria/soria.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="jquery-easyui-1.4.4/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="jquery-easyui-1.4.4/themes/icon.css" />
+    <link rel="stylesheet" type="text/css" href="css/userguide.css">
+
+    <script type="text/javascript" src="jquery-easyui-1.4.4/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery-easyui-1.4.4/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="jquery-easyui-1.4.4/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="arcgis_js_api/library/3.14/3.14/init.js"></script>
+    <script type="text/javascript" src="js/maps_tianditu.js"></script>
+    <script type="text/javascript" src="js/TDTLayer.js"></script>
+    <script type="text/javascript" src="js/BaseMap.js"></script>
+    <script type="text/javascript" src="js/Theme.js"></script>
+    <script type="text/javascript" src="js/MapTool.js"></script>
+
+    <script type="text/javascript" src="js/360point.js"></script>
+    <script type="text/javascript" src="js/tab_label.js"></script>
+    <script type="text/javascript" src="js/Common.js"></script>
+    <script type="text/javascript" src="js/address.js"></script>
+    <script type="text/javascript" src="js/wallmap.js"></script>
+    <script type="text/javascript" src="js/Analyse.js"></script>
+ 
+</head>
+<body>
+    <table id="table" width="100%" style="display:none"><tr>
+        <td width="30%"></td><div id="layername"></div><td></td>
+       
+        
+        </tr>
+       <tr>
+           <td>透明度：</td><td><input id="slider" class='easyui-slider' value=100 id='range~" + id + "' style='width:180px' data-options='step:1,showTip:false,max:100,onChange:baseMapOnchange'></td>
+       </tr>
+        <tr>
+            <td>属性查询：</td>
+            <td><input id="check"  type="checkbox"  onchange="searchChange()"/>（其他专题属性查询将取消）</td>
+        </tr>
+        <tr id="analyse" style="display:none">
+            <td>叠加分析：</td>
+            <td>
+
+                    <a  style="color:blue" href="javascript:parent.handPainted();">手绘</a> 
+                    <a  style="color:blue" href="javascript:parent.importTxt();">导入</a>
+               
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
+<script>
+        var id = getQueryStringByName("id");
+        init();
+        function init()
+        {
+            document.getElementById("slider").value= parent.getOpacity(id) * 100;
+            if (id == parent.tempId)
+            {
+                document.getElementById("check").checked = true
+            }
+            document.getElementById("table").style.display = "";
+            for (var i = 0 ; i < parent.themeConfig.length;i++) {
+                if (parent.themeConfig[i].themeId == id && parent.themeConfig[i].analyse == true)
+                    document.getElementById("analyse").style.display = "";
+            }
+            
+        }
+        function baseMapOnchange()
+        {
+
+            parent.setLayerOpacity(id, this.value / 100);
+        }
+        function searchChange()
+        {
+            parent.initKeyWordSelect(id);
+        }
+</script>

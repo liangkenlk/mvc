@@ -1,0 +1,168 @@
+﻿
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>
+        广州市地名（普查）网
+    </title>
+
+    <meta name="others" content="页面生成时间 2016-11-08 15:46:17" />
+    <link type="text/css" rel="stylesheet" href="/css/index1.css" />
+    <script type="text/javascript" src="/js/jquery-1.8.3.min.js"></script>
+    <script src="js/swfobject.js"></script>
+    <script type="text/javascript" src="/js/yeqie.js"></script>
+    <script type="text/javascript" src="/jquery-easyui-1.4.4/jquery.min.js"></script>
+    <script type="text/javascript" src="/jquery-easyui-1.4.4/jquery.easyui.min.js"></script>
+    <script src="/jquery-easyui-1.4.4/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript">
+
+        //获取数据库里面的新闻列表
+        function getpostlist() {
+           // alert("++++++++++++++++");
+
+            var url = "../server/PostTypeHandler.ashx?method=Getpsottype";
+
+
+
+            j(data, url, CallBack);
+        }
+        function CallBack(re) {
+            for (i = 0; i <= re.length;i++){
+                $("#type").html(re.Name);
+                var newRow = "<tr><td>" + name + "</td></tr>";
+                //为表格追加新行
+                $("#type").append(newRow);
+            }
+
+
+        }
+
+
+      
+     
+
+
+
+
+function setTab(a,b){
+ var tli=document.getElementById("menu"+a).getElementsByTagName("li");
+ var mli=document.getElementById("main"+a).getElementsByTagName("li");
+ var more=document.getElementById("more"+a).getElementsByTagName("li");
+
+ for(i=0;i<tli.length;i++){
+  tli[i].className=i==b?"on":"off"+a;
+  mli[i].style.display=i==b?"block":"none";
+  more[i].style.display=i==b?"block":"none";
+
+ }
+ getpostlist();
+}
+    </script>
+</head>
+
+<body>
+    <form id="form1" runat="server">
+       
+            <!--top begin-->
+            <div id="top">
+                <iframe src="Pages/head.html"
+                        scrolling="No" frameborder="0" allowtransparency="true"></iframe>
+
+            </div>
+
+
+
+
+                
+                    <div class="container">
+                        <div class="dmjss">
+                            <span>地名检索</span>
+                            <input type="text" class="SearchTxt" name="search" value="请输入关键字搜索">
+                            <input type="submit" class="SearchBtn" value="搜索" />
+                            <font color=red><br>温馨提示：查询信息仅供参考，不作为任何法律依据，进一步核实请到各区民政部门或市政务中心民政局政务服务窗口重新查询。任何单位和个人不得将从本网站获取的信息出售牟利。"</br>查询范例：您可以通过地名专名查询地名。例如需要查询地名为“西湖路”，可以在“地名检索”栏输入“西湖”或“xihu”，查询我市已有以“西湖”或“xihu”作专名的地名。</font>
+                        </div>
+                        <div class="mc">
+                            </table>
+                        </div>
+                        <div class="mc">
+                            <table width="97%" border="1" align="center" cellpadding="5"
+                                   cellspacing="0" bordercolor="#CCCCCC" class="SearchList"
+                                   style="BORDER-COLLAPSE: collapse ;font-size:14px; line-height:36px;">
+                                <tr bgcolor="#BCD7EB">
+                                    <th height="25" align="center"></th>
+                                    <th height="25" align="center">标准名称</th>
+
+                                </tr>
+
+                            </table>
+
+                        </div>
+                       
+                    </div>
+                </form>
+                <script type="text/javascript">
+var thisP=1;
+
+var maxP=0;
+
+function first(){
+	document.getElementById('thisPage').value='1';
+	document.forms[0].submit();
+}
+function previous(){
+	if(thisP<=1){alert('已经是第一页');return;}
+	document.getElementById('thisPage').value=thisP-1;
+	alert(thisP-1);
+	document.forms[0].submit();
+}
+function next(){
+	if(thisP>=maxP){alert('已经是最后一页');return;}
+	document.getElementById('thisPage').value=thisP+1;
+	document.forms[0].submit();
+}
+function last(){
+	document.getElementById('thisPage').value=maxP;
+	document.forms[0].submit();
+}
+function pagination_go(dmcx_list,jsp,maxPage){
+	var gopageID2 = document.getElementById('thisPage').value;
+	//gopageID2= gopageID.replace(" ",'');
+	var gopage2 = parseInt(gopageID2);
+	if(gopageID2 =="")
+	  {
+	  alert("请输入页数");
+	  gopageID2.focus();
+	  return false;
+	 }else if(isNaN(gopage2)){
+      alert("请输入数字")
+      gopage2.focus();
+	  return false;
+	 }
+	if(gopage2 <= maxP && gopage2 >0){
+		if(gopageID2=="1"){
+				window.location.href = dmcx_list +"."+jsp;
+			}else{
+
+				window.location.href = dmcx_list +"."+jsp+"?thisPage="+ gopage2;
+			}
+	}
+
+}
+                </script>
+          
+          
+
+           
+    <div class="foot">
+        <iframe src="Pages/foot.html"
+                scrolling="No" frameborder="0" allowtransparency="true"></iframe>
+    </div>
+    <!--bottom end-->
+   
+
+
+    
+</body>
+</html>

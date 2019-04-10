@@ -1,0 +1,214 @@
+body {
+	background: url("../images/webbg.gif") repeat-y top rgb(255, 255, 255); font: 14px/normal "Microsoft Yahei"; color: rgb(0, 0, 0); font-size-adjust: none; font-stretch: normal;
+}
+body {
+	margin: 0px; padding: 0px;
+}
+div {
+	margin: 0px; padding: 0px;
+}
+dl {
+	margin: 0px; padding: 0px;
+}
+dt {
+	margin: 0px; padding: 0px;
+}
+dd {
+	margin: 0px; padding: 0px;
+}
+ul {
+	margin: 0px; padding: 0px;
+}
+ol {
+	margin: 0px; padding: 0px;
+}
+li {
+	margin: 0px; padding: 0px;
+}
+h1 {
+	margin: 0px; padding: 0px;
+}
+h2 {
+	margin: 0px; padding: 0px;
+}
+h3 {
+	margin: 0px; padding: 0px;
+}
+h4 {
+	margin: 0px; padding: 0px;
+}
+h5 {
+	margin: 0px; padding: 0px;
+}
+h6 {
+	margin: 0px; padding: 0px;
+}
+pre {
+	margin: 0px; padding: 0px;
+}
+code {
+	margin: 0px; padding: 0px;
+}
+form {
+	margin: 0px; padding: 0px;
+}
+fieldset {
+	margin: 0px; padding: 0px;
+}
+legend {
+	margin: 0px; padding: 0px;
+}
+input {
+	margin: 0px; padding: 0px;
+}
+textarea {
+	margin: 0px; padding: 0px;
+}
+p {
+	margin: 0px; padding: 0px;
+}
+blockquote {
+	margin: 0px; padding: 0px;
+}
+iframe {
+	margin: 0px; padding: 0px;
+}
+img {
+	border: 0px currentColor;
+}
+ul {
+	list-style: none;
+}
+a {
+	color: rgb(51, 51, 51); text-decoration: none;
+}
+a:visited {
+	color: rgb(51, 51, 51); text-decoration: none;
+}
+a:hover {
+	color: rgb(204, 0, 0); text-decoration: underline;
+}
+.spe10 {
+	height: 10px; line-height: 10px; clear: both; font-size: 1px;
+}
+.dot {
+	background: url("../images/dot.gif") repeat-x left;
+}
+.mainbody {
+	margin: 15px auto; width: 980px; overflow: hidden;
+}
+.main01 {
+	margin: 0px auto; border: 1px solid rgb(238, 238, 238); width: 980px;
+}
+.w15 {
+	width: 15px; overflow: hidden;
+}
+.tabs {
+	background: url("/Inc/tab1/conbg.gif") repeat-x bottom; border-width: 2px 1px 1px; border-style: solid; border-color: rgb(0, 102, 153) rgb(155, 194, 224) rgb(155, 194, 224); color: rgb(51, 51, 51); overflow: hidden; font-size: 14px;
+}
+.tabs ul {
+	list-style: none; margin: 0px; padding: 0px;
+}
+.tabs li {
+	list-style: none; margin: 0px; padding: 0px;
+}
+.tabs-title {
+	color: rgb(0, 102, 204); font-family: "MicroSoft YaHei", SimSun, Arial; font-size: 16px; float: left;
+}
+.tabs-bigtitle {
+	background: url("/Inc/tab1/titlebg3.gif") no-repeat left top; list-style: none; margin: 0px 0px 0px -1px; padding: 0px 0px 0px 10px; width: 90px; height: 29px; color: white; line-height: 29px; overflow: hidden; font-weight: bold; border-top-color: currentColor; border-top-width: medium; border-top-style: none; float: left;
+}
+.tabs-nav li {
+	background: url("/Inc/tab1/itembg.gif") repeat-x top; border-width: medium 1px 1px; border-style: none solid solid; border-color: currentColor rgb(155, 194, 224) rgb(155, 194, 224); list-style: none; margin: 0px 0px 0px -1px; padding: 0px 10px; transition:background 0.3s; height: 29px; line-height: 29px; float: left;
+}
+.tabs-nav .cur > a {
+	
+}
+.tabs-nav .cur a:visited {
+	
+}
+.tabs-content {
+	padding: 5px;
+}
+.tabs-more {
+	text-align: right; padding-top: 5px; font-family: "ï¿½ï¿½ï¿½ï¿½"; font-size: 12px;
+}
+.list1-border {
+	border-radius: 5px; border: 1px solid rgb(204, 204, 204);
+}
+.list1-page {
+	margin: 0px auto; width: 960px; overflow: hidden;
+}
+.list1-content {
+	margin: 0px auto; width: 930px; overflow: hidden;
+}
+.list1 {
+	margin: 0px 0px 25px; padding: 0px 0px 25px; font-size: 14px; border-bottom-color: rgb(178, 178, 178); border-bottom-width: 1px; border-bottom-style: dotted;
+}
+.list1 li {
+	background: url("../images/point.jpg") no-repeat left 17px; list-style: none; margin: 0px auto; padding: 4px 80px 4px 12px; height: auto; line-height: 27px; position: relative;
+}
+.list1 li a {
+	color: rgb(51, 51, 51); text-decoration: none;
+}
+.list1 li a:hover {
+	color: rgb(178, 0, 0);
+}
+.list1 li span {
+	width: 80px; text-align: center; right: 0px; bottom: 0px; color: rgb(153, 153, 153); line-height: 35px; font-size: 12px; float: none; display: block; position: absolute;
+}
+.list1 li h6 {
+	margin: 0px; padding: 0px 0px 0px 10px; color: rgb(153, 153, 153); font-size: 14px; font-weight: normal; display: inline;
+}
+.list1-title {
+	height: 30px; line-height: 28px; font-family: "Microsoft Yahei"; font-size: 14px; border-bottom-color: rgb(0, 102, 153); border-bottom-width: 2px; border-bottom-style: solid;
+}
+.list1-title span {
+	background: rgb(0, 102, 153); padding: 2px 20px; border-radius: 5px 5px 0px 0px; width: auto; height: 35px; color: white; line-height: 35px; float: left; display: block;
+}
+.pages {
+	padding: 15px 5px 0px; height: 50px; line-height: 50px; overflow: hidden; font-family: "Microsoft Yahei"; font-size: 12px;
+}
+.pages a {
+	padding: 4px 10px; border: 1px solid rgb(232, 232, 232); color: rgb(51, 51, 51); text-decoration: none; margin-right: 5px;
+}
+.pages a:visited {
+	padding: 4px 10px; border: 1px solid rgb(232, 232, 232); color: rgb(51, 51, 51); text-decoration: none; margin-right: 5px;
+}
+.pages a.disable {
+	color: rgb(204, 204, 204);
+}
+.pages a.disable:hover {
+	color: rgb(204, 204, 204);
+}
+.pages a:hover {
+	background: rgb(0, 102, 204); color: white;
+}
+.pages a.currpage {
+	background: rgb(0, 102, 204); color: white;
+}
+.wrap {
+	margin: 0px auto; width: 980px;
+}
+.nav {
+	background: url("../images/nav_bg.jpg") repeat-x bottom; border: 1px solid rgb(204, 204, 204); height: 28px; color: rgb(105, 105, 105); line-height: 28px; padding-left: 15px; font-family: "ï¿½ï¿½ï¿½ï¿½"; font-size: 12px; margin-top: 15px;
+}
+.nav a {
+	color: rgb(105, 105, 105);
+}
+.nav a:visited {
+	color: rgb(105, 105, 105);
+}
+.nav a:hover {
+	color: rgb(204, 0, 0);
+}
+.bsdd {
+	width: 100%; height: 30px; line-height: 30px; font-size: 14px; font-weight: bold; border-top-color: rgb(238, 238, 238); border-bottom-color: rgb(238, 238, 238); border-top-width: 2px; border-bottom-width: 1px; border-top-style: solid; border-bottom-style: solid; background-color: rgb(240, 246, 251);
+}
+.bsdd01 {
+	line-height: 30px; padding-bottom: 20px; margin-top: 20px; margin-right: 20px; margin-left: 70px;
+}
+.bsdd02 {
+	margin: 20px; line-height: 30px;
+}
+img{border:none;}

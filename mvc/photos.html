@@ -1,0 +1,345 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script type="text/javascript" src="jquery-easyui-1.4.4/jquery.min.js"></script>
+    <script src="js/Common.js"></script>
+    <script src="js/UploadPhoto.js"></script>
+    <script src="jquery-easyui-1.4.4/imageView/js/index.js"></script>
+    <link href="jquery-easyui-1.4.4/imageView/css/index.css" rel="stylesheet" />
+    <script src="jquery-easyui-1.4.4/imageView/js/jquery.rotate.min.js"></script>
+    <script type="text/javascript" src="js/touch.min.js"></script>
+    <script type="text/javascript" src="js/cat.touchjs.js"></script>
+    <style type="text/css">
+        .clearfix {
+            *zoom: 1;
+        }
+
+            .clearfix:before, .clearfix:after {
+                display: table;
+                line-height: 0;
+                content: "";
+            }
+
+            .clearfix:after {
+                clear: both;
+            }
+
+        .dynamic_images {
+            width: 100%;
+        }
+
+            .dynamic_images ul {
+                margin: 0;
+                padding: 0;
+            }
+
+                .dynamic_images ul li {
+                    float: left;
+                    list-style: none;
+                    width: 100px;
+                    height: 100px;
+                    overflow: hidden;
+                    cursor: pointer;
+                }
+
+                    .dynamic_images ul li img {
+                        width: 98%;
+                        height: 80px;
+                    }
+
+        .btn {
+            align-items: flex-start;
+            background-clip: padding-box;
+            background-color: rgb(0, 122, 255);
+            border-bottom-color: rgb(0, 122, 255);
+            border-bottom-left-radius: 3px;
+            border-bottom-right-radius: 3px;
+            border-bottom-style: solid;
+            border-bottom-width: 1px;
+            border-image-outset: 0px;
+            border-image-repeat: stretch;
+            border-image-slice: 100%;
+            border-image-source: none;
+            border-image-width: 1;
+            border-left-color: rgb(0, 122, 255);
+            border-left-style: solid;
+            border-left-width: 1px;
+            border-right-color: rgb(0, 122, 255);
+            border-right-style: solid;
+            border-right-width: 1px;
+            border-top-color: rgb(0, 122, 255);
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+            border-top-style: solid;
+            border-top-width: 1px;
+            box-sizing: border-box;
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+            display: inline-block;
+            font-family: "Helvetica Neue", Helvetica, sans-serif;
+            font-size: 14px;
+            font-stretch: 100%;
+            font-style: normal;
+            font-variant-caps: normal;
+            font-variant-east-asian: normal;
+            font-variant-ligatures: normal;
+            font-variant-numeric: normal;
+            font-weight: 400;
+            height: 33px;
+            letter-spacing: normal;
+            line-height: 19.88px;
+            margin-bottom: 0px;
+            margin-left: 0px;
+            margin-right: 0px;
+            margin-top: 0px;
+            outline-color: rgb(255, 255, 255);
+            outline-style: none;
+            outline-width: 0px;
+            overflow-x: visible;
+            overflow-y: visible;
+            padding-bottom: 6px;
+            padding-left: 12px;
+            padding-right: 12px;
+            padding-top: 6px;
+            position: relative;
+            text-align: center;
+            text-indent: 0px;
+            text-rendering: auto;
+            text-shadow: none;
+            text-size-adjust: 100%;
+            text-transform: none;
+            transition-delay: 0s;
+            transition-duration: 0.2s;
+            transition-property: all;
+            transition-timing-function: linear;
+            user-select: none;
+            vertical-align: top;
+            white-space: nowrap;
+            width: 54px;
+            word-spacing: 0px;
+            writing-mode: horizontal-tb;
+            -webkit-appearance: none;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            -webkit-border-image: none;
+        }
+    </style>
+    <script>
+        //document.addEventListener("plusready", plusReady, false);
+        var plus = window.parent.plus;
+        //function plusReady() {
+        //    //document.getElementById("addnew").addEventListener("click", function () {
+        //    //    showActionSheet();//拍照还是相册
+        //    //});
+        //    //document.getElementById("fabiao").addEventListener("click", function () {
+        //    //    upload();//上传文件
+        //    //});
+
+
+        //    plus.nativeUI.closeWaiting();
+
+        //}
+
+
+        $(getPhotoList());
+        function getPhotoList()
+        {
+            $('#btnDel').hide();
+            $('[data-magnify]').Magnify({
+		Toolbar: [
+			'prev',
+			'next',
+			'rotateLeft',
+			'rotateRight',
+			'zoomIn',
+			'actualSize',
+			'zoomOut'
+		],
+		keyboard:true,
+		draggable:true,
+		movable:true,
+		modalSize:[800,400],
+		beforeOpen:function (obj,data) {
+			console.log('beforeOpen')
+		},
+		opened:function (obj,data) {
+			console.log('opened')
+		},
+		beforeClose:function (obj,data) {
+			console.log('beforeClose')
+		},
+		closed:function (obj,data) {
+			console.log('closed')
+		},
+		beforeChange:function (obj,data) {
+			console.log('beforeChange')
+		},
+		changed:function (obj,data) {
+			console.log('changed')
+		}
+	});
+            var url = "server/maphandler.ashx";
+            var data = { outid: parent.currentRecord .id,method:"getPhotoList"};
+            j(data, url, getPhotoListCallBack);
+        }
+        function getPhotoListCallBack(e)
+        {
+            $('#viewer').html("");
+            //<li><a href="javascript:void(0)" data-magnify="gallery" data-group="g1" data-src="./images/a1.jpg" data-caption="测试图片一"><img src="./images/a1.jpg"></a></li>
+            for (var i = 0; i < e.length; i++) {
+                var src = rootUrl + "upload/images/" + e[i].id + ".jpg";
+                var str = '<li><input type="checkbox" value="'+e[i].id+'" style="display:none" /><div href="javascript:void(0)" data-magnify="gallery" data-group="g1" data-src="' + src + '" data-caption="' + e[i].imageDescribe + '"><img src="' + src + '"></div></li>';
+                $('#viewer').append(str);
+            }
+            $('#viewer').append('<div style="clear:both;"></div>');
+            $('[data-magnify]').Magnify({
+                Toolbar: [
+                    'prev',
+                    'next',
+                    'rotateLeft',
+                    'rotateRight',
+                    'zoomIn',
+                    'actualSize',
+                    'zoomOut'
+                ],
+                keyboard: true,
+                draggable: true,
+
+                movable: true,
+                modalSize: [800, 400],
+                beforeOpen: function (obj, data) {
+                    console.log('beforeOpen')
+                },
+                opened: function (obj, data) {
+                    console.log('opened');
+                    setTouch();
+                },
+                beforeClose: function (obj, data) {
+                    console.log('beforeClose')
+                },
+                closed: function (obj, data) {
+                    console.log('closed')
+                },
+                beforeChange: function (obj, data) {
+                    console.log('beforeChange')
+                },
+                changed: function (obj, data) {
+                    console.log('changed')
+                }
+            });
+        }
+
+        function selectImg()
+        {
+            $(":checkbox,#btnDel").toggle();
+
+
+        }
+        function askDel()
+        {
+            //plus.nativeUI.confirm("确定要删除吗?", delImg,"请确认", ["是", "否"]);
+            delImg();
+        }
+        function delImg(e)
+        {
+            //if (e.index == 1)
+            //    return;
+            var checklist = $(":checked");
+            var idlist = "";
+            for (var i = 0; i < checklist.length; i++)
+            {
+                if (idlist != "")
+                    idlist += ",";
+                idlist += "'" + checklist[i].value+ "'";
+
+            }
+            var url = "server/maphandler.ashx";
+            var data = {idlist:idlist,method:"delImg"};
+            j(data, url, delImgCallBack);
+        }
+        function delImgCallBack(e)
+        {
+            getPhotoList();
+        }
+
+             $(setTouch());
+             function setTouch () {
+            var $targetObj = $('.magnify-stage img');
+            //初始化设置
+            cat.touchjs.init($targetObj, function (left, top, scale, rotate) {
+                $('#left').text(left);
+                $('#top').text(top);
+                $('#scale').text(scale);
+                $('#rotate').text(rotate);
+                $targetObj.css({
+                    left: left,
+                    top: top,
+                    'transform': 'scale(' + scale + ') rotate(' + rotate + 'deg)',
+                    '-webkit-transform': 'scale(' + scale + ') rotate(' + rotate + 'deg)'
+                });
+            });
+            //初始化拖动手势（不需要就注释掉）
+            cat.touchjs.drag($targetObj, function (left, top) {
+                $('#left').text(left);
+                $('#top').text(top);
+            });
+            //初始化缩放手势（不需要就注释掉）
+            cat.touchjs.scale($targetObj, function (scale) {
+                $('#scale').text(scale);
+            });
+            //初始化旋转手势（不需要就注释掉）
+            //cat.touchjs.rotate($targetObj, function (rotate) {
+            //    $('#rotate').text(rotate);
+            //});
+        }
+        //保存并刷新
+        function save() {
+            var data = {
+                left: cat.touchjs.left,
+                top: cat.touchjs.top,
+                scale: cat.touchjs.scaleVal,
+                rotate: cat.touchjs.rotateVal
+            };
+            //本地存储
+            window.localStorage.cat_touchjs_data = JSON.stringify(data);
+            window.location = window.location;
+        };
+        //重置
+        function reset() {
+            var data = {
+                left: 0,
+                top: 0,
+                scale: 1,
+                rotate: 0
+            };
+            //本地存储
+            window.localStorage.cat_touchjs_data = JSON.stringify(data);
+            window.location = window.location;
+        };
+    </script>
+
+</head>
+<body>
+    <div style="width:100%;height:50px; background-color: gray;width: 100%;height: 50px;">
+        <a href="#" style="margin-right: 11px;margin-top: 10px;float: right;" class="btn" onclick="selectImg()">选择</a>
+        <a href="#" id="btnDel" onclick="askDel()" style="margin-right: 11px;margin-top: 10px;float: right;background-color:red;border-color:red;display:none" class="btn">删除</a>
+    </div>
+    <div style="width:100%">
+        <ul id='viewer' class="picView-magnify-list"><div style="clear:both;"></div></ul>
+        <br />
+        <div class="dynamic_images">
+            <ul class="clearfix">
+                <!--<li><img src="images/cbd.jpg"></li>-->
+                <li id="addnew"><img src="images/addphoto.jpg" onclick="showActionSheet();"></li>
+                <!--<li><span class="mui-icon iconfont icon-jia2" style="font-size: 28px;"></span></li>-->
+                <div style="clear:both;"></div><!--添加一个空div，用clear:both清除浮动造成的影响-->
+            </ul>
+        </div>
+    </div><br />
+    照片描述：<br />
+    <textarea id="desc" style="width:90%"></textarea>
+    <a href="#" onclick="upload()" class="btn">上传</a>
+</body>
+</html>

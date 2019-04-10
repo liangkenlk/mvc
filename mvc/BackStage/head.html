@@ -1,0 +1,214 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>
+        增城地名（普查）网
+    </title>
+    <meta name="others" content="页面生成时间 2016-04-28 15:24:50" />
+    <link type="text/css" rel="stylesheet" href="../css/index3.css" />
+    
+
+    
+
+    <script src="../js/jquery-1.8.3.min.js"></script>
+    <script src="../js/Common.js"></script>
+    <script type="text/javascript">
+      
+
+        $(document).ready(function () {
+            //初始化高度  
+
+            //当文档窗口发生改变时 触发  
+            showUserName();
+        })
+
+            //显示当前用户用户名
+            function showUserName()
+            {
+                var url = "../server/userHandler.ashx?method=getCurrentUserInfo";
+ 
+                j({}, url, showUserNameCallBack);
+            }
+            function showUserNameCallBack(re)
+            {
+                if(re.UserName)
+                {
+                    //如果用户已经登录，获取当前用户名并显示，同时设置"退出登录"入口可见
+                    $('#UserName').text(re.UserName);
+                    $('#logout').css({ display: "block" });
+
+                    //隐藏登录/注册入口
+                    $('#register').css({ display: "none" });
+                    $('#login').css({ display: "none" });
+                }
+
+            }
+            
+            //退出登录
+            function logout() {
+                $.ajax({
+                    url : "../server/userHandler.ashx?method=Logout",
+                    type: "post",
+                    data: {},
+                    success: function () {
+
+                        //隐藏用户名、退出登录入口
+                        $('#logout').css({ display: "none" });
+                        $('#UserName').css({ display: "none" });
+
+                        //设置登录/注册可见
+                        $("#register").css({ display: "block" });
+                        $("#login").css({ display: "block" });
+
+                        //退出登录后，销毁session，重定向到主页面
+                        location.href = "../index.aspx";
+                    },
+                    error: function () {
+                        //
+                    }
+
+                })
+            }     
+     
+    </script>
+
+    <script type="text/javascript">
+
+        function find() {
+
+            var a = $(".text").val();
+
+            if (a != "请输入关键字搜索" && a !="") {
+
+
+
+                window.open("../more.aspx?keyword=" + a);  //你需要跳转的地址
+
+            } else
+                alert("请输入查询的信息");
+        }
+
+
+// 设置为主页
+function SetHome(obj,vrl){
+try{
+obj.style.behavior='url(#default#homepage)';obj.setHomePage(vrl);
+}
+catch(e){
+if(window.netscape) {
+try {
+netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+}
+catch (e) {
+alert("此操作被浏览器拒绝！\n请在浏览器地址栏输入“about:config”并回车\n然后将 [signed.applets.codebase_principal_support]的值设置为'true',双击即可。");
+}
+var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch);
+prefs.setCharPref('browser.startup.homepage',vrl);
+}else{
+alert("您的浏览器不支持，请按照下面步骤操作：1.打开浏览器设置。2.点击设置网页。3.输入："+vrl+"点击确定。");
+}
+}
+}
+// 加入收藏 兼容360和IE6
+function shoucang(sTitle,sURL)
+{
+try
+{
+window.external.addFavorite(sURL, sTitle);
+}
+catch (e)
+{
+try
+{
+window.sidebar.addPanel(sTitle, sURL, "");
+}
+catch (e)
+{
+alert("加入收藏失败，请使用Ctrl+D进行添加");
+}
+}
+}
+
+$(function () {
+    document.onkeydown = function (event) {
+        var e = event || window.event || arguments.callee.caller.arguments[0];
+        if (e && e.keyCode == 27) { // 按 Esc 
+            //要做的事情
+        }
+        if (e && e.keyCode == 113) { // 按 F2 
+            //要做的事情
+        }
+        if (e && e.keyCode == 13) { // enter 键
+            find();
+        }
+    };
+})
+
+    </script>
+
+</head>
+
+<body>
+    <div class="top">
+
+        <div class="banner">
+            <ul class="ban_ul">
+                <li><a href="javascript:void(0)" onclick="SetHome(this,window.location)">设置为首页</a></li>
+                <li><a href="javascript:void(0)" onclick="shoucang(document.title,window.location)">加入收藏</a></li>
+                <li id="UserName"></li>
+                <li id="logout" style="display:none"><a href="javascript:logout()">退出登录</a></li>
+                <li id="register"><a href="../reg.aspx" target="_blank">用户注册</a></li>
+                <li id="login"><a href="../login.html" target="_blank">用户登录</a></li>
+                <li id="admin"><a href="../pages/default.htm" target="_blank">后台管理</a></li>
+            </ul>
+        </div>
+
+        <div class="navbar">
+            <ul>
+                <li><a href="../index.aspx" target="_parent">首页</a></li>
+                <li>|</li>
+                <li>
+                    <a href="../more.aspx?posttype=新闻频道" target="_parent">	新闻频道	</a>
+                </li>
+                <li>|</li>
+                <li>
+                    <a href="../more.aspx?posttype=政务公开" target="_parent">	政务公开	</a>
+                </li>
+                <li>|</li>
+                <li>
+                    <a href="../more.aspx?posttype=地名文化" target="_parent">	地名文化	</a>
+                </li>
+                <li>|</li>
+                <li>
+                    <a href="../more.aspx?posttype=政民互动" target="_parent">	政民互动	</a>
+                </li>
+                <li>|</li>
+                <li>
+                    <a href="../more.aspx?posttype=公示公告" target="_parent">公示公告</a>
+                </li>
+                <li>|</li>
+                <li>
+                    <a href="../Pages/Work.aspx" target="_parent">网上办事</a>
+                </li>
+                <li>|</li>
+                <li>
+                    <a href="../DivIndex.aspx" target="_blank">	地图	</a>
+                </li>
+
+            </ul>
+        </div>
+        <div class="search">
+
+
+            <form  target="_blank">
+               <input class="text" value="请输入关键字搜索" name="keyword" onblur="if(this.value=='')
+  {this.value='请输入关键字搜索'}" onfocus="this.value=''"> <input class="button" type="button" onclick="find()" value="">
+            </form>
+
+
+        </div>
+    </div>
+    
+</body>
+</html>

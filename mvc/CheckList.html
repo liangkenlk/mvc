@@ -1,0 +1,266 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="jquery-easyui-1.4.4/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="jquery-easyui-1.4.4/themes/icon.css" />
+    <script type="text/javascript" src="jquery-easyui-1.4.4/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery-easyui-1.4.4/jquery.easyui.min.js"></script>
+    <script src="jquery-easyui-1.4.4/locale/easyui-lang-zh_CN.js"></script>
+    <script src="js/Common.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <!--<link rel="stylesheet" href="css/style.css" type="text/css" />-->
+    <link rel="stylesheet" type="text/css" href="css/userguide.css" />
+</head>
+<body>
+    <table class="easyui-datagrid"  style="width:100%;height:100%;"
+           data-options="singleSelect:true,rownumbers:true,pagination:true,url:'Check/GetListByCaseId',queryParams:queryParams,toolbar:'#tb',idField: 'id',onSortColumn:'onSort'">
+        <thead>
+            <tr>
+                <th data-options="field:'id',width:80,checkbox:true"></th>
+                <th data-options="field:'CheckTime',width:100,sortable:false">处理时间</th>
+                <th data-options="field:'UserName',width:100,sortable:false,editor:'datebox'">处理人</th>
+                <th data-options="field:'CheckResult',width:300,sortable:false,editor:'text'">处理结果</th>
+                <th data-options="field:'Result',width:100,sortable:false,formatter:photoFormat">查看照片</th>
+                <!--  <th data-options="field:'DataPower',width:100,sortable:false,editor:editor,formatter:format">数据权限</th>-->
+            </tr>
+        </thead>
+    </table>
+    <div id="tb" style="padding:2px 5px;">
+
+        <a href="#" class="easyui-linkbutton" onclick="del();" iconcls="icon-remove">删除任务</a>
+    </div>
+
+
+</body>
+</html>
+
+<script type="text/javascript">
+    var caseid = getQueryStringByName("id");
+    var queryParams = { caseid:caseid};
+function fixDate(date)
+{
+ var base=new Date(0)
+ var skew=base.getTime()
+ if(skew>0)
+ {
+ date.setTime(date.getTime()-skew)
+ }
+}
+var now=new Date()
+fixDate(now)
+now.setTime(now.getTime()+365 * 24 * 60 * 60 * 1000)
+var visits = getCookie("counter")
+if(!visits)
+{
+ visits=1;
+}
+else
+{
+ visits=parseInt(visits)+1;
+}
+
+
+
+    var sort;
+    var order;
+    var dropdata = [{ "id": "1=1", "text": "所有" }, { "id": "userid='@userid'", "text": "仅本人" }];
+    var editor = { type: 'combobox', options: { valueField: 'id', textField: 'text', data: dropdata } };
+
+    var Typedata = [{ "UserName": "管理员" }, { "UserName": "普通用户" }];
+    var Typeeditor = { type: 'combobox', options: { valueField: 'UserId', textField: 'UserName', url: "user/GetList", loadFilter: userfilter } };
+    $(GetUserData());
+    function GetUserData()
+    {
+        j(null, "user/GetList", GetUserDataCallBack);
+    }
+    function GetUserDataCallBack(re)
+    {
+        Typedata = re.rows;
+        $.parser.parse();
+    }
+    function photoFormat(value, row, index)
+    {
+        return "<a href='#' onclick='parent.parent.showPhotoWin(\""+row.id+"\")'>查看照片</a>";
+    }
+
+    function userfilter(data)
+    {
+        return data.rows;
+    }
+    function dosearch() {
+
+        var result = $('#result').combobox("getValue");
+        $('.easyui-datagrid').datagrid("load", { result: result, caseid: caseid });
+    }
+
+    function format(row, data, index)
+    {
+        if (data.DataPower == "userid='@userid'") {
+            return "仅本人";
+
+        }
+        else if (data.DataPower == "1=1")
+            return "所有";
+        else
+            return "";
+    }
+
+    function edit() {
+        //修改时要获取选择到的行
+        var rows = $('.easyui-datagrid').datagrid("getSelections");
+        //如果只选择了一行则可以进行修改，否则不操作
+        if (rows.length == 1) {
+            //修改之前先关闭已经开启的编辑行，当调用endEdit该方法时会触发onAfterEdit事件
+            if (editRow != undefined) {
+                $('.easyui-datagrid').datagrid("endEdit", editRow);
+                editRow = undefined;
+            }
+            //当无编辑行时
+            if (editRow == undefined) {
+                //获取到当前选择行的下标
+                var index = $('.easyui-datagrid').datagrid("getRowIndex", rows[0]);
+                //开启编辑
+                $('.easyui-datagrid').datagrid("beginEdit", index);
+                //把当前开启编辑的行赋值给全局变量editRow
+                editRow = index;
+                //当开启了当前选择行的编辑状态之后，
+                //应该取消当前列表的所有选择行，要不然双击之后无法再选择其他行进行编辑
+                $('.easyui-datagrid').datagrid("unselectAll");
+            }
+        }
+    }
+
+   
+
+    function del() {
+        if (!confirm("确定要删除吗？")) {
+            return;
+        }
+        var a = $('.easyui-datagrid').datagrid("getChecked");
+        var selected = "";
+        for (var i = 0; i < a.length; i++) {
+            var id = "'" + a[i].id + "'";
+            if (selected != "")
+                selected += "," + id;
+            else
+                selected += id;
+        }
+
+        var url = "Task/Delete";
+        var data = { selected: selected };
+        j(data, url, delCallBack);
+
+    }
+    function delCallBack(result) {
+        if (result.Success == true)
+            $('.easyui-datagrid').datagrid("reload");
+        else
+            $.messager.show({ title: "提示", msg: "请勾选需要删除的选项" });
+
+    }
+    function cancel()
+    {
+
+        $('.easyui-datagrid').datagrid("cancelEdit", editRow);
+        if (isAdding) {
+            $('.easyui-datagrid').datagrid("deleteRow", 0);
+            editRow = undefined;
+            isAdding = false;
+        }
+
+
+    }
+
+    function add() {
+        $('.easyui-datagrid').datagrid("insertRow", {
+            index: 0, row: {
+                Caseid: caseid,
+                remark: "新任务",
+                Result:"未处理"
+            }
+        });
+        if (editRow != undefined) {
+            $('.easyui-datagrid').datagrid("endEdit", editRow);
+            editRow = undefined;
+        }
+        $('.easyui-datagrid').datagrid("beginEdit", 0);
+        isAdding = true;
+        editRow = 0;
+    }
+
+    var isAdding;
+    var editRow;
+
+    function onSort(sort, order) {
+        sort = sort;
+        order = order;
+    }
+
+    function save() {
+        $('.easyui-datagrid').datagrid("endEdit", editRow);
+        var data = $('.easyui-datagrid').datagrid("getData").rows[editRow];
+        var url = "Task/Update";
+        for (var i in Typedata)
+        {
+            if (Typedata[i].UserId == data.Userid)
+                data.UserName = Typedata[i].UserName;
+            
+        }
+       
+        j(data, url, saveCallBack);
+    }
+    function saveCallBack(re) {
+        if (re.Success == true) {
+
+            $('.easyui-datagrid').datagrid("updateRow",{index:editRow,row:{UserId:re.Message}});
+            $('.easyui-datagrid').datagrid("acceptChanges", editRow);
+            editRow = undefined;
+            isAdding = false;
+            $.messager.show({ title: "提示", msg: "保存成功。" });
+        }
+        else {
+            if (isAdding)
+                $('.easyui-datagrid').datagrid("deleteRow", editRow);
+            else
+                $('.easyui-datagrid').datagrid("rejectChanges", editRow);
+            isAdding = false;
+            editRow = undefined;
+            $('.easyui-datagrid').datagrid("clearSelections");
+
+            $.messager.show({ title: "提示", msg: re.Message });
+
+        }
+    }
+
+    //取消操作
+    function Cancel() {
+
+
+
+        $('.easyui-datagrid').datagrid("uncheckAll", editRow);
+          if (isAdding) {
+            $('.easyui-datagrid').datagrid("uncheckAll", 0);
+            editRow = undefined;
+             isAdding = false;
+         }
+
+
+    }
+   
+
+    
+ 
+    function reload(re)
+    {
+        if (re!=null && re.Message != null)
+            $.messager.show("提示", re.Message);
+        $('.easyui-datagrid').datagrid("reload");
+    }
+
+ 
+
+
+</script>

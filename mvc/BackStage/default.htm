@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="UTF-8" />
+    <title>后台</title>
+    <link rel="stylesheet" type="text/css" href="../jquery-easyui-1.4.4/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="../jquery-easyui-1.4.4/themes/icon.css" />
+    <script type="text/javascript" src="../jquery-easyui-1.4.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../jquery-easyui-1.4.4/jquery.easyui.min.js"></script>
+    <script src="../js/Menu.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#menu").tree({
+
+                data: [{
+                    "id": 1,
+                    "text": "用户管理",
+                    "url": "userlist.html"
+                },
+  {
+      "id": 2,
+      "text": "地图配置",
+      "children": [
+        {
+            "id": 10,
+            "text": "地图配置",
+            "url": "MapConfig.html"
+        }
+        ,
+        {
+            "id": 11,
+            "text": "专题配置",
+            "url": "ThemeConfig.html"
+        }
+        ,
+        {
+            "id": 12,
+            "text": "区域配置",
+            "url": "RegionConfig.html"
+        }
+        ,
+        {
+            "id": 13,
+            "text": "配置助手",
+            "url": "Confighelper.aspx"
+        }
+      ]
+  },
+  {
+      "id": 3,
+      "text": "系统设置",
+      "url": "Config.html"
+  }
+  ,
+  {
+      "id": 5,
+      "text": "系统日志",
+      "url": "log.aspx"
+  }
+  //,
+  //{
+  //    "id": 4,
+  //    "text": "城市部件数据",
+  //    "url": "citypart.html"
+  //}
+                ],
+                method:'get',
+                animate: true,
+                lines: true
+            })
+
+        })
+       
+    </script>
+</head>
+<style>
+    body {
+        
+    }
+</style>
+<body class="easyui-layout" style="overflow-y:hidden;">
+    <div data-options="region:'north',border:false" style="height:100px;padding:10px;text-align:center;background-color: #0069b7;color: white"><span style="font-size:50px;display:inline-block;vertical-align:middle; ">后台管理</span><div style="position:absolute;right:50px; bottom:5px;">
+        <a href="../" style="color:white">返回首页</a>
+        <a  href="../login.html"  style="color:white">退出</a></div></div>
+    <div data-options="region:'west',split:true,title:'菜单'" style="width:250px;padding:1px;">
+        <ul id="menu" class="easyui-tree"></ul>
+    </div>
+    <div id="center" data-options="region:'center'">
+        <div id="tabs" class="easyui-tabs" data-options="fit:true,border:false,plain:true">
+            <div title="新闻管理" data-options="content:''" style="padding:10px;overflow-y:hidden;" ></div>
+
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    var a = document.getElementsByTagName("a");
+    var detaildiv = document.createElement("div");
+    detaildiv.style.width = "60px";
+    detaildiv.id = "detail";
+    detaildiv.style.backgroundColor = "#ccc"
+    detaildiv.style.height = "50px";
+    detaildiv.style.border = "1px solid #ff0";
+    detaildiv.style.position = "absolute";
+    function mouseover(demo) {
+
+        detaildiv.innerHTML = "-------点击退出登录";
+        document.body.appendChild(detaildiv);
+        document.getElementById("detail").style.display = "";
+        detaildiv.style.left = event.clientX + "px";
+        detaildiv.style.top = event.clientY + "px";
+    }
+    function mouseout() {
+        document.getElementById("detail").style.display = "none";
+    }
+
+</script>

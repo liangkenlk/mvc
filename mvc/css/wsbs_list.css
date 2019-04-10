@@ -1,0 +1,209 @@
+body {
+	font-family: Segoe UI, "Microsoft YaHei" , "ï¿½ï¿½ï¿½ï¿½"; font-size: 12px;
+}
+div {
+	margin: 0px; padding: 0px;
+}
+dl {
+	margin: 0px; padding: 0px;
+}
+dt {
+	margin: 0px; padding: 0px;
+}
+dd {
+	margin: 0px; padding: 0px;
+}
+ul {
+	margin: 0px; padding: 0px;
+}
+ol {
+	margin: 0px; padding: 0px;
+}
+li {
+	margin: 0px; padding: 0px;
+}
+.pages {
+	padding: 15px 5px 0px; height: 50px; line-height: 50px; overflow: hidden; font-family: "Microsoft Yahei"; font-size: 12px;
+}
+.pages a {
+	padding: 4px 10px; border: 1px solid rgb(232, 232, 232); color: rgb(51, 51, 51); text-decoration: none; margin-right: 5px;
+}
+.pages a:visited {
+	padding: 4px 10px; border: 1px solid rgb(232, 232, 232); color: rgb(51, 51, 51); text-decoration: none; margin-right: 5px;
+}
+.pages a.disable {
+	color: rgb(204, 204, 204);
+}
+.pages a.disable:hover {
+	color: rgb(204, 204, 204);
+}
+.pages a:hover {
+	background: rgb(0, 102, 204); color: white;
+}
+.pages a.currpage {
+	background: rgb(0, 102, 204); color: white;
+}
+.list a {
+	color: rgb(0, 51, 204); text-decoration: none;
+}
+.list a:visited {
+	color: rgb(0, 51, 204); text-decoration: none;
+}
+.list a:hover {
+	color: rgb(204, 0, 0); text-decoration: underline;
+}
+.list {
+	border: 1px solid rgb(238, 238, 238); width: 750px; color: rgb(51, 51, 51); font-size: 14px; border-collapse: collapse;
+}
+.list td {
+	background: rgb(247, 247, 247); padding: 10px 15px; border: 1px solid rgb(255, 255, 255); border-collapse: collapse;
+}
+.list .spe td {
+	background: rgb(244, 242, 242);
+}
+.list-header td {
+	background: rgb(255, 204, 153); padding: 0px; border: 1px solid rgb(255, 255, 255); height: 35px; text-align: center; line-height: 35px; overflow: hidden; font-size: 14px; font-weight: bold;
+}
+.list .list-header td a {
+	color: rgb(0, 0, 0); text-decoration: none; cursor: pointer;
+}
+.list .list-header td a:visited {
+	color: rgb(0, 0, 0); text-decoration: none; cursor: pointer;
+}
+.list-bottom {
+	
+}
+.list-desc {
+	background: url("/Inc/list/down.gif") no-repeat right; padding-right: 10px;
+}
+.list-asc {
+	background: url("/Inc/list/up.gif") no-repeat right; padding-right: 10px;
+}
+.loading {
+	background: url("/Inc/list/loading.gif") no-repeat left; padding-left: 20px;
+}
+.list .push {
+	background: rgb(236, 249, 231); padding: 1px 3px; border-radius: 3px; border: 1px solid rgb(50, 173, 21); margin-left: 5px;
+}
+.gstitle {
+	padding: 10px 0px; color: rgb(0, 102, 204); width:437px;
+}
+.gstext {
+	color: rgb(153, 153, 153); font-size: 12px;
+}
+
+.article-colum {
+	width: 808px;
+	margin: 0 auto;
+	position: relative;
+	overflow: hidden;
+	padding-top: 25px;
+}
+.pages-title {
+	font-size: 32px;
+	font-family: Microsoft Yahei;
+	text-align: center;
+	color: #333333;
+	line-height: 40px;
+	overflow:hidden;
+	padding:10px 0;
+}
+.pages-date {
+	text-align: center;
+	color: #898989;
+	font-size: 12px;
+	height: 40px;
+	overflow: hidden;
+	line-height: 40px;
+}
+.pages-date span.font, .pages_print span.font {
+	margin: 0 10px;
+}
+.pages_print {
+	position: relative
+}
+.pages_print .index_switchsize {
+	float: left;
+	padding-left: 240px;
+}
+.pages_print .printIco {
+	float: left;
+	background: url(/inc/images/icons/icon_printer.png) no-repeat left center;
+	padding-left: 20px
+}
+.pages_print .share {
+	float: left;
+	padding-left: 20px;
+	width: auto;
+	margin: 0;
+}
+.pages_print .index_switchsize span {
+	cursor: pointer;
+}
+.pages_print {
+	text-align: center;
+	font-size: 12px;
+	height: 30px;
+	overflow: hidden;
+	border-bottom: 1px #dcdcdc solid;
+	padding-bottom:20px;
+}
+.pages_print .printIco {
+	color: #898989;
+}
+.pages_print .share {
+	color: #898989;
+	position: absolute;
+	top: -5px;
+	left: 450px;
+}
+#btnPrint {
+	cursor: pointer;
+}
+.pages_content {
+	line-height: 35px;
+	padding: 0;
+	margin: 12px 0 0 0;
+	font-size: 16px;
+}
+.pages_content p {
+	margin: 15px 0 0 0;
+	font-family: "ï¿½ï¿½ï¿½ï¿½";
+}
+
+.bluePanel{
+	border:1px solid #cedaf3;
+	width:93%;
+}
+.bluePanelTitle{
+	background:#e2eaf7;
+	height:24px;
+	font-size:14px;
+	color:#000000;
+	line-height:24px;
+}
+.bluePanelTitleMore{
+	font-size:12px;
+}
+
+.wsbl_con{width:902px; height:212px; background:url(../images/prom.png) 250px 80px #E7E7E7 no-repeat; color:#000; line-height:212px; text-align:center; margin:15px auto 0px; font-size:14px; font-weight:bold; padding-left:80px;}
+
+.pagediv{ clear:both; padding:10px 0 35px; text-align:center; font-size:14px;}
+#pagination_input{width:40px; margin:0 3px;}
+.pagediv .arrow{margin:0 3px;}
+
+/*-------------------------------â†“åˆ†é¡µæ ·å¼å¼€å§‹â†“------------------------------------*/
+.page_num{overflow:hidden; width:100%; margin:auto;}
+
+#page_div{line-height:20px; color:#666; padding:30px; overflow:hidden; font-size:12px; font-family:"å¾®è½¯é›…é»‘";}
+
+#pagination_input{ width:20px; height:16px; line-height:16px; margin:0 8px; padding:0; overflow:hidden; border:1px solid #ccc;}
+
+#page_div .pagination_index, #page_div .pagination_index_num{ 
+	background:#F2F4F9; border:1px solid #D2DFEB; padding:0 8px;
+	margin-right:2px;
+	float: left; height:20px;text-align:center;}
+#page_div .pagination_index a, #page_div .pagination_index_num a{padding:0px; margin:0px;text-align:center;  color:#666666;}
+#page_div .pagination_index a:hover, #page_div .pagination_index_num a:hover{padding:0px; margin:0px;text-align:center;  color:#666666;}
+
+#page_div .pagination_index_last{width:380px; float:right; text-align:right;}

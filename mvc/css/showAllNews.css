@@ -1,0 +1,62 @@
+﻿/* CSS Document */
+@charset "GBK";
+    *{ margin:0px; padding:0px;
+	}
+     body{
+		 font:12px/20px Tahoma;
+		 }
+	p{
+			padding:5px;
+			}
+	a{ color:#335884; text-decoration:none;}
+	a:hover{ color:#f00; text-decoration:underline;}
+    #header{
+	margin-top:15px; 
+	width:925px; 
+	height:100px; 
+	border:1px solid #dfdfdf;
+	
+		}
+		
+	#welcome{
+		border:1px solid #999;
+		
+		}
+		
+	
+    #logo{
+		float:left;
+		}
+	#status{
+		float:left;
+		}
+	#admin_bar{
+		background:#CCC;
+		width:925;
+		height:20px;
+		margin-top:10px;
+		}
+	#main{
+		width:925px;
+		}
+	#opt_list{
+		float:left;
+		padding-top:20px;}
+	#opt_area{
+		width:600px;
+		padding-top:20px;
+		padding-left:20px;
+		}
+	#opt_type{
+		width:300px;
+		height:23px;
+		padding-top:5px;
+		padding-left:15px;
+		background:url(../Images/opt_name.gif);
+		
+		}
+	#site_link{
+		background:#CCC;
+		width:925px;
+		border-top:2px solid #00C;
+		}

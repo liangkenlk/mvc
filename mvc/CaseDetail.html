@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="jquery-easyui-1.4.4/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="jquery-easyui-1.4.4/themes/icon.css" />
+    <script type="text/javascript" src="jquery-easyui-1.4.4/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery-easyui-1.4.4/jquery.easyui.min.js"></script>
+    <script src="jquery-easyui-1.4.4/locale/easyui-lang-zh_CN.js"></script>
+    <script src="js/sysConfig.js"></script>
+    <script src="js/Common.js"></script>
+    <script src="jquery-easyui-1.4.4/imageView/js/index.js"></script>
+    <link href="jquery-easyui-1.4.4/imageView/css/index.css" rel="stylesheet" />
+    <script src="jquery-easyui-1.4.4/imageView/js/jquery.rotate.min.js"></script>
+    <script type="text/javascript" src="js/touch.min.js"></script>
+    <script type="text/javascript" src="js/cat.touchjs.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <!--<link rel="stylesheet" href="css/style.css" type="text/css" />-->
+    <link rel="stylesheet" type="text/css" href="css/userguide.css" />
+    <link href="jquery-easyui-1.4.4/jiaoben741/css/zzsc.css" rel="stylesheet" />
+    <script src="jquery-easyui-1.4.4/jiaoben741/js/slider.js"></script>
+
+     
+</head>
+<body>
+   <div style="height:200px;width:30%;float:left">
+      
+           
+               <div class="flexslider"   style="height:200px;width:200px">
+                   <ul class="slides"  style="height:200px;width:200px">
+
+                   </ul>
+               </div>
+          
+       
+   </div>
+ 
+        <div style="padding:0px 0px 0px 0px;float:right;width:60%">
+            <form id="ff" method="post">
+                <table cellpadding="5">
+                    <tr>
+                        <td>地址:</td>
+                        <td><label  type="text" name="Address" id="Address" data-options="required:true"></label></td>
+                        <td>上报时间:</td>
+                        <td><label type="text" name="BeginTime" id="BeginTime" data-options="required:true"></label></td>
+                    </tr>
+                    <tr>
+                        <td>大类:</td>
+                        <td>
+                            <label  id="CaseType" data-options="width:160,valueField: 'id',textField: 'id',data:GetCaseTypeList(),onSelect:onselect" name="CaseType"></label>
+                        </td>
+                        <td>状态:</td>
+                        <td>
+                            <label id="Status" data-options="width:160,valueField: 'id',textField: 'id',data:GetCaseTypeList(),onSelect:onselect" name="Status"></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>小类:</td>
+                        <td><label id="CaseSubType" data-options="width:160,valueField: 'id',textField: 'id'" name="CaseSubType"></label></td>
+                        <td>上传人:</td>
+                        <td><label id="Uploader" data-options="width:160,valueField: 'id',textField: 'id'" name="Uploader"></label></td>
+                    </tr>
+                    <tr>
+                        <td>所属区域:</td>
+                        <td><label  id="Zone" name="Zone"></label></td>
+                        <td>经纬度:</td>
+                        <td><label id="X" name="X"></label><br /><label id="Y" name="Y"></label></td>
+                    </tr>
+                    <tr>
+                        <td>描述:</td>
+                        <td colspan="3"><label name="Remark" id="Remark" data-options="multiline:true" width="100%"></label></td>
+                    </tr>
+
+                </table>
+            </form>
+
+        </div>
+
+</body>
+<script>
+		function clearForm(){
+			$('#ff').form('clear');
+		}
+		function cancel()
+		{
+		    window.parent.closeEditWin();
+		    window.parent.frames["caseframe"].reload();
+		}
+		$(init());
+		function init()
+		{
+
+		    var id = getQueryStringByName("id");
+		    if (id != null)
+		    {
+		        var url = "case/GetByKey";
+               
+		        j({ key: id }, url, initCallBack);
+		    }
+		    getPhotoList();
+		}
+		function initCallBack(re)
+		{
+		    for (var i in re)
+		    {
+		        $("#" + i).text(re[i]);
+		    }
+		}
+		function onselect(record)
+		{
+		    $("#CaseSubType").combobox({ data: GetCaseSubTypeList(record.id) });
+		}
+		function showPhoto()
+		{
+		    parent.parent.showPhotoWin(getQueryStringByName("id"));
+		}
+
+		function getPhotoList() {
+		 
+		  
+		    var url = "Images/GetListByOutId";
+		    var data = { outid: getQueryStringByName("id")};
+		   j(data, url, getPhotoListCallBack);
+		}
+    
+		
+		function getPhotoListCallBack(e) {
+		    $('.slides').html("");
+		    //<li><a href="javascript:void(0)" data-magnify="gallery" data-group="g1" data-src="./images/a1.jpg" data-caption="测试图片一"><img src="./images/a1.jpg"></a></li>
+		    for (var i = 0; i < e.length; i++) {
+		        var src = rootUrl + "upload/case/" + e[i].Outid+"/"+e[i].FileName;
+		        var str = '<li><div class="img"><img onclick="showPhoto()" src="' + src + '"  style="height:200px;width:200px" alt="" /></div></li>';
+		        $('.slides').append(str);
+		    }
+		    $('.slides').append('<div style="clear:both;"></div>');
+		    showslider();
+		 
+		}
+
+	
+		function showslider() {
+		    $('.flexslider').flexslider({
+		        animation: "slide",
+		        start: function(slider){
+		            $('body').removeClass('loading');
+		        }
+		    });
+		}
+</script>
+</html>

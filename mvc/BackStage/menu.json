@@ -1,0 +1,40 @@
+﻿[
+  {
+    "id": 1,
+    "text": "用户管理",
+    "url": "userlist.html"
+  },
+  {
+    "id": 2,
+    "text": "地图配置",
+    "children": [
+      {
+        "id": 10,
+        "text": "地图配置",
+        "url": "PostInfoList.html"
+      }
+      //{
+      //  "id": 11,
+      //  "text": "专题配置",
+      //  "url": "notice.html"
+      //},
+      //{
+      //  "id": 12,
+      //  "text": "区域配置",
+      //  "url": "notice.html"
+      //}
+    ]
+  },
+  {
+    "id": 3,
+    "text": "系统设置",
+    "url": "arealine.html"
+  },
+  {
+    "id": 4,
+    "text": "城市部件采集",
+    "url": "citypart.html"
+  }
+
+
+]
