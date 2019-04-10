@@ -208,6 +208,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app.html" />
     <Content Include="CheckList.html" />
     <Content Include="count.html" />
     <Content Include="dll\GetuiServerApiSDK.dll" />
@@ -221,6 +222,7 @@
     <Content Include="images\addphoto.jpg" />
     <Content Include="images\an.JPG" />
     <Content Include="images\an0.JPG" />
+    <Content Include="images\app.png" />
     <Content Include="images\area.png" />
     <Content Include="images\areaSelect.png" />
     <Content Include="images\arrow.png" />
