@@ -68,5 +68,12 @@ namespace mvc.Controllers
             bll.Update(u);
             return JsonOb(true, "ok");
         }
+
+        public ActionResult GetCurrentUserInfo()
+        {
+            if (!UserAuth.IsLogined())
+                return JsonOb(false, "您未登录");
+            return Json(JsonHelper.DataRowToDictionary(UserAuth.User), JsonRequestBehavior.AllowGet);
+        }
     }
 }

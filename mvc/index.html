@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>上林县城市管理综合指挥平台</title>
 	<meta charset="utf-8" />
+    <link rel="shortcut icon" href="images/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="jquery-easyui-1.4.4/themes/default/easyui.css" />
     <link rel="stylesheet" type="text/css" href="jquery-easyui-1.4.4/themes/icon.css" />
     <script type="text/javascript" src="jquery-easyui-1.4.4/jquery.min.js"></script>
@@ -81,8 +82,10 @@
             j({}, url, showUserNameCallBack);
         }
         function showUserNameCallBack(re) {
-            if (re.Success == false)
-                this.location.href = "login.html";
+            if (re.Success == false) {
+                window.location.href = "login.html";
+                return;
+            }
             $('#UserName').text("您好："+re.UserName);
 
         }

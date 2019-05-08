@@ -31,12 +31,7 @@ namespace mvc.Controllers
             PropertyInfo[] properties = typeof(T).GetProperties();
         }
 
-        public ActionResult GetCurrentUserInfo()
-        {
-            if (!UserAuth.IsLogined())
-                return JsonOb(false, "您未登录");
-            return Json(JsonHelper.DataRowToDictionary( UserAuth.User), JsonRequestBehavior.AllowGet);
-        }
+
 
 
 
