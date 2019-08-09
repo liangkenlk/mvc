@@ -146,6 +146,10 @@
                         <td><input class="easyui-textbox" type="text" name="Address" id="Address" data-options="required:true"></input></td>
                     </tr>
                     <tr>
+                        <td>案件分类:</td>
+                        <td><input class="easyui-combobox" id="CaseBigType" name="CaseBigType"  data-options="width:160,valueField: 'id',textField: 'id',required:true,data:[{id:'事件类'},{id:'部件类'}]"></input></td>
+                    </tr>
+                    <tr>
                         <td>大类:</td>
                         <td>
                             <select class="easyui-combobox" id="CaseType" data-options="width:160,valueField: 'id',textField: 'id',data:GetCaseTypeList(),onSelect:onselect" name="CaseType"></select>
@@ -180,7 +184,6 @@
           
                 <div style="width:100%">
                     <ul id='viewer' class="picView-magnify-list"><div style="clear:both;"></div></ul>
-                 
                 </div>
             </fieldset>
         </div>
