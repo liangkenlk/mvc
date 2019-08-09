@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -437,6 +438,36 @@
     <Content Include="jquery-easyui-1.4.4\dist\viewer.js" />
     <Content Include="jquery-easyui-1.4.4\dist\viewer.min.css" />
     <Content Include="jquery-easyui-1.4.4\dist\viewer.min.js" />
+    <Content Include="js\360point.js" />
+    <Content Include="js\address.js" />
+    <Content Include="js\Analyse.js" />
+    <Content Include="js\appUpdate.js" />
+    <Content Include="js\BaseMap.js" />
+    <Content Include="js\cat.touchjs.js" />
+    <Content Include="js\CityPart.js" />
+    <Content Include="js\Common.js" />
+    <Content Include="js\common_rosters.js" />
+    <Content Include="js\content.js" />
+    <Content Include="js\default.js" />
+    <Content Include="js\echarts.js" />
+    <Content Include="js\example.js" />
+    <Content Include="js\GeoTable.js" />
+    <Content Include="js\label.js" />
+    <Content Include="js\login.js" />
+    <Content Include="js\mapConfig.js" />
+    <Content Include="js\maps_tianditu.js" />
+    <Content Include="js\MapTool.js" />
+    <Content Include="js\Menu.js" />
+    <Content Include="js\ProjectInfo.js" />
+    <Content Include="js\region.js" />
+    <Content Include="js\sysConfig.js" />
+    <Content Include="js\TDTLayer.js" />
+    <Content Include="js\Theme.js" />
+    <Content Include="js\touch.js" />
+    <Content Include="js\touch.min.js" />
+    <Content Include="js\UploadPhoto.js" />
+    <Content Include="js\wallmap.js" />
+    <Content Include="js\whir.touch.js" />
     <Content Include="TaskList.html" />
     <Content Include="Case.html" />
     <Content Include="CaseDetail.html" />
