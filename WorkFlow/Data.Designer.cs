@@ -56,7 +56,7 @@ namespace WorkFlow {
         
         private UserDataTable tableUser;
         
-        private TaskManualDataTable tableTaskManual;
+        private ManualDataTable tableManual;
         
         private global::System.Data.DataRelation relationFK_label_image_Label;
         
@@ -136,8 +136,8 @@ namespace WorkFlow {
                 if ((ds.Tables["User"] != null)) {
                     base.Tables.Add(new UserDataTable(ds.Tables["User"]));
                 }
-                if ((ds.Tables["TaskManual"] != null)) {
-                    base.Tables.Add(new TaskManualDataTable(ds.Tables["TaskManual"]));
+                if ((ds.Tables["Manual"] != null)) {
+                    base.Tables.Add(new ManualDataTable(ds.Tables["Manual"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -321,9 +321,9 @@ namespace WorkFlow {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public TaskManualDataTable TaskManual {
+        public ManualDataTable Manual {
             get {
-                return this.tableTaskManual;
+                return this.tableManual;
             }
         }
         
@@ -442,8 +442,8 @@ namespace WorkFlow {
                 if ((ds.Tables["User"] != null)) {
                     base.Tables.Add(new UserDataTable(ds.Tables["User"]));
                 }
-                if ((ds.Tables["TaskManual"] != null)) {
-                    base.Tables.Add(new TaskManualDataTable(ds.Tables["TaskManual"]));
+                if ((ds.Tables["Manual"] != null)) {
+                    base.Tables.Add(new ManualDataTable(ds.Tables["Manual"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -574,10 +574,10 @@ namespace WorkFlow {
                     this.tableUser.InitVars();
                 }
             }
-            this.tableTaskManual = ((TaskManualDataTable)(base.Tables["TaskManual"]));
+            this.tableManual = ((ManualDataTable)(base.Tables["Manual"]));
             if ((initTable == true)) {
-                if ((this.tableTaskManual != null)) {
-                    this.tableTaskManual.InitVars();
+                if ((this.tableManual != null)) {
+                    this.tableManual.InitVars();
                 }
             }
             this.relationFK_label_image_Label = this.Relations["FK_label_image_Label"];
@@ -623,8 +623,8 @@ namespace WorkFlow {
             base.Tables.Add(this.tableDept);
             this.tableUser = new UserDataTable();
             base.Tables.Add(this.tableUser);
-            this.tableTaskManual = new TaskManualDataTable();
-            base.Tables.Add(this.tableTaskManual);
+            this.tableManual = new ManualDataTable();
+            base.Tables.Add(this.tableManual);
             this.relationFK_label_image_Label = new global::System.Data.DataRelation("FK_label_image_Label", new global::System.Data.DataColumn[] {
                         this.tableLabel.idColumn}, new global::System.Data.DataColumn[] {
                         this.tablelabel_image.labelIdColumn}, false);
@@ -729,7 +729,7 @@ namespace WorkFlow {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private bool ShouldSerializeTaskManual() {
+        private bool ShouldSerializeManual() {
             return false;
         }
         
@@ -837,7 +837,7 @@ namespace WorkFlow {
         public delegate void UserRowChangeEventHandler(object sender, UserRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public delegate void TaskManualRowChangeEventHandler(object sender, TaskManualRowChangeEvent e);
+        public delegate void ManualRowChangeEventHandler(object sender, ManualRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -7067,7 +7067,7 @@ namespace WorkFlow {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class TaskManualDataTable : global::System.Data.TypedTableBase<TaskManualRow> {
+        public partial class ManualDataTable : global::System.Data.TypedTableBase<ManualRow> {
             
             private global::System.Data.DataColumn columnid;
             
@@ -7081,8 +7081,8 @@ namespace WorkFlow {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public TaskManualDataTable() {
-                this.TableName = "TaskManual";
+            public ManualDataTable() {
+                this.TableName = "Manual";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -7090,7 +7090,7 @@ namespace WorkFlow {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal TaskManualDataTable(global::System.Data.DataTable table) {
+            internal ManualDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -7107,7 +7107,7 @@ namespace WorkFlow {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected TaskManualDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected ManualDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
@@ -7163,56 +7163,56 @@ namespace WorkFlow {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public TaskManualRow this[int index] {
+            public ManualRow this[int index] {
                 get {
-                    return ((TaskManualRow)(this.Rows[index]));
+                    return ((ManualRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event TaskManualRowChangeEventHandler TaskManualRowChanging;
+            public event ManualRowChangeEventHandler ManualRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event TaskManualRowChangeEventHandler TaskManualRowChanged;
+            public event ManualRowChangeEventHandler ManualRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event TaskManualRowChangeEventHandler TaskManualRowDeleting;
+            public event ManualRowChangeEventHandler ManualRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event TaskManualRowChangeEventHandler TaskManualRowDeleted;
+            public event ManualRowChangeEventHandler ManualRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void AddTaskManualRow(TaskManualRow row) {
+            public void AddManualRow(ManualRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public TaskManualRow AddTaskManualRow(string id, string BigType, string Type, string SubType, string Content) {
-                TaskManualRow rowTaskManualRow = ((TaskManualRow)(this.NewRow()));
+            public ManualRow AddManualRow(string id, string BigType, string Type, string SubType, string Content) {
+                ManualRow rowManualRow = ((ManualRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         id,
                         BigType,
                         Type,
                         SubType,
                         Content};
-                rowTaskManualRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowTaskManualRow);
-                return rowTaskManualRow;
+                rowManualRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowManualRow);
+                return rowManualRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public TaskManualRow FindByid(string id) {
-                return ((TaskManualRow)(this.Rows.Find(new object[] {
+            public ManualRow FindByid(string id) {
+                return ((ManualRow)(this.Rows.Find(new object[] {
                             id})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                TaskManualDataTable cln = ((TaskManualDataTable)(base.Clone()));
+                ManualDataTable cln = ((ManualDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -7220,7 +7220,7 @@ namespace WorkFlow {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new TaskManualDataTable();
+                return new ManualDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7259,28 +7259,28 @@ namespace WorkFlow {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public TaskManualRow NewTaskManualRow() {
-                return ((TaskManualRow)(this.NewRow()));
+            public ManualRow NewManualRow() {
+                return ((ManualRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new TaskManualRow(builder);
+                return new ManualRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(TaskManualRow);
+                return typeof(ManualRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.TaskManualRowChanged != null)) {
-                    this.TaskManualRowChanged(this, new TaskManualRowChangeEvent(((TaskManualRow)(e.Row)), e.Action));
+                if ((this.ManualRowChanged != null)) {
+                    this.ManualRowChanged(this, new ManualRowChangeEvent(((ManualRow)(e.Row)), e.Action));
                 }
             }
             
@@ -7288,8 +7288,8 @@ namespace WorkFlow {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.TaskManualRowChanging != null)) {
-                    this.TaskManualRowChanging(this, new TaskManualRowChangeEvent(((TaskManualRow)(e.Row)), e.Action));
+                if ((this.ManualRowChanging != null)) {
+                    this.ManualRowChanging(this, new ManualRowChangeEvent(((ManualRow)(e.Row)), e.Action));
                 }
             }
             
@@ -7297,8 +7297,8 @@ namespace WorkFlow {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.TaskManualRowDeleted != null)) {
-                    this.TaskManualRowDeleted(this, new TaskManualRowChangeEvent(((TaskManualRow)(e.Row)), e.Action));
+                if ((this.ManualRowDeleted != null)) {
+                    this.ManualRowDeleted(this, new ManualRowChangeEvent(((ManualRow)(e.Row)), e.Action));
                 }
             }
             
@@ -7306,14 +7306,14 @@ namespace WorkFlow {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.TaskManualRowDeleting != null)) {
-                    this.TaskManualRowDeleting(this, new TaskManualRowChangeEvent(((TaskManualRow)(e.Row)), e.Action));
+                if ((this.ManualRowDeleting != null)) {
+                    this.ManualRowDeleting(this, new ManualRowChangeEvent(((ManualRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void RemoveTaskManualRow(TaskManualRow row) {
+            public void RemoveManualRow(ManualRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -7340,7 +7340,7 @@ namespace WorkFlow {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "TaskManualDataTable";
+                attribute2.FixedValue = "ManualDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -11630,25 +11630,25 @@ namespace WorkFlow {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class TaskManualRow : global::System.Data.DataRow {
+        public partial class ManualRow : global::System.Data.DataRow {
             
-            private TaskManualDataTable tableTaskManual;
+            private ManualDataTable tableManual;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal TaskManualRow(global::System.Data.DataRowBuilder rb) : 
+            internal ManualRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableTaskManual = ((TaskManualDataTable)(this.Table));
+                this.tableManual = ((ManualDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public string id {
                 get {
-                    return ((string)(this[this.tableTaskManual.idColumn]));
+                    return ((string)(this[this.tableManual.idColumn]));
                 }
                 set {
-                    this[this.tableTaskManual.idColumn] = value;
+                    this[this.tableManual.idColumn] = value;
                 }
             }
             
@@ -11657,14 +11657,14 @@ namespace WorkFlow {
             public string BigType {
                 get {
                     try {
-                        return ((string)(this[this.tableTaskManual.BigTypeColumn]));
+                        return ((string)(this[this.tableManual.BigTypeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("表“TaskManual”中列“BigType”的值为 DBNull。", e);
+                        throw new global::System.Data.StrongTypingException("表“Manual”中列“BigType”的值为 DBNull。", e);
                     }
                 }
                 set {
-                    this[this.tableTaskManual.BigTypeColumn] = value;
+                    this[this.tableManual.BigTypeColumn] = value;
                 }
             }
             
@@ -11673,14 +11673,14 @@ namespace WorkFlow {
             public string Type {
                 get {
                     try {
-                        return ((string)(this[this.tableTaskManual.TypeColumn]));
+                        return ((string)(this[this.tableManual.TypeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("表“TaskManual”中列“Type”的值为 DBNull。", e);
+                        throw new global::System.Data.StrongTypingException("表“Manual”中列“Type”的值为 DBNull。", e);
                     }
                 }
                 set {
-                    this[this.tableTaskManual.TypeColumn] = value;
+                    this[this.tableManual.TypeColumn] = value;
                 }
             }
             
@@ -11689,14 +11689,14 @@ namespace WorkFlow {
             public string SubType {
                 get {
                     try {
-                        return ((string)(this[this.tableTaskManual.SubTypeColumn]));
+                        return ((string)(this[this.tableManual.SubTypeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("表“TaskManual”中列“SubType”的值为 DBNull。", e);
+                        throw new global::System.Data.StrongTypingException("表“Manual”中列“SubType”的值为 DBNull。", e);
                     }
                 }
                 set {
-                    this[this.tableTaskManual.SubTypeColumn] = value;
+                    this[this.tableManual.SubTypeColumn] = value;
                 }
             }
             
@@ -11705,63 +11705,63 @@ namespace WorkFlow {
             public string Content {
                 get {
                     try {
-                        return ((string)(this[this.tableTaskManual.ContentColumn]));
+                        return ((string)(this[this.tableManual.ContentColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("表“TaskManual”中列“Content”的值为 DBNull。", e);
+                        throw new global::System.Data.StrongTypingException("表“Manual”中列“Content”的值为 DBNull。", e);
                     }
                 }
                 set {
-                    this[this.tableTaskManual.ContentColumn] = value;
+                    this[this.tableManual.ContentColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsBigTypeNull() {
-                return this.IsNull(this.tableTaskManual.BigTypeColumn);
+                return this.IsNull(this.tableManual.BigTypeColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetBigTypeNull() {
-                this[this.tableTaskManual.BigTypeColumn] = global::System.Convert.DBNull;
+                this[this.tableManual.BigTypeColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsTypeNull() {
-                return this.IsNull(this.tableTaskManual.TypeColumn);
+                return this.IsNull(this.tableManual.TypeColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetTypeNull() {
-                this[this.tableTaskManual.TypeColumn] = global::System.Convert.DBNull;
+                this[this.tableManual.TypeColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsSubTypeNull() {
-                return this.IsNull(this.tableTaskManual.SubTypeColumn);
+                return this.IsNull(this.tableManual.SubTypeColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetSubTypeNull() {
-                this[this.tableTaskManual.SubTypeColumn] = global::System.Convert.DBNull;
+                this[this.tableManual.SubTypeColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsContentNull() {
-                return this.IsNull(this.tableTaskManual.ContentColumn);
+                return this.IsNull(this.tableManual.ContentColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetContentNull() {
-                this[this.tableTaskManual.ContentColumn] = global::System.Convert.DBNull;
+                this[this.tableManual.ContentColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -12313,22 +12313,22 @@ namespace WorkFlow {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public class TaskManualRowChangeEvent : global::System.EventArgs {
+        public class ManualRowChangeEvent : global::System.EventArgs {
             
-            private TaskManualRow eventRow;
+            private ManualRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public TaskManualRowChangeEvent(TaskManualRow row, global::System.Data.DataRowAction action) {
+            public ManualRowChangeEvent(ManualRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public TaskManualRow Row {
+            public ManualRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -22108,7 +22108,7 @@ SELECT UserId, LoginID, UserName, BankCard, Address, PassWord, CellPhone, CarNo,
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class TaskManualTableAdapter : global::System.ComponentModel.Component {
+    public partial class ManualTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
@@ -22122,7 +22122,7 @@ SELECT UserId, LoginID, UserName, BankCard, Address, PassWord, CellPhone, CarNo,
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public TaskManualTableAdapter() {
+        public ManualTableAdapter() {
             this.ClearBeforeFill = true;
         }
         
@@ -22219,7 +22219,7 @@ SELECT UserId, LoginID, UserName, BankCard, Address, PassWord, CellPhone, CarNo,
             this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "TaskManual";
+            tableMapping.DataSetTable = "Manual";
             tableMapping.ColumnMappings.Add("id", "id");
             tableMapping.ColumnMappings.Add("BigType", "BigType");
             tableMapping.ColumnMappings.Add("Type", "Type");
@@ -22228,7 +22228,7 @@ SELECT UserId, LoginID, UserName, BankCard, Address, PassWord, CellPhone, CarNo,
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[TaskManual] WHERE (([id] = @Original_id) AND ((@IsNull_BigType = 1 AND [BigType] IS NULL) OR ([BigType] = @Original_BigType)) AND ((@IsNull_Type = 1 AND [Type] IS NULL) OR ([Type] = @Original_Type)) AND ((@IsNull_SubType = 1 AND [SubType] IS NULL) OR ([SubType] = @Original_SubType)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[Manual] WHERE (([id] = @Original_id) AND ((@IsNull_BigType = 1 AND [BigType] IS NULL) OR ([BigType] = @Original_BigType)) AND ((@IsNull_Type = 1 AND [Type] IS NULL) OR ([Type] = @Original_Type)) AND ((@IsNull_SubType = 1 AND [SubType] IS NULL) OR ([SubType] = @Original_SubType)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_id", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_BigType", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BigType", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -22239,9 +22239,9 @@ SELECT UserId, LoginID, UserName, BankCard, Address, PassWord, CellPhone, CarNo,
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SubType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SubType", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[TaskManual] ([id], [BigType], [Type], [SubType], [Content]) VA" +
-                "LUES (@id, @BigType, @Type, @SubType, @Content);\r\nSELECT id, BigType, Type, SubT" +
-                "ype, [Content] FROM TaskManual WHERE (id = @id)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Manual] ([id], [BigType], [Type], [SubType], [Content]) VALUES" +
+                " (@id, @BigType, @Type, @SubType, @Content);\r\nSELECT id, BigType, Type, SubType," +
+                " [Content] FROM Manual WHERE (id = @id)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BigType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BigType", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -22250,8 +22250,8 @@ SELECT UserId, LoginID, UserName, BankCard, Address, PassWord, CellPhone, CarNo,
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Content", global::System.Data.SqlDbType.Text, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Content", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[TaskManual] SET [id] = @id, [BigType] = @BigType, [Type] = @Type, [SubType] = @SubType, [Content] = @Content WHERE (([id] = @Original_id) AND ((@IsNull_BigType = 1 AND [BigType] IS NULL) OR ([BigType] = @Original_BigType)) AND ((@IsNull_Type = 1 AND [Type] IS NULL) OR ([Type] = @Original_Type)) AND ((@IsNull_SubType = 1 AND [SubType] IS NULL) OR ([SubType] = @Original_SubType)));
-SELECT id, BigType, Type, SubType, [Content] FROM TaskManual WHERE (id = @id)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Manual] SET [id] = @id, [BigType] = @BigType, [Type] = @Type, [SubType] = @SubType, [Content] = @Content WHERE (([id] = @Original_id) AND ((@IsNull_BigType = 1 AND [BigType] IS NULL) OR ([BigType] = @Original_BigType)) AND ((@IsNull_Type = 1 AND [Type] IS NULL) OR ([Type] = @Original_Type)) AND ((@IsNull_SubType = 1 AND [SubType] IS NULL) OR ([SubType] = @Original_SubType)));
+SELECT id, BigType, Type, SubType, [Content] FROM Manual WHERE (id = @id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BigType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BigType", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -22280,7 +22280,7 @@ SELECT id, BigType, Type, SubType, [Content] FROM TaskManual WHERE (id = @id)";
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT id, BigType, Type, SubType, Content FROM dbo.TaskManual";
+            this._commandCollection[0].CommandText = "SELECT id, BigType, Type, SubType, Content FROM dbo.Manual";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -22288,7 +22288,7 @@ SELECT id, BigType, Type, SubType, [Content] FROM TaskManual WHERE (id = @id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(Data.TaskManualDataTable dataTable) {
+        public virtual int Fill(Data.ManualDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -22301,9 +22301,9 @@ SELECT id, BigType, Type, SubType, [Content] FROM TaskManual WHERE (id = @id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual Data.TaskManualDataTable GetData() {
+        public virtual Data.ManualDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            Data.TaskManualDataTable dataTable = new Data.TaskManualDataTable();
+            Data.ManualDataTable dataTable = new Data.ManualDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -22311,7 +22311,7 @@ SELECT id, BigType, Type, SubType, [Content] FROM TaskManual WHERE (id = @id)";
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(Data.TaskManualDataTable dataTable) {
+        public virtual int Update(Data.ManualDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
@@ -22319,7 +22319,7 @@ SELECT id, BigType, Type, SubType, [Content] FROM TaskManual WHERE (id = @id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         public virtual int Update(Data dataSet) {
-            return this.Adapter.Update(dataSet, "TaskManual");
+            return this.Adapter.Update(dataSet, "Manual");
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -22573,7 +22573,7 @@ SELECT id, BigType, Type, SubType, [Content] FROM TaskManual WHERE (id = @id)";
         
         private UserTableAdapter _userTableAdapter;
         
-        private TaskManualTableAdapter _taskManualTableAdapter;
+        private ManualTableAdapter _manualTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -22819,12 +22819,12 @@ SELECT id, BigType, Type, SubType, [Content] FROM TaskManual WHERE (id = @id)";
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
             "a", "System.Drawing.Design.UITypeEditor")]
-        public TaskManualTableAdapter TaskManualTableAdapter {
+        public ManualTableAdapter ManualTableAdapter {
             get {
-                return this._taskManualTableAdapter;
+                return this._manualTableAdapter;
             }
             set {
-                this._taskManualTableAdapter = value;
+                this._manualTableAdapter = value;
             }
         }
         
@@ -22911,9 +22911,9 @@ SELECT id, BigType, Type, SubType, [Content] FROM TaskManual WHERE (id = @id)";
                             && (this._userTableAdapter.Connection != null))) {
                     return this._userTableAdapter.Connection;
                 }
-                if (((this._taskManualTableAdapter != null) 
-                            && (this._taskManualTableAdapter.Connection != null))) {
-                    return this._taskManualTableAdapter.Connection;
+                if (((this._manualTableAdapter != null) 
+                            && (this._manualTableAdapter.Connection != null))) {
+                    return this._manualTableAdapter.Connection;
                 }
                 return null;
             }
@@ -22976,7 +22976,7 @@ SELECT id, BigType, Type, SubType, [Content] FROM TaskManual WHERE (id = @id)";
                 if ((this._userTableAdapter != null)) {
                     count = (count + 1);
                 }
-                if ((this._taskManualTableAdapter != null)) {
+                if ((this._manualTableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -23134,12 +23134,12 @@ SELECT id, BigType, Type, SubType, [Content] FROM TaskManual WHERE (id = @id)";
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._taskManualTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.TaskManual.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._manualTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Manual.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._taskManualTableAdapter.Update(updatedRows));
+                    result = (result + this._manualTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -23281,11 +23281,11 @@ SELECT id, BigType, Type, SubType, [Content] FROM TaskManual WHERE (id = @id)";
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._taskManualTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.TaskManual.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._manualTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Manual.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._taskManualTableAdapter.Update(addedRows));
+                    result = (result + this._manualTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -23299,11 +23299,11 @@ SELECT id, BigType, Type, SubType, [Content] FROM TaskManual WHERE (id = @id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private int UpdateDeletedRows(Data dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._taskManualTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.TaskManual.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._manualTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Manual.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._taskManualTableAdapter.Update(deletedRows));
+                    result = (result + this._manualTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -23538,8 +23538,8 @@ SELECT id, BigType, Type, SubType, [Content] FROM TaskManual WHERE (id = @id)";
                         && (this.MatchTableAdapterConnection(this._userTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("由 TableAdapterManager 管理的所有 TableAdapter 必须使用相同的连接字符串。");
             }
-            if (((this._taskManualTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._taskManualTableAdapter.Connection) == false))) {
+            if (((this._manualTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._manualTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("由 TableAdapterManager 管理的所有 TableAdapter 必须使用相同的连接字符串。");
             }
             global::System.Data.IDbConnection workConnection = this.Connection;
@@ -23717,13 +23717,13 @@ SELECT id, BigType, Type, SubType, [Content] FROM TaskManual WHERE (id = @id)";
                         adaptersWithAcceptChangesDuringUpdate.Add(this._userTableAdapter.Adapter);
                     }
                 }
-                if ((this._taskManualTableAdapter != null)) {
-                    revertConnections.Add(this._taskManualTableAdapter, this._taskManualTableAdapter.Connection);
-                    this._taskManualTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._taskManualTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._taskManualTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._taskManualTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._taskManualTableAdapter.Adapter);
+                if ((this._manualTableAdapter != null)) {
+                    revertConnections.Add(this._manualTableAdapter, this._manualTableAdapter.Connection);
+                    this._manualTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._manualTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._manualTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._manualTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._manualTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -23848,9 +23848,9 @@ SELECT id, BigType, Type, SubType, [Content] FROM TaskManual WHERE (id = @id)";
                     this._userTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._userTableAdapter]));
                     this._userTableAdapter.Transaction = null;
                 }
-                if ((this._taskManualTableAdapter != null)) {
-                    this._taskManualTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._taskManualTableAdapter]));
-                    this._taskManualTableAdapter.Transaction = null;
+                if ((this._manualTableAdapter != null)) {
+                    this._manualTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._manualTableAdapter]));
+                    this._manualTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];

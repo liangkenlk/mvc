@@ -135,12 +135,61 @@
     </style>
 </head>
 <body>
-    <div style="margin:20px 0;"></div>
+ 
     <fieldset>
-        <legend>基本信息</legend>
-        <tr>
-            <td>案件分类:<input class="easyui-combobox" id="CaseBigType" name="CaseBigType" data-options="width:160,valueField: 'id',textField: 'id',required:true,data:[{id:'事件类'},{id:'部件类'}]"></input></td>
-        大类:<select class="easyui-combobox" id="CaseType" data-options="width:160,valueField: 'id',textField: 'id',onSelect:onselect" name="CaseType"></select>
-            小类:<select class="easyui-combobox" id="CaseSubType" data-options="width:160,valueField: 'id',textField: 'id'" name="CaseSubType"></select></td>
-        </tr>
+        <legend>城管执法知识库</legend>
+
+        <table>
+            <tr>
+                <td>
+                    案件分类:<input class="easyui-combobox" id="CaseBigType" name="CaseBigType" data-options="width:160,valueField: 'id',textField: 'id',data:[{id:'事件类'},{id:'部件类'}],onSelect:onBigTypeSelect"></input>
+                    大类:
+                    <select class="easyui-combobox" id="CaseType" data-options="width:160,valueField: 'id',textField: 'id',onSelect:onselect" name="CaseType"></select>
+                    小类:
+                    <select class="easyui-combobox" id="CaseSubType" data-options="width:160,valueField: 'id',textField: 'id',onSelect:showContent" name="CaseSubType"></select>
+                    <a href="#" class="easyui-linkbutton" onclick="edit();" iconcls="icon-edit">修改</a>
+                    <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-save" onclick="save()">提交</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span id="content">该类别暂无内容</span><br />
+                    <textarea id='txtContent' style='height:300px; width:100%;'>请输入内容....</textarea>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
 </html>
+<script>
+        function onBigTypeSelect(record) {
+        $("#CaseType").combobox({ data:GetTypeList(record.id) });
+    }
+		function onselect(record)
+        {
+            var bigType = $("#CaseBigType").combobox("getValue");
+		    $("#CaseSubType").combobox({ data: GetSubTypeList(bigType,record.id) });
+    }
+    function showContent()
+    {
+        var bigType = $("#CaseBigType").combobox("getValue");
+        var type = $("#CaseType").combobox("getValue");
+        var subType = $("#CaseSubType").combobox("getValue");
+        j({
+            BigType: bigType, Type: type, SubType: subType
+        }, "Manuel/GetByTypes", showContentCallBack);
+    }
+    function showContentCallBack(re) {
+        $("#txtContent").val(re.Content);
+        $("#content").html(re.Content);
+
+    }
+
+    function save() {
+        var bigType = $("#CaseBigType").combobox("getValue");
+        var type = $("#CaseType").combobox("getValue");
+        var subType = $("#CaseSubType").combobox("getValue");
+        var Content = $("#txtContent").val();
+        j({BigType: bigType, Type: type, SubType: subType,Content:Content}, "Manuel/Update", saveCallBack);
+    }
+    function saveCallBack(re) { }
+</script>
