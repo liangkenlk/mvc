@@ -1,27 +1,34 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
     <link href="css/userguide.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="jquery-easyui-1.4.4/themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="jquery-easyui-1.4.4/themes/icon.css">
-
+    
     <script type="text/javascript" src="jquery-easyui-1.4.4/jquery.min.js"></script>
     <script type="text/javascript" src="jquery-easyui-1.4.4/jquery.easyui.min.js"></script>
     <script src="jquery-easyui-1.4.4/locale/easyui-lang-zh_CN.js"></script>
     <script src="js/Common.js"></script>
+    <script type="text/javascript" src="jquery-easyui-1.4.4/treegrid-dnd.js"></script>
+    <style>
+        .man {
+            background: url(images/man.png);
+        }
+    </style>
 </head>
 <body>
-    <table class="easyui-datagrid"  style="width:100%;height:100%;"
-           data-options="rownumbers:false,pagination:true,url:'user/Getlist',toolbar:'#tb',footer:'#ft',idField: 'UserId',onSortColumn:'onSort'" rownumbers="true" pagination="true">
+    <table class="easyui-treegrid"  style="width:100%;height:100%;"
+           data-options="rownumbers:true,loadFilter:filter,pagination:false,dnd:true,animate:true,url:'user/GetDeptTree',toolbar:'#tb',footer:'#ft',idField: 'UserId',treeField:'UserName',onSortColumn:'onSort',onLoadSuccess:loaded,onBeforeDrag:beforeDrag,onBeforeDrop:beforeDrop,onDrop:Drop,onBeforeEdit:onBeforeEdit,onAfterEdit:onAfterEdit,onCancelEdit:onCancelEdit">
         <thead>
             <tr>
                <th data-options="field:'UserId',width:80,checkbox:true"></th>
+                <th data-options="field:'UserName',width:300,sortable:false,editor:'text'">中文名</th>
                 <th data-options="field:'LoginID',width:80,sortable:false,editor:'text'">用户名</th>
                 <th data-options="field:'PassWord',width:80,sortable:false,editor:'text'">密码</th>
-                <th data-options="field:'UserName',width:100,sortable:false,editor:'text'">中文名</th>
+                
                 <th data-options="field:'CellPhone',width:100,sortable:false,editor:'text'">电话</th>
                 <th data-options="field:'UserType',width:100,sortable:false,editor:Typeeditor">用户类型</th>
               <!--  <th data-options="field:'DataPower',width:100,sortable:false,editor:editor,formatter:format">数据权限</th>-->
@@ -120,7 +127,7 @@ else
     function dosearch() {
 
         var username = $('#username').val();
-        $('.easyui-datagrid').datagrid("load", {username: username });
+        $('.easyui-treegrid').treegrid("load", {username: username });
     }
 
     function format(row, data, index)
@@ -143,7 +150,7 @@ else
         if (!confirm("确定要删除吗？")) {
             return;
         }
-        var a = $('.easyui-datagrid').datagrid("getChecked");
+        var a = $('.easyui-treegrid').treegrid("getChecked");
         var selected = "";
         for (var i = 0; i < a.length; i++) {
             var id = "'" + a[i].UserId + "'";
@@ -160,7 +167,7 @@ else
     }
     function delCallBack(result) {
         if (result.Success == true)
-            $('.easyui-datagrid').datagrid("reload");
+            $('.easyui-treegrid').treegrid("reload");
         else
             $.messager.show({ title: "提示", msg: "请勾选需要删除的选项" });
 
@@ -168,9 +175,9 @@ else
     function cancel()
     {
         
-        $('.easyui-datagrid').datagrid("cancelEdit", editRow);
+        $('.easyui-treegrid').datagrid("cancelEdit", editRow);
         if (isAdding) {
-            $('.easyui-datagrid').datagrid("deleteRow", 0);
+            $('.easyui-treegrid').datagrid("deleteRow", 0);
             editRow = undefined;
             isAdding = false;
         }
@@ -179,45 +186,54 @@ else
     }
     function add()
     {
-        $('.easyui-datagrid').datagrid("insertRow", {
-            index: 0, row: {
+        var node = $('.easyui-treegrid').treegrid('getSelected');
+        if (node.UserType != '部门')
+            return;
+        $('.easyui-treegrid').treegrid("append", {
+            parent: node.UserId,
+            data: [{
+                UserId:"-1",
                 UserName: '新用户',
                 PassWord: '123456',
-                LoginID:"newUser"
-            }
+                LoginID: "newUser",
+                DeptId: node.UserId,
+                parentid: node.UserId,
+                iconCls:'man'
+
+            }]
         });
         if (editRow != undefined) {
-            $('.easyui-datagrid').datagrid("endEdit", editRow);
+            $('.easyui-treegrid').treegrid("endEdit", editRow);
             editRow = undefined;
         }
-        $('.easyui-datagrid').datagrid("beginEdit", 0);
+        $('.easyui-treegrid').treegrid("beginEdit", '-1');
         isAdding = true;
-        editRow = 0;
+        editRow = '-1';
     }
     
     var isAdding;
     var editRow;
     function edit() {
         //修改时要获取选择到的行
-        var rows = $('.easyui-datagrid').datagrid("getSelections");
+        var rows = $('.easyui-treegrid').treegrid("getSelections");
         //如果只选择了一行则可以进行修改，否则不操作
         if (rows.length == 1) {
             //修改之前先关闭已经开启的编辑行，当调用endEdit该方法时会触发onAfterEdit事件
             if (editRow != undefined) {
-                $('.easyui-datagrid').datagrid("endEdit", editRow);
+                $('.easyui-treegrid').treegrid("endEdit", editRow);
                 editRow = undefined;
             }
             //当无编辑行时
             if (editRow == undefined) {
                 //获取到当前选择行的下标
-                var index = $('.easyui-datagrid').datagrid("getRowIndex", rows[0]);
+                //var index = $('.easyui-treegrid').treegrid("getRowIndex", rows[0]);
                 //开启编辑
-                $('.easyui-datagrid').datagrid("beginEdit", index);
+                $('.easyui-treegrid').treegrid("beginEdit", rows[0].UserId);
                 //把当前开启编辑的行赋值给全局变量editRow
-                editRow = index;
+                editRow = rows[0].UserId;
                 //当开启了当前选择行的编辑状态之后，
                 //应该取消当前列表的所有选择行，要不然双击之后无法再选择其他行进行编辑
-                $('.easyui-datagrid').datagrid("unselectAll");
+                $('.easyui-treegrid').treegrid("unselectAll");
             }
         }
     }
@@ -246,8 +262,8 @@ else
             $.messager.show({ title: "提示", msg: re.Message });
     }
     function save() {
-        $('.easyui-datagrid').datagrid("endEdit", editRow);
-        var data = $('.easyui-datagrid').datagrid("getData").rows[editRow];
+        $('.easyui-treegrid').treegrid("endEdit", editRow);
+        var data = $('.easyui-treegrid').treegrid("find",editRow);
         var url = "user/Update";
         
         j(data, url, saveCallBack);
@@ -255,20 +271,20 @@ else
     function saveCallBack(re) {
         if (re.Success == true) {
             
-            $('.easyui-datagrid').datagrid("updateRow",{index:editRow,row:{UserId:re.Message}});
-            $('.easyui-datagrid').datagrid("acceptChanges", editRow);
+            $('.easyui-treegrid').treegrid("update",{id:editRow,row:{UserId:re.data}});
+            $('.easyui-treegrid').treegrid("acceptChanges", editRow);
             editRow = undefined;
             isAdding = false;
             $.messager.show({ title: "提示", msg: "保存成功。" });
         }
         else {
             if (isAdding)
-                $('.easyui-datagrid').datagrid("deleteRow", editRow);
+                $('.easyui-treegrid').treegrid("deleteRow", editRow);
             else
-                $('.easyui-datagrid').datagrid("rejectChanges", editRow);
+                $('.easyui-treegrid').treegrid("rejectChanges", editRow);
             isAdding = false;
             editRow = undefined; 
-            $('.easyui-datagrid').datagrid("clearSelections");
+            $('.easyui-treegrid').treegrid("clearSelections");
             
             $.messager.show({ title: "提示", msg: re.Message });
 
@@ -304,13 +320,79 @@ else
 
 
 
-        $('.easyui-datagrid').datagrid("uncheckAll", editRow);
+        $('.easyui-treegrid').datagrid("uncheckAll", editRow);
           if (isAdding) {
-            $('.easyui-datagrid').datagrid("uncheckAll", 0);
+            $('.easyui-treegrid').datagrid("uncheckAll", 0);
             editRow = undefined;
              isAdding = false;
          }
 
 
-    }
+        }
+        function filter(rows, parentId)
+        {
+            	function exists(rows, parentid){
+		            for(var i=0; i<rows.length; i++){
+			            if (rows[i].UserId == parentid) return true;
+		            }
+		            return false;
+            }
+
+            	var nodes = [];
+	            // get the top level nodes
+	            for(var i=0; i<rows.length; i++){
+		            var row = rows[i];
+		            if (!exists(rows, row.parentid)){
+			            nodes.push(row);
+		            }
+	            }
+		        var toDo = [];
+	            for(var i=0; i<nodes.length; i++){
+		            toDo.push(nodes[i]);
+	            }
+	            while(toDo.length){
+		            var node = toDo.shift();	// the parent node
+		            // get the children nodes
+		            for(var i=0; i<rows.length; i++){
+			            var row = rows[i];
+			            if (row.parentid == node.UserId){
+                            var child = row;
+                            if (child.UserType != '部门')
+                                child.iconCls = "man";
+				            if (node.children){
+					            node.children.push(child);
+				            } else {
+					            node.children = [child];
+				            }
+				            toDo.push(child);
+			            }
+		            }
+	            }
+	            return nodes;
+        }
+        function loaded(row)
+        {
+            $(this).treegrid('enableDnd', (row ? row.UserId : null && row.UserType != '部门'));
+        }
+
+        function beforeDrag(row) {
+            if (row.UserType == '部门')
+                return false;
+        }
+        function beforeDrop(targetRow, sourceRow, point) {
+            if (targetRow.UserType != '部门')
+            {
+                return false;
+            }
+        }
+        function Drop(targetRow, sourceRow) {
+            var url = "user/Update";
+            editRow = sourceRow.UserId;
+            sourceRow.DeptId = targetRow.UserId;
+        
+                j(sourceRow, url, saveCallBack);
+        }
+        function onBeforeEdit() { $(this).treegrid('disableDnd'); }
+        function onAfterEdit() { $(this).treegrid('enableDnd'); }
+        function onCancelEdit() { $(this).treegrid('enableDnd');}
 </script>

@@ -146,18 +146,26 @@
                         <td><input class="easyui-textbox" type="text" name="Address" id="Address" data-options="required:true"></input></td>
                     </tr>
                     <tr>
+                        <td>来源:</td>
+                        <td><input class="easyui-combobox" id="ComeFrom" name="ComeFrom" data-options="width:160,valueField: 'id',textField: 'id',required:true,data:[{id:'巡查发现'},{id:'群众举报'}]"></input></td>
+                    </tr>
+                    <tr>
                         <td>案件分类:</td>
-                        <td><input class="easyui-combobox" id="CaseBigType" name="CaseBigType"  data-options="width:160,valueField: 'id',textField: 'id',required:true,data:[{id:'事件类'},{id:'部件类'}]"></input></td>
+                        <td><input class="easyui-combobox" id="CaseBigType" name="CaseBigType" data-options="width:160,valueField: 'id',textField: 'id',required:true,data:[{id:'事件类'},{id:'部件类'}],onSelect:onBigTypeSelect"></input></td>
                     </tr>
                     <tr>
                         <td>大类:</td>
                         <td>
-                            <select class="easyui-combobox" id="CaseType" data-options="width:160,valueField: 'id',textField: 'id',data:GetCaseTypeList(),onSelect:onselect" name="CaseType"></select>
+                            <select class="easyui-combobox" id="CaseType" data-options="width:160,valueField: 'id',textField: 'id',onSelect:onselect" name="CaseType"></select>
                         </td>
                     </tr>
                     <tr>
                         <td>小类:</td>
                         <td><select class="easyui-combobox" id="CaseSubType" data-options="width:160,valueField: 'id',textField: 'id'" name="CaseSubType"></select></td>
+                    </tr>
+                    <tr>
+                        <td>紧急程度:</td>
+                        <td><input class="easyui-combobox" id="Urgent" name="Urgent" data-options="width:160,valueField: 'id',textField: 'id',required:true,data:[{id:'紧急情况'},{id:'一般性措施'},{id:'工程性措施'}]"></input></td>
                     </tr>
                     <tr>
                         <td>所属区域:</td>
@@ -259,10 +267,14 @@
 		    //$('#CaseType').combobox('setValue', re.CaseType);
 		    //$('#CaseSubType').combobox('setValue', re.CaseSubType);
 		    $('#ff').form('load', re);
-		}
+    }
+    function onBigTypeSelect(record) {
+        $("#CaseType").combobox({ data:GetTypeList(record.id) });
+    }
 		function onselect(record)
-		{
-		    $("#CaseSubType").combobox({ data: GetCaseSubTypeList(record.id) });
+        {
+            var bigType = $("#CaseBigType").combobox("getValue");
+		    $("#CaseSubType").combobox({ data: GetSubTypeList(bigType,record.id) });
 		}
 
 		function getPhotoList() {

@@ -39,14 +39,21 @@
             $('#tt').tabs('update', {
                 tab: tab,
                 options: {
-                    title: '需处理<span style="color:red">(' + re["需处理"] + ')</span>'
+                    title: '需审核<span style="color:red">(' + re["审核"] + ')</span>'
                 }
             });
             tab = $('#tt').tabs('getTab', 1);
             $('#tt').tabs('update', {
                 tab: tab,
                 options: {
-                    title: '已处理<span style="color:red">(' + re["已处理"] + ')</span>'
+                    title: '已立案<span style="color:red">(' + re["立案"] + ')</span>'
+                }
+            });
+            tab = $('#tt').tabs('getTab', 2);
+            $('#tt').tabs('update', {
+                tab: tab,
+                options: {
+                    title: '已处置<span style="color:red">(' + re["处置"] + ')</span>'
                 }
             });
         }
@@ -103,23 +110,29 @@
     <div data-options="region:'south',border:false" style="height:40px;background-color:cornflowerblue;padding:10px;text-align:center">版权所有©2019 南宁市国土测绘信息中心 版本：v1.0</div>
     <div data-options="region:'center',title:'Center',noheader:true">
         <div id="tt" class="easyui-tabs" data-options="onSelect:tabSelected" style="width:100%;height:100%;">
-            <div title="需处理" style="">
-                <iframe width="100%" height="99.5%" frameborder="0" id="caseframe" src="Case.html?status=需处理"></iframe>
+            <div title="需审核" style="">
+                <iframe width="100%" height="99.5%" frameborder="0" id="caseframe" src="Case.html?status=审核"></iframe>
             </div>
-            <div title="已处理" style="">
-                <iframe width="100%" height="99.5%" frameborder="0" id="caseframe" src="Case.html?status=已处理"></iframe>
+            <div title="已立案" style="">
+                <iframe width="100%" height="99.5%" frameborder="0" id="caseframe" src="Case.html?status=立案"></iframe>
             </div>
-            <div title="已解决" >
-                <iframe width="100%" height="99.5%" frameborder="0" id="caseframe" src="Case.html?status=已结案"></iframe>
+            <div title="已处置" style="">
+                <iframe width="100%" height="99.5%" frameborder="0" id="caseframe" src="Case.html?status=处置"></iframe>
             </div>
-            <div title="已撤销">
+            <div title="已结案">
+                <iframe width="100%" height="99.5%" frameborder="0" id="caseframe" src="Case.html?status=结案"></iframe>
+            </div>
+            <div title="不立案">
                 <iframe width="100%" height="99.5%" frameborder="0" id="caseframe" src="Case.html?status=不立案"></iframe>
             </div>
-            <div title="统计与报表" >
+            <div title="统计与报表">
                 <iframe width="100%" height="99.5%" frameborder="0" id="caseframe" src="count.html"></iframe>
             </div>
             <div title="用户管理">
                 <iframe width="100%" height="99.5%" frameborder="0" src="userlist.html"></iframe>
+            </div>
+            <div title="执法知识库">
+                <iframe width="100%" height="99.5%" frameborder="0" src="ManuelContent.html"></iframe>
             </div>
             <div title="app下载">
                 <iframe width="100%" height="99.5%" frameborder="0" src="app.html"></iframe>

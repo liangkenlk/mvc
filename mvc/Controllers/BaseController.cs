@@ -202,7 +202,7 @@ namespace mvc.Controllers
 
             //var ret = JsonConvert.SerializeObject(ob, setting);
 
-            return Json(ob,JsonRequestBehavior.AllowGet);
+            return Json(ob, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ActionList()
@@ -279,8 +279,16 @@ namespace mvc.Controllers
                 }
                 if (Data != null)
                 {
-                    JavaScriptSerializer serializer = new JavaScriptSerializer();
-                    string jsonstring = serializer.Serialize(Data);
+                    //JavaScriptSerializer serializer = new JavaScriptSerializer();
+                    //string jsonstring = serializer.Serialize(Data);
+
+                    JsonSerializerSettings setting = new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    };
+
+                    var jsonstring = JsonConvert.SerializeObject(Data, setting);
+                    
 
 
                     //string hashOldPassword = @"\\/Date\((\param+)\+\param+\)\\/";
