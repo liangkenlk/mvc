@@ -136,7 +136,7 @@
 </head>
 <body>
  
-    <fieldset>
+    <fieldset style="height:98%">
         <legend>城管执法知识库</legend>
 
         <table>
@@ -167,7 +167,8 @@
 		function onselect(record)
         {
             var bigType = $("#CaseBigType").combobox("getValue");
-		    $("#CaseSubType").combobox({ data: GetSubTypeList(bigType,record.id) });
+            $("#CaseSubType").combobox({ data: GetSubTypeList(bigType, record.id) });
+            
     }
     function showContent()
     {
@@ -176,11 +177,16 @@
         var subType = $("#CaseSubType").combobox("getValue");
         j({
             BigType: bigType, Type: type, SubType: subType
-        }, "Manuel/GetByTypes", showContentCallBack);
+        }, "Manual/GetByTypes", showContentCallBack);
     }
     function showContentCallBack(re) {
-        $("#txtContent").val(re.Content);
-        $("#content").html(re.Content);
+        if (re.Success) {
+            $("#txtContent").val(re.data.Content);
+            $("#content").html(re.data.Content);
+        }
+        else
+            $("#content").val("该类别暂无内容");
+            
 
     }
 
@@ -189,7 +195,11 @@
         var type = $("#CaseType").combobox("getValue");
         var subType = $("#CaseSubType").combobox("getValue");
         var Content = $("#txtContent").val();
-        j({BigType: bigType, Type: type, SubType: subType,Content:Content}, "Manuel/Update", saveCallBack);
+        j({BigType: bigType, Type: type, SubType: subType,Content:Content}, "Manual/Update", saveCallBack);
     }
-    function saveCallBack(re) { }
+    function saveCallBack(re) {
+        if (re.Success) {
+            $.messager.show({ title: "提示", msg: "修改成功" });
+        }
+    }
 </script>

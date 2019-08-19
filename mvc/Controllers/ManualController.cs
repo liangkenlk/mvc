@@ -11,7 +11,7 @@ using WorkFlow;
 
 namespace mvc.Controllers
 {
-    public class ManuelController : BaseController<Data.ManualDataTable,Data.ManualRow>
+    public class ManualController : BaseController<Data.ManualDataTable,Data.ManualRow>
     {
         public ActionResult GetList()
         {
@@ -35,7 +35,10 @@ namespace mvc.Controllers
         {
 
             var t = myGetByTypes();
-                return JsonOb(t);
+            if (t == null)
+                return JsonOb(false, "");
+            t.Content = t.Content.Replace("\n", "<br>").Replace(" ","&nbsp;");
+                return JsonOb(true,"ok",t);
 
         }
 
@@ -72,23 +75,6 @@ namespace mvc.Controllers
             return JsonOb(true, "ok",row.id);
         }
 
-        public ActionResult GetCount()
-        {
-            Dictionary<string, string> dic = new Dictionary<string, string>();
-            string sql = "select count(*) from [case] where status='审核'";
-            var ob1 = bll.ExecuteScalar(sql).ToString();
-            sql = "select count(*) from [case] where status='立案'";
-            var ob2 = bll.ExecuteScalar(sql).ToString();
-            sql = "select count(*) from [case] where status='处置'";
-            var ob3 = bll.ExecuteScalar(sql).ToString();
-            sql = "select count(*) from task where userid='"+UserAuth.UserID+"' and  result='未处理'";
-            var ob4 = bll.ExecuteScalar(sql).ToString();
-            dic["审核"] = ob1;
-            dic["立案"] = ob2;
-            dic["处置"] = ob3;
-            dic["任务"] = ob4;
-            return JsonOb(dic);
-        }
         public ActionResult UploadFile()
         {
             try
