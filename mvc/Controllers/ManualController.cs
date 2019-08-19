@@ -37,8 +37,10 @@ namespace mvc.Controllers
             var t = myGetByTypes();
             if (t == null)
                 return JsonOb(false, "");
-            t.Content = t.Content.Replace("\n", "<br>").Replace(" ","&nbsp;");
-                return JsonOb(true,"ok",t);
+            //t.Content = t.Content.Replace("\n", "<br>").Replace(" ","&nbsp;");
+            var dic = JsonHelper.DataRowToDictionary(t);
+            dic["Content2"] = t.Content.Replace("\n", "<br>").Replace(" ", "&nbsp;");
+            return JsonOb(true,"ok",dic);
 
         }
 

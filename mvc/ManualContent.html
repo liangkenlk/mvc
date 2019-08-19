@@ -154,13 +154,14 @@
             <tr>
                 <td>
                     <span id="content">该类别暂无内容</span><br />
-                    <textarea id='txtContent' style='height:300px; width:100%;'>请输入内容....</textarea>
+                    <textarea id='txtContent' style='height:300px; width:100%;display:none'>请输入内容....</textarea>
                 </td>
             </tr>
         </table>
     </fieldset>
 </html>
 <script>
+    function edit() { $("#txtContent").show();}
         function onBigTypeSelect(record) {
         $("#CaseType").combobox({ data:GetTypeList(record.id) });
     }
@@ -182,11 +183,12 @@
     function showContentCallBack(re) {
         if (re.Success) {
             $("#txtContent").val(re.data.Content);
-            $("#content").html(re.data.Content);
+            $("#content").html(re.data.Content2);
+            
         }
         else
             $("#content").val("该类别暂无内容");
-            
+            $("#txtContent").hide();
 
     }
 
