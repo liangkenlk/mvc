@@ -86,6 +86,24 @@ function sleep(numberMillis) {
             return;
     }
 }
+
+function setBtnPower() {
+    //if (IsSetBtnPower) {
+    //    return;
+    //}
+    var url = "user/getCurrentUserInfo";
+
+    j({}, url, setBtnPowerCallBack);
+}
+function setBtnPowerCallBack(re) {
+
+
+    let list = re.BtnPower.split(",");
+    for (var i = 0; i < list.length; i++) {
+        $(".easyui-linkbutton :contains('"+list[i]+"')").hide()
+    }
+
+}
 function show_msg(msg, url) {
     var d = dialog({ content: msg }).show();
     setTimeout(function () {

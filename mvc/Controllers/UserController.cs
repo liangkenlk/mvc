@@ -86,7 +86,7 @@ namespace mvc.Controllers
             if (ParentId == null)
             {
                 ADOBaseBLL<Data.DeptDataTable, Data.DeptRow> deptbll = new ADOBaseBLL<Data.DeptDataTable, Data.DeptRow>(new DBContext());
-                string sql = "SELECT 'D' + id AS UserId,'' as LoginID, DeptName AS UserName, '' AS PassWord, '' AS CellPhone, '' AS Email, '' AS DataPower, '' AS BtnPower, '部门' AS UserType,'' as DeptId ,'D' + ParentId as parentid FROM Dept UNION SELECT convert(varchar(10),UserId) as UserId, LoginID, UserName, PassWord, CellPhone, Email, DataPower, BtnPower, UserType, DeptId, 'D'+ DeptId AS parentid FROM [User] ";
+                string sql = "SELECT 'D' + id AS UserId,'' as LoginID, DeptName AS UserName, '' AS PassWord, '' AS CellPhone, '' AS Email, '' AS DataPower, '' AS BtnPower, '部门' AS UserType,'' as DeptId ,'D' + ParentId as parentid,'' as Duty FROM Dept UNION SELECT convert(varchar(10),UserId) as UserId, LoginID, UserName, PassWord, CellPhone, Email, DataPower, BtnPower, UserType, DeptId, 'D'+ DeptId AS parentid ,Duty FROM [User] ";
                 if (username != null)
                     sql += " where UserName like '%" + username + "%'";
                 var t = deptbll.GetNormalDataTable(sql);

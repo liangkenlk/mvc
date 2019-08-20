@@ -72,7 +72,7 @@
         var Address = $('#Address').val();
         $('.easyui-datagrid').datagrid("load", { Address: Address });
     }
-
+    $(setBtnPower());
     function format(row, data, index)
     {
         if (data.DataPower == "userid='@userid'") {

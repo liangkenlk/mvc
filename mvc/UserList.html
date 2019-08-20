@@ -24,14 +24,15 @@
            data-options="rownumbers:true,loadFilter:filter,pagination:false,dnd:true,animate:true,url:'user/GetDeptTree',toolbar:'#tb',footer:'#ft',idField: 'UserId',treeField:'UserName',onSortColumn:'onSort',onLoadSuccess:loaded,onBeforeDrag:beforeDrag,onBeforeDrop:beforeDrop,onDrop:Drop,onBeforeEdit:onBeforeEdit,onAfterEdit:onAfterEdit,onCancelEdit:onCancelEdit">
         <thead>
             <tr>
-               <th data-options="field:'UserId',width:80,checkbox:true"></th>
+                <th data-options="field:'UserId',width:80,checkbox:true"></th>
                 <th data-options="field:'UserName',width:300,sortable:false,editor:'text'">中文名</th>
                 <th data-options="field:'LoginID',width:80,sortable:false,editor:'text'">用户名</th>
                 <th data-options="field:'PassWord',width:80,sortable:false,editor:'text'">密码</th>
-                
+                <th data-options="field:'Duty',width:80,sortable:false,editor:'text'">职务</th>
                 <th data-options="field:'CellPhone',width:100,sortable:false,editor:'text'">电话</th>
                 <th data-options="field:'UserType',width:100,sortable:false,editor:Typeeditor">用户类型</th>
-              <!--  <th data-options="field:'DataPower',width:100,sortable:false,editor:editor,formatter:format">数据权限</th>-->
+                <th data-options="field:'BtnPower',width:100,sortable:false,editor:btnPowerEidtor">禁用按钮</th>
+                <th data-options="field:'DataPower',width:100,sortable:false,editor:editor,formatter:format">数据权限</th>
             </tr>
         </thead>
     </table>
@@ -50,77 +51,16 @@
 </html>
 
     <script type="text/javascript">
-var caution=false
-function setCookie(name,value,expires,path,domain,secure)
-{
- var curCookie=name+"="+escape(value) +
- ((expires)?";expires="+expires.toGMTString() : "") +
- ((path)?"; path=" + path : "") +
- ((domain)? "; domain=" + domain : "") +
- ((secure)?";secure" : "")
- if(!caution||(name + "=" + escape(value)).length <= 4000)
- {
- document.cookie = curCookie
- }
- else if(confirm("Cookie exceeds 4KB and will be cut!"))
- {
- document.cookie = curCookie
- }
-}
-function getCookie(name)
-{
- var prefix = name + "="
- var cookieStartIndex = document.cookie.indexOf(prefix)
- if (cookieStartIndex == -1)
- {
- return null
- }
- var cookieEndIndex=document.cookie.indexOf(";",cookieStartIndex+prefix.length)
- if(cookieEndIndex == -1)
- {
-
- cookieEndIndex = document.cookie.length
- }
- return unescape(document.cookie.substring(cookieStartIndex+prefix.length,cookieEndIndex))
-}
-function deleteCookie(name, path, domain)
-{
- if(getCookie(name))
- {
- document.cookie = name + "=" +
- ((path) ? "; path=" + path : "") +
- ((domain) ? "; domain=" + domain : "") +
- "; expires=Thu, 01-Jan-70 00:00:01 GMT"
- }
-}
-function fixDate(date)
-{
- var base=new Date(0)
- var skew=base.getTime()
- if(skew>0)
- {
- date.setTime(date.getTime()-skew)
- }
-}
-var now=new Date()
-fixDate(now)
-now.setTime(now.getTime()+365 * 24 * 60 * 60 * 1000)
-var visits = getCookie("counter")
-if(!visits)
-{
- visits=1;
-}
-else
-{
- visits=parseInt(visits)+1;
-}
-
 
 
     var sort;
     var order;
     var dropdata = [{ "id": "1=1", "text": "所有" }, { "id": "userid='@userid'", "text": "仅本人" }];
-    var editor = { type: 'combobox', options: { valueField: 'id', textField: 'text', data: dropdata } };
+        var editor = { type: 'combobox', options: { valueField: 'id', textField: 'text', data: dropdata } };
+
+        var btnPowerEidtorData=[{ "id": "删除"}, { "id": "修改" }, { "id": "添加" }, { "id": "立案" }, { "id": "设为结案" }, { "id": "设为不立案" }];
+        var btnPowerEidtor = { type: 'combobox', options: {multiple:true, valueField: 'id',textField: 'id',  data: btnPowerEidtorData } };
+
 
     var Typedata = [{ "id": "管理员" }, { "id": "普通用户" }];
     var Typeeditor = { type: 'combobox', options: { valueField: 'id', textField: 'id', data: Typedata } };
@@ -218,6 +158,8 @@ else
         var rows = $('.easyui-treegrid').treegrid("getSelections");
         //如果只选择了一行则可以进行修改，否则不操作
         if (rows.length == 1) {
+            if (rows[0]["UserType"] == "部门")
+                return;
             //修改之前先关闭已经开启的编辑行，当调用endEdit该方法时会触发onAfterEdit事件
             if (editRow != undefined) {
                 $('.easyui-treegrid').treegrid("endEdit", editRow);
