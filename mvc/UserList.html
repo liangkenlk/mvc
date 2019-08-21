@@ -30,8 +30,10 @@
                 <th data-options="field:'PassWord',width:80,sortable:false,editor:'text'">密码</th>
                 <th data-options="field:'Duty',width:80,sortable:false,editor:'text'">职务</th>
                 <th data-options="field:'CellPhone',width:100,sortable:false,editor:'text'">电话</th>
+                <th data-options="field:'DutyType',width:100,sortable:false,editor:DutyTypeeditor">执勤排班</th>
                 <th data-options="field:'UserType',width:100,sortable:false,editor:Typeeditor">用户类型</th>
                 <th data-options="field:'BtnPower',width:100,sortable:false,editor:btnPowerEidtor">禁用按钮</th>
+                <th data-options="field:'MenuPower',width:100,sortable:false,editor:MenuPowerEidtor">禁用栏目</th>
                 <th data-options="field:'DataPower',width:100,sortable:false,editor:editor,formatter:format">数据权限</th>
             </tr>
         </thead>
@@ -63,7 +65,12 @@
 
 
     var Typedata = [{ "id": "管理员" }, { "id": "普通用户" }];
-    var Typeeditor = { type: 'combobox', options: { valueField: 'id', textField: 'id', data: Typedata } };
+        var Typeeditor = { type: 'combobox', options: { valueField: 'id', textField: 'id', data: Typedata } };
+        var DutyTypedata = [{ "id": "四班" }, { "id": "两班" }];
+        var DutyTypeeditor = { type: 'combobox', options: { valueField: 'id', textField: 'id', data: DutyTypedata } };
+
+        var MenuPowerdata = [{ "id": "需审核" }, { "id": "已立案" }, { "id": "已处置" }, { "id": "已结案" }, { "id": "不立案" }, { "id": "用户管理" }, { "id": "执法知识库" }];
+        var MenuPowerEidtor = { type: 'combobox', options: {multiple:true, valueField: 'id', textField: 'id', data: MenuPowerdata } };
     function dosearch() {
 
         var username = $('#username').val();

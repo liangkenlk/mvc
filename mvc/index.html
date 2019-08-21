@@ -93,9 +93,16 @@
                 window.location.href = "login.html";
                 return;
             }
-            $('#UserName').text("您好："+re.UserName);
+            $('#UserName').text("您好：" + re.UserName);
+            this.userinfo = re;
+            var menupower = re.MenuPower.split(',');
+            for (var i = 0; i < menupower.length; i++) {
+                $("#tt").tabs("close", menupower[i]);
+            }
+
 
         }
+        var userinfo;
     </script>
 </head>
 <body class="easyui-layout claro">
@@ -124,6 +131,9 @@
             </div>
             <div title="不立案">
                 <iframe width="100%" height="99.5%" frameborder="0" id="caseframe" src="Case.html?status=不立案"></iframe>
+            </div>            
+            <div title="排班管理">
+                <iframe width="100%" height="99.5%" frameborder="0" id="caseframe" src="DutyList.html"></iframe>
             </div>
             <div title="统计与报表">
                 <iframe width="100%" height="99.5%" frameborder="0" id="caseframe" src="count.html"></iframe>

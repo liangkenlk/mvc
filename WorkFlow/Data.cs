@@ -6,6 +6,10 @@ namespace WorkFlow
 
     public partial class Data
     {
+        partial class DeptDataTable
+        {
+        }
+
         partial class DataTable1DataTable
         {
         }

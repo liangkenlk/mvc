@@ -213,6 +213,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.html" />
+    <Content Include="DutyList.html" />
     <Content Include="ManualContent.html" />
     <Content Include="CheckList.html" />
     <Content Include="count.html" />
