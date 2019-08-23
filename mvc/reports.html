@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="jquery-easyui-1.4.4/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="jquery-easyui-1.4.4/themes/icon.css" />
+    <script type="text/javascript" src="jquery-easyui-1.4.4/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery-easyui-1.4.4/jquery.easyui.min.js"></script>
+    <script src="jquery-easyui-1.4.4/locale/easyui-lang-zh_CN.js"></script>
+    <script src="js/Common.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="css/userguide.css" />
+</head>
+<body class="easyui-layout claro">
+
+    <div data-options="region:'west',split:true,title:'统计类型',noheader:true,noheader:false,collapsible:true,collapse:false" style="width:300px;" id="map">
+        <ul class="easyui-tree" data-options="onSelect:Select">
+            <li data-options="attributes:'rep_casecount.html'">事件问题汇总统计</li>
+            <li data-options="attributes:'rep_caseType.html'">事件问题分类统计</li>
+            <li data-options="attributes:'rep_duty.html'">人员考勤统计</li>
+            <li data-options="attributes:'rep_task.html'">工作人员处理任务效率统计</li>
+            <<!--li>其他统计</li>-->
+        </ul>
+    </div>
+
+    <div data-options="region:'center',title:'Center',noheader:true">
+        <iframe width="100%" height="99.5%" frameborder="0" id="repframe" src="rep_CaseCount.html"></iframe>
+    </div>
+
+</body>
+</html>
+
+<script type="text/javascript">
+    function Select(node) {
+        document.getElementById("repframe").src = node.attributes;
+    }
+
+</script>

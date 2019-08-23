@@ -1,0 +1,102 @@
+﻿
+<!--,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Access-Control-Allow-Origin" content="*">
+<title>上林县城市管理综合指挥平台</title>
+    <link rel="shortcut icon" href="images/favicon.ico" />
+<link href="css/style.css" rel="stylesheet" type="text/css"/>
+	 
+    <script type="text/javascript" src="jquery-easyui-1.4.4/jquery.min.js"></script>
+    <script src="js/Common.js"></script>
+    <script src="js/mapConfig.js"></script>
+    <script src="js/sysConfig.js"></script>
+</head>
+
+<body class="green_bg"> 
+<form id="fm1" onsubmit="return false;">
+<!--login start-->
+    <div class="login_wid" id="login-box">
+        <div class="logo">上林县城市管理综合指挥平台</div>
+        <div class="login_cen">
+            <div class="login_pad">
+                <div class="login_yhm"><input id="LoginID" name="LoginID" class="required" tabindex="1" accesskey="n" type="text" value="" size="25" autocomplete="false" /></div>
+                <div class="login_mm"><input id="PassWord" name="PassWord" class="required required-password" tabindex="2" accesskey="p" type="password" value="" size="25" autocomplete="off" /></div>
+
+                <div class="login_but">
+                    <input type="hidden" name="lt" value="_c27356CA4-34C2-4F4B-93BE-5E5FD046B3F7_k15197CC1-608F-E273-A157-221B5CC7BF5C" />
+                    <input type="hidden" name="_eventId" value="submit" />
+
+                    <a onclick="javascript: login()"></a>
+                    <div id="msg" style="width:200px"></div>
+                </div>
+                
+            </div>
+            
+        </div>
+        <div class="login_footer">
+            <div class="login_footer">
+             上林县城市管理局
+            </div>
+    </div>
+</form>
+<!--login end-->
+</body>
+
+</html>
+<script>
+    var plus;
+    $(function () {
+        //getSysconfig();
+        document.onkeydown = function (event) {
+            var e = event || window.event || arguments.callee.caller.arguments[0];
+            if (e && e.keyCode == 27) { // 按 Esc 
+                //要做的事情
+            }
+            if (e && e.keyCode == 113) { // 按 F2 
+                //要做的事情
+            }
+            if (e && e.keyCode == 13) { // enter 键
+                login();
+            }
+
+        };
+        //$(".logo").text(sysConfig["系统名称"]);
+        //$(".login_footer").text(sysConfig["版权"]);
+        //$(document).attr('title', sysConfig["系统名称"]);
+    })
+
+
+
+    function login() {
+
+        if ($('#LoginID').val() == "") { }
+        if ($('#PassWord').val() == "") { }
+
+        $('#msg').html("正在登录中.....");
+        var url=rootUrl+"user/login?LoginID="+$('#LoginID').val()+"&PassWord="+$('#PassWord').val();
+        $.get(url, function (msg) {
+            //msg = eval("(" + msg + ")");
+            if (msg.Success == true) {
+                var returnUrl = getQueryStringByName("returnUrl");
+                if(plus)
+                   plus.storage.setItem("token", msg.Message);
+                if (returnUrl == null)
+                    location.href = "index.html";
+                else
+                    location.href = "index.html";
+                    //location.href = returnUrl;
+                //var html = "<iframe src='" + url + "' id='ifr' width=0px; height=0px></iframe>";
+                //$("html").append(html);
+
+                }
+                else
+                $('#msg').html(msg.Message);
+        });
+
+    }
+ 
+</script>

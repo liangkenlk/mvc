@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using TY.Core;
+using Web.lib;
 using WorkFlow;
 
 namespace mvc.Controllers
@@ -77,6 +79,37 @@ namespace mvc.Controllers
                 catch { }
             }
             return JsonOb(true, "ok",row.id);
+        }
+
+        public DataTable RepList()
+        {
+            var start = Query<string>("start");
+            var end = Query<string>("end");
+            start = DateTime.Parse(start).ToString("yyyy-MM-dd");
+            end = DateTime.Parse(end).ToString("yyyy-MM-dd");
+            string sql = "select * from arrange where" + " Date < '" + end + "' and Date >= '" + start + "' order by date,userid";
+            return bll.GetNormalDataTable(sql);
+        }
+
+        public ActionResult GetRepList()
+        {
+            return JsonOb(this.RepList());
+        }
+
+        public ActionResult Export()
+        {
+            var t = RepList();
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            dic["Date"] = "日期";
+            dic["UserName"] = "执勤人员";
+            dic["WorkTime"] = "班次";
+            dic["SignOnTime"] = "签到时间";
+            dic["SignAdd"] = "签到地点";
+            string filename = "执勤签到" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xlsx";
+            string path = Server.MapPath("~/temp/") + filename;
+            new ExcelTool(dic).GridToExcelByNPOI(t, path);
+            return JsonOb(true, "ok", filename);
+
         }
     }
 }

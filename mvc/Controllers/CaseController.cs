@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -152,5 +153,49 @@ namespace mvc.Controllers
 
         }
 
+        public DataTable typeCount()
+        {
+            var start = Query<string>("start");
+            var end = Query<string>("end");
+            var sql = @"select a.CaseBigType,a.casetype,a.casesubtype,casecount,casecount1,casecount2,casecount3,casecount4  from (select Casebigtype,casetype,CaseSubType,count(*) as casecount from [case] where @where1 group by CaseBigType,CaseType,CaseSubType) as  a
+                        left  join 
+                        (select Casebigtype,casetype,CaseSubType,count(*) as casecount1 from [case] where Status='审核' and @where1  group by CaseBigType,CaseType,CaseSubType) as b
+                        on a.casebigtype=b.casebigtype and a.casetype=b.casetype and a.casesubtype=b.casesubtype
+                        left join 
+                        (select Casebigtype,casetype,CaseSubType,count(*) as casecount2 from [case] where Status='立案' and @where1   group by CaseBigType,CaseType,CaseSubType) as c
+                        on a.casebigtype=c.casebigtype and a.casetype=c.casetype and a.casesubtype=c.casesubtype
+                        left join
+                        (select Casebigtype,casetype,CaseSubType,count(*) as casecount3 from [case] where Status='处置' and @where1   group by CaseBigType,CaseType,CaseSubType) as d
+                        on a.casebigtype=d.casebigtype and a.casetype=d.casetype and a.casesubtype=d.casesubtype
+                        left join
+                        (select Casebigtype,casetype,CaseSubType,count(*) as casecount4 from [case] where Status='结案' and @where1 group by CaseBigType,CaseType,CaseSubType) as e
+                        on a.casebigtype=e.casebigtype and a.casetype=e.casetype and e.casesubtype=d.casesubtype";
+            var where1 = " begintime <'" + end + "' and begintime >='" + start + "'";
+            sql = sql.Replace("@where1", where1);
+            var table = bll.GetNormalDataTable(sql);
+            return table;
+        }
+
+        public ActionResult GetTypeCount()
+        {
+            return JsonOb(this.typeCount());
+        }
+        public ActionResult ExportTypeCount()
+        {
+            var t = this.typeCount();
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            dic["CaseBigType"] = "大类";
+            dic["casetype"] = "类型";
+            dic["casesubtype"] = "小类";
+            dic["casecount"] = "总数";
+            dic["casecount1"] = "需审核";
+            dic["casecount2"] = "已立案";
+            dic["casecount3"] = "已处理";
+            dic["casecount4"] = "已结案";
+            string filename = "事件问题分类统计" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xlsx";
+            string path = Server.MapPath("~/temp/") + filename;
+            new ExcelTool(dic).GridToExcelByNPOI(t, path);
+            return JsonOb(true, "ok", filename);
+        }
     }
 }

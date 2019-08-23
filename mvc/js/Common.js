@@ -100,6 +100,8 @@ function setBtnPowerCallBack(re) {
 
     let list = re.BtnPower.split(",");
     for (var i = 0; i < list.length; i++) {
+        if (list[i] == "")
+            continue;
         $(".easyui-linkbutton :contains('"+list[i]+"')").hide()
     }
 

@@ -42,14 +42,14 @@
         <a href="#" class="easyui-linkbutton" onclick="setStatus('不立案');" iconcls="icon-no">设为不立案</a>
         <a href="#" class="easyui-linkbutton" onclick="del();" iconcls="icon-remove">删除</a>
     </div>
-    <div id="tt" class="easyui-tabs" data-options="onSelect:tabSelected" style="width:100%;height:49%;">
-        <div title="问题详情" style="">
+    <div id="tt" class="easyui-tabs" data-options="onSelect:tabSelected" style="width:99%;height:48%;">
+        <div title="问题详情" style="overflow:hidden">
             <iframe width="100%" id="CaseDetail"  height="99.5%" frameborder="0" src="CaseDetail.html"></iframe>
         </div>
-        <div title="处理经过">
+        <div title="处理经过" style="overflow:hidden">
             <iframe width="100%" id="CheckList" height="99.5%" frameborder="0" src="CheckList.html"></iframe>
         </div>
-        <div title="任务派遣">
+        <div title="任务派遣" style="overflow:hidden">
             <iframe width="100%" id="TaskList" height="99.5%" frameborder="0" src="TaskList.html"></iframe>
         </div>
     </div>

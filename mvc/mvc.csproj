@@ -213,10 +213,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.html" />
+    <Content Include="reports.html" />
     <Content Include="DutyList.html" />
+    <Content Include="login - 复制.html" />
     <Content Include="ManualContent.html" />
     <Content Include="CheckList.html" />
-    <Content Include="count.html" />
+    <Content Include="rep_task.html" />
+    <Content Include="rep_duty.html" />
+    <Content Include="rep_CaseType.html" />
+    <Content Include="rep_CaseCount.html" />
     <Content Include="dll\GetuiServerApiSDK.dll" />
     <Content Include="dll\Google.ProtocolBuffers.dll" />
     <Content Include="dll\NPOI.dll" />
