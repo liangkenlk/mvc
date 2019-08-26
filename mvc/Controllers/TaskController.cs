@@ -87,7 +87,14 @@ namespace mvc.Controllers
             var end = Query<string>("end");
             start = DateTime.Parse(start).ToString("yyyy-MM-dd");
             end = DateTime.Parse(end).ToString("yyyy-MM-dd");
-            string sql = "select * from arrange where" + " Date < '" + end + "' and Date >= '" + start + "' order by date,userid";
+            string sql = @"select * from 
+            (select COUNT(*)as aa,Userid,UserName from task  where @where group by Userid,UserName) a
+            left join 
+            (select COUNT(*) as bb,Userid,UserName from  task where @where and endtime is not null and  datediff(hh,begintime,endtime)<TimeLimit group by Userid,UserName) b
+
+            on a.userid=b.userid";
+            var where = " begintime <'" + end + "' and begintime >='" + start + "'";
+            sql = sql.Replace("@where", where);
             return bll.GetNormalDataTable(sql);
         }
 
@@ -100,12 +107,12 @@ namespace mvc.Controllers
         {
             var t = RepList();
             Dictionary<string, string> dic = new Dictionary<string, string>();
-            dic["Date"] = "日期";
+            //dic["Date"] = "日期";
             dic["UserName"] = "执勤人员";
-            dic["WorkTime"] = "班次";
-            dic["SignOnTime"] = "签到时间";
-            dic["SignAdd"] = "签到地点";
-            string filename = "执勤签到" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xlsx";
+            dic["aa"] = "处理次数";
+            dic["bb"] = "时限内完成";
+            //dic["SignAdd"] = "签到地点";
+            string filename = "案件处理" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xlsx";
             string path = Server.MapPath("~/temp/") + filename;
             new ExcelTool(dic).GridToExcelByNPOI(t, path);
             return JsonOb(true, "ok", filename);

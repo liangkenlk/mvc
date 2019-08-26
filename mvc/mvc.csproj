@@ -218,6 +218,7 @@
     <Content Include="login - 复制.html" />
     <Content Include="ManualContent.html" />
     <Content Include="CheckList.html" />
+    <Content Include="rep_dutyCount.html" />
     <Content Include="rep_task.html" />
     <Content Include="rep_duty.html" />
     <Content Include="rep_CaseType.html" />

@@ -16,14 +16,14 @@
 </head>
 <body>
     <table class="easyui-datagrid" style="width:100%;height:100%;"
-           data-options="singleSelect:true,rownumbers:true,pagination:true,queryParams:queryParams(),url:'case/Count',toolbar:'#tb',idField: 'id',onSortColumn:'onSort'">
+           data-options="singleSelect:true,rownumbers:true,pagination:false,queryParams:queryParams(),url:'arrange/GetRepDutyCount',toolbar:'#tb',idField: 'id',onSortColumn:'onSort'">
         <thead>
             <tr>
-             
-                <th data-options="field:'username',width:100,sortable:false">人员</th>
-                <th data-options="field:'casecount',width:100,sortable:false,editor:'datebox'">上报数</th>
-                <th data-options="field:'checkcount',width:300,sortable:false,editor:'text'">处理数</th>
-                <!--  <th data-options="field:'DataPower',width:100,sortable:false,editor:editor,formatter:format">数据权限</th>-->
+                <th data-options="field:'username',width:100,sortable:false">执勤人员</th>
+                <th data-options="field:'countall',width:100,sortable:false">排班次数</th>
+
+                <th data-options="field:'countsign',width:100,sortable:false">签到次数</th>
+                <th data-options="field:'countnotsign',width:100,sortable:false">未签到次数</th>
             </tr>
         </thead>
     </table>
@@ -68,7 +68,7 @@
     }
     function reload()
     {
-        $('.easyui-datagrid').datagrid("reload");
+        $('.easyui-datagrid').datagrid("load",queryParams());
     }
     function formatter(date) {
         var y = date.getFullYear();
@@ -80,7 +80,7 @@
     function exportExcel()
     {
         var data = queryParams();
-        j(data, "case/Export", exportExcelCallBack);
+        j(data, "arrange/ExportRepDutyCount", exportExcelCallBack);
     }
     function exportExcelCallBack(re)
     {

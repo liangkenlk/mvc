@@ -19,12 +19,12 @@
            data-options="singleSelect:true,rownumbers:true,pagination:false,queryParams:queryParams(),url:'task/GetRepList',toolbar:'#tb',idField: 'id',onSortColumn:'onSort'">
         <thead>
             <tr>
-                <th data-options="field:'Date',width:100,sortable:false,editor:'datebox'">日期</th>
                 <th data-options="field:'UserName',width:100,sortable:false">执勤人员</th>
-                <th data-options="field:'WorkTime',width:100,sortable:false">班次</th>
+                <th data-options="field:'aa',width:100,sortable:false">处理次数</th>
+                <th data-options="field:'bb',width:100,sortable:false">时限内完成</th>
 
-                <th data-options="field:'SignOnTime',width:100,sortable:false">签到时间</th>
-                <th data-options="field:'SignAdd',width:100,sortable:false">签到地点</th>
+                <!--<th data-options="field:'SignOnTime',width:100,sortable:false">签到时间</th>
+    <th data-options="field:'SignAdd',width:100,sortable:false">签到地点</th>-->
             </tr>
         </thead>
     </table>
@@ -81,7 +81,7 @@
     function exportExcel()
     {
         var data = queryParams();
-        j(data, "arrange/Export", exportExcelCallBack);
+        j(data, "task/Export", exportExcelCallBack);
     }
     function exportExcelCallBack(re)
     {

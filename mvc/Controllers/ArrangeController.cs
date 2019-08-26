@@ -268,5 +268,44 @@ namespace mvc.Controllers
 
         }
 
+
+        public DataTable RepDutyCount()
+        {
+            var start = Query<string>("start");
+            var end = Query<string>("end");
+            start = DateTime.Parse(start).ToString("yyyy-MM-dd");
+            end = DateTime.Parse(end).ToString("yyyy-MM-dd");
+            string sql = @"select * from 
+                    (select userid,username, COUNT(*) as countall  from Arrange where @where group by userid,username) a
+                    left join 
+                    (select userid,username,COUNT(*) as countsign from Arrange where @where and signontime is not null group by userid,username) b
+                    on a.userid = b.userid
+                    left join
+                    (select userid,username,COUNT(*) as countnotsign from Arrange where  @where and signontime is  null group by userid,username) c
+                    on a.userid = c.userid";
+            var where = "  Date <'" + end + "' and Date >='" + start + "'";
+            sql = sql.Replace("@where", where);
+            return bll.GetNormalDataTable(sql);
+        }
+
+        public ActionResult GetRepDutyCount()
+        {
+            return JsonOb(this.RepDutyCount());
+        }
+
+        public ActionResult ExportRepDutyCount()
+        {
+            var t = RepDutyList();
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            dic["UserName"] = "执勤人员";
+            dic["countall"] = "排班次数";
+            dic["countsign"] = "签到次数";
+            dic["countnotsign"] = "未签到次数";
+            string filename = "执勤签到汇总" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xlsx";
+            string path = Server.MapPath("~/temp/") + filename;
+            new ExcelTool(dic).GridToExcelByNPOI(t, path);
+            return JsonOb(true, "ok", filename);
+
+        }
     }
 }
