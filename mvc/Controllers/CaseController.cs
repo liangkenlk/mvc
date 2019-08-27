@@ -45,11 +45,28 @@ namespace mvc.Controllers
             {
                 row.id = Guid.NewGuid().ToString();
                 row.BeginTime = DateTime.Now;
-                row.Status = "需处理";
+                row.Status = "审核";
+                if (!row.IsIsSimpleNull() && row.IsSimple)
+                    row.Status = "结案";
                 row.UploaderId = UserAuth.UserID.ToString();
                 row.Uploader = UserAuth.UserName;
                 bll.Add(row);
-                
+
+            }
+            else
+            {
+                switch (Query<string>("Status"))
+                {
+                    case "立案":
+                        row.ComfirmTime = DateTime.Now;
+                        break;
+                    case "处置":
+                        row.HandleTime = DateTime.Now;
+                        break;
+                    case "结案":
+                        row.EndTime = DateTime.Now;
+                        break;
+                }
             }
             this.bll.Update(row);
             return JsonOb(true, "ok",row.id);

@@ -42,14 +42,14 @@
                 <table cellpadding="5">
                     <tr>
                         <td>地址:</td>
-                        <td><label  type="text" name="Address" id="Address" data-options="required:true"></label></td>
+                        <td><label type="text" name="Address" id="Address" data-options="required:true"></label></td>
                         <td>上报时间:</td>
                         <td><label type="text" name="BeginTime" id="BeginTime" data-options="required:true"></label></td>
                     </tr>
                     <tr>
                         <td>大类:</td>
                         <td>
-                            <label  id="CaseType" data-options="width:160,valueField: 'id',textField: 'id',data:GetCaseTypeList(),onSelect:onselect" name="CaseType"></label>
+                            <label id="CaseType" data-options="width:160,valueField: 'id',textField: 'id',data:GetCaseTypeList(),onSelect:onselect" name="CaseType"></label>
                         </td>
                         <td>状态:</td>
                         <td>
@@ -63,10 +63,28 @@
                         <td><label id="Uploader" data-options="width:160,valueField: 'id',textField: 'id'" name="Uploader"></label></td>
                     </tr>
                     <tr>
-                        <td>所属区域:</td>
-                        <td><label  id="Zone" name="Zone"></label></td>
+                        <td>类型:</td>
+                        <td><label id="CaseBigType" name="CaseBigType"></label></td>
                         <td>经纬度:</td>
-                        <td><label id="X" name="X"></label><br /><label id="Y" name="Y"></label></td>
+                        <td><label id="X" name="X"></label>，<label id="Y" name="Y"></label></td>
+                    </tr>
+                    <tr>
+                        <td>来源:</td>
+                        <td><label id="ComeFrom" name="ComeFrom"></label></td>
+                        <td>紧急程度:</td>
+                        <td><label id="Urgent" name="Urgent"></label></td>
+                    </tr>
+                    <tr>
+                        <td>是否走简单流程:</td>
+                        <td><label id="IsSimple" name="IsSimple"></label></td>
+                        <td>结案时间:</td>
+                        <td><label id="Urgent" name="Urgent"></label></td>
+                    </tr>
+                    <tr>
+                        <td>立案时间:</td>
+                        <td><label id="ComfirmTime" name="ComfirmTime"></label></td>
+                        <td>处理时间:</td>
+                        <td><label id="HandlerTime" name="HandlerTime"></label></td>
                     </tr>
                     <tr>
                         <td>描述:</td>

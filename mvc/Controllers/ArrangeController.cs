@@ -48,6 +48,28 @@ namespace mvc.Controllers
             //}
             return JsonOb(bll.GetBySQL(sql));
         }
+        public ActionResult getNowDuty()
+        {
+            var date = DateTime.Now.Date.ToString("yyyy-MM-dd");
+            var h = DateTime.Now.Hour;
+            var m = DateTime.Now.Minute;
+            var dutytype = "";
+            if (h >= 8 && h < 12)
+                dutytype = "早";
+            else if (h >= 12 && h < 15)
+                dutytype = "中";
+            else if (h >= 15 && h <= 18)
+                dutytype = "下";
+            else if (h >= 18 && h < 21 || h == 21 && m < 30)
+                dutytype = "晚";
+            else
+                return JsonOb(false);
+             var t = bll.GetBySQL("select * from arrange where date='" + date + "' and userid='" + UserAuth.UserID + "' and worktime='"+dutytype+"'");
+            if(t.Count()==0)
+                return JsonOb(false);
+            return JsonOb(true, "ok", t[0].id);
+        }
+
         public JsonResult AutoArrange()
         {
             var start = Query<string>("start");
@@ -147,7 +169,13 @@ namespace mvc.Controllers
                 row.UserId = UserAuth.UserID.ToString();
                 row.UserName = UserAuth.UserName;
                 bll.Add(row);
-                
+
+            }
+            else
+            {
+                if (!row.IsSignAddNull())
+                    row.SignOnTime = DateTime.Now;
+
             }
             this.bll.Update(row);
             return JsonOb(true, "ok",row.id);
@@ -295,7 +323,7 @@ namespace mvc.Controllers
 
         public ActionResult ExportRepDutyCount()
         {
-            var t = RepDutyList();
+            var t = RepDutyCount();
             Dictionary<string, string> dic = new Dictionary<string, string>();
             dic["UserName"] = "执勤人员";
             dic["countall"] = "排班次数";
