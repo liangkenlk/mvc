@@ -129,5 +129,12 @@ namespace mvc.Controllers
                 return null;
             }
         }
+
+        public ActionResult delImg()
+        {
+            string idlist = Query<string>("idlist");
+            bll.ExecuteNonQuery("delete from images where id in (" + idlist + ")");
+            return JsonOb(true, "ok");
+        }
     }
 }

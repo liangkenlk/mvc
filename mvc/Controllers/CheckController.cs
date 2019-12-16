@@ -41,13 +41,13 @@ namespace mvc.Controllers
                 row.CheckTime = DateTime.Now;
                 
                 row.UserId = UserAuth.UserID.ToString();
-                row.UserName = UserAuth.UserName;
+                row.UserName = UserAuth.User.UserName;
                 //row. = UserAuth.UserName;
                 bll.Add(row);
 
                 //IBaseBLL<Data.TaskDataTable, Data.TaskRow> taskBll = DBFactory<Data.TaskDataTable, Data.TaskRow>.GetBLL();
                 string sql = "update task set result='已处理',endtime=GETDATE() where userid='" + row.UserId + "' and caseid='" + row.Caseid + "' and result='未处理'";
-                string sql2 = "update [case] set status='已处理' where  id='" + row.Caseid + "'";
+                string sql2 = "update [case] set status='处理' where  id='" + row.Caseid + "'";
                 bll.ExecuteNonQuery(sql);
                 bll.ExecuteNonQuery(sql2);
 

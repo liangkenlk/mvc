@@ -67,7 +67,7 @@ namespace mvc.Controllers
              var t = bll.GetBySQL("select * from arrange where date='" + date + "' and userid='" + UserAuth.UserID + "' and worktime='"+dutytype+"'");
             if(t.Count()==0)
                 return JsonOb(false);
-            return JsonOb(true, "ok", t[0].id);
+            return JsonOb(true, "ok",JsonHelper.DataRowToDictionary( t[0]));
         }
 
         public JsonResult AutoArrange()
@@ -152,8 +152,8 @@ namespace mvc.Controllers
             }
             bll.Update(t);    
         }
-        [HttpPost]
-        public  ActionResult Update()
+
+        public new ActionResult Update()
         {
             Data.ArrangeRow row;
             if (Query<string>(bll.GetKey()) == null)
@@ -167,7 +167,7 @@ namespace mvc.Controllers
                 row.id = Guid.NewGuid().ToString();
                 row.SignOnTime = DateTime.Now;
                 row.UserId = UserAuth.UserID.ToString();
-                row.UserName = UserAuth.UserName;
+                row.UserName = UserAuth.User.UserName;
                 bll.Add(row);
 
             }

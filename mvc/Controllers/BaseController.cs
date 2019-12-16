@@ -153,11 +153,11 @@ namespace mvc.Controllers
 
 
 
-        public ActionResult Update(R row)
-        {
-            this.bll.Update(row);
-            return JsonOb(true,"ok");
-        }
+        //public ActionResult Update(R row)
+        //{
+        //    this.bll.Update(row);
+        //    return JsonOb(true,"ok");
+        //}
         //[HttpPost]
         //public  ActionResult Update()
         //{

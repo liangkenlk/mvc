@@ -176,10 +176,10 @@
                         <td><input class="easyui-textbox" name="Remark" id="Remark" data-options="multiline:true" style="height:60px"></input></td>
                     </tr>
                     <tr>
-                        <td></td>
+                        <td>是否简单处理：</td>
                         <td>
                        
-                                <input class="easyui-checkbox" name="IsSimple" value="IsSimple" label="走简单处理流程">
+                            <input class="easyui-checkbox" type="checkbox" name="IsSimple"  label="Banana:">
                           
                         </td>
                     </tr>
@@ -195,7 +195,7 @@
                 <legend>现场照片</legend>
                 <input class="easyui-filebox" id="file" name="images" data-options="width:300,multiple:true,buttonText:'选择图片（可多选）'" />
                 <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-save" onclick="uploadimages()">上传</a>
-                <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="delimages()">删除</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="askDel()">删除</a>
           
                 <div style="width:100%">
                     <ul id='viewer' class="picView-magnify-list"><div style="clear:both;"></div></ul>
@@ -398,7 +398,39 @@
 		    
 		    getPhotoList();
 	
-		}
+    }
+
+        function askDel()
+        {
+            //plus.nativeUI.confirm("确定要删除吗?", delImg,"请确认", ["是", "否"]);
+            $.messager.confirm('Confirm', '确定要删除吗?', function(r){
+	            if (r){
+		            delImg();
+	            }
+            });
+            
+        }
+        function delImg()
+        {
+            //if (e.index == 1)
+            //    return;
+            var checklist = $(":checked");
+            var idlist = "";
+            for (var i = 0; i < checklist.length; i++)
+            {
+                if (idlist != "")
+                    idlist += ",";
+                idlist += "'" + checklist[i].value+ "'";
+
+            }
+            var url = "images/delImg";
+            var data = {idlist:idlist,method:"delImg"};
+            j(data, url, delImgCallBack);
+        }
+        function delImgCallBack(e)
+        {
+            getPhotoList();
+        }
 
 </script>
 </html>

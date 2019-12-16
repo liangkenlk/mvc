@@ -48,8 +48,10 @@ namespace mvc.Controllers
                 row.Status = "审核";
                 if (!row.IsIsSimpleNull() && row.IsSimple)
                     row.Status = "结案";
+                if(!row.IsAddressNull())
+                row.Address = row.Address.Replace("广西壮族自治区", "");
                 row.UploaderId = UserAuth.UserID.ToString();
-                row.Uploader = UserAuth.UserName;
+                row.Uploader = UserAuth.User.UserName;
                 bll.Add(row);
 
             }
